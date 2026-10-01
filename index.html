@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Bloom - Lifestyle Blog Bootstrap 5 HTML Website Template</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="author" content="TemplatesJungle">
+  <meta name="keywords" content="Lifestyle Blog, Bootstrap 5, HTML, Website Template">
+  <meta name="description" content="Bloom is a Lifestyle Blog Bootstrap 5 HTML Website Template">
+
+  <!-- style sheets -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/vendor.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- svg section -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="user" viewBox="0 0 512 512">
+      <path fill="currentColor"
+        d="M332.64 64.58C313.18 43.57 286 32 256 32c-30.16 0-57.43 11.5-76.8 32.38c-19.58 21.11-29.12 49.8-26.88 80.78C156.76 206.28 203.27 256 256 256s99.16-49.71 103.67-110.82c2.27-30.7-7.33-59.33-27.03-80.6M432 480H80a31 31 0 0 1-24.2-11.13c-6.5-7.77-9.12-18.38-7.18-29.11C57.06 392.94 83.4 353.61 124.8 326c36.78-24.51 83.37-38 131.2-38s94.42 13.5 131.2 38c41.4 27.6 67.74 66.93 76.18 113.75c1.94 10.73-.68 21.34-7.18 29.11A31 31 0 0 1 432 480" />
+    </symbol>
+    <symbol id="search" viewBox="0 0 512 512">
+      <path fill="currentColor"
+        d="M456.69 421.39L362.6 327.3a173.8 173.8 0 0 0 34.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.8 173.8 0 0 0 327.3 362.6l94.09 94.09a25 25 0 0 0 35.3-35.3M97.92 222.72a124.8 124.8 0 1 1 124.8 124.8a124.95 124.95 0 0 1-124.8-124.8" />
+    </symbol>
+    <symbol id="cart" viewBox="0 0 512 512">
+      <circle cx="176" cy="416" r="32" fill="currentColor" />
+      <circle cx="400" cy="416" r="32" fill="currentColor" />
+      <path fill="currentColor"
+        d="M456.8 120.78a23.92 23.92 0 0 0-18.56-8.78H133.89l-6.13-34.78A16 16 0 0 0 112 64H48a16 16 0 0 0 0 32h50.58l45.66 258.78A16 16 0 0 0 160 368h256a16 16 0 0 0 0-32H173.42l-5.64-32h241.66A24.07 24.07 0 0 0 433 284.71l28.8-144a24 24 0 0 0-5-19.93" />
+    </symbol>
+    <symbol id="left-arrow" viewBox="0 0 32 32">
+      <path fill="currentColor" d="M10.813 9.281L4.093 16l6.72 6.719l1.406-1.438L7.938 17H28v-2H7.937l4.282-4.281z" />
+    </symbol>
+    <symbol id="facebook" viewBox="0 0 24 24">
+      <path fill="currentColor"
+        d="M9.198 21.5h4v-8.01h3.604l.396-3.98h-4V7.5a1 1 0 0 1 1-1h3v-4h-3a5 5 0 0 0-5 5v2.01h-2l-.396 3.98h2.396z" />
+    </symbol>
+    <symbol id="right-arrow" viewBox="0 0 32 32">
+      <path fill="currentColor"
+        d="M21.188 9.281L19.78 10.72L24.063 15H4v2h20.063l-4.282 4.281l1.407 1.438L27.905 16z" />
+    </symbol>
+    <symbol id="google" viewBox="0 0 16 16">
+      <path fill="currentColor"
+        d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301c1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z" />
+    </symbol>
+    <symbol id="share" viewBox="0 0 24 24">
+      <path fill="currentColor"
+        d="M10 3v2H5v14h14v-5h2v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm7.586 2H13V3h8v8h-2V6.414l-7 7L10.586 12z" />
+    </symbol>
+    <symbol id="play" viewBox="0 0 512 512">
+      <path fill="currentColor"
+        d="M133 440a35.37 35.37 0 0 1-17.5-4.67c-12-6.8-19.46-20-19.46-34.33V111c0-14.37 7.46-27.53 19.46-34.33a35.13 35.13 0 0 1 35.77.45l247.85 148.36a36 36 0 0 1 0 61l-247.89 148.4A35.5 35.5 0 0 1 133 440" />
+    </symbol>
+    <symbol id="navbar-icon" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M4 6h16M4 12h16m-7 6h7" />
+    </symbol>
+  </svg>
+  <div class="search-popup">
+    <div class="search-popup-container">
+
+      <form role="search" method="get" class="form-group" action="index.html">
+        <input type="search" id="search-form" class="form-control border-0 border-bottom"
+          placeholder="Type and press enter" value="" name="s">
+        <button type="submit" class="search-submit border-0 position-absolute bg-white"
+          style="top: 15px;right: 15px;"><svg class="search" width="24" height="24">
+            <use xlink:href="#search"></use>
+          </svg></button>
+      </form>
+
+      <h5 class="cat-list-title">Browse Categories</h5>
+
+      <ul class="cat-list">
+        <li class="cat-list-item">
+          <a href="#" title="Self Love">Life Style</a>
+        </li>
+        <li class="cat-list-item">
+          <a href="#" title="Relationships">Trending</a>
+        </li>
+        <li class="cat-list-item">
+          <a href="#" title="Skin Care"> Skin Care</a>
+        </li>
+        <li class="cat-list-item">
+          <a href="#" title="Health">Health</a>
+        </li>
+        <li class="cat-list-item">
+          <a href="#" title="Spa">Spa</a>
+        </li>
+        <li class="cat-list-item">
+          <a href="#" title="Friendship">Friendship</a>
+        </li>
+        <li class="cat-list-item">
+          <a href="#" title="Healing">Explore</a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasAccount"
+    aria-labelledby="Account">
+    <div class="offcanvas-header justify-content-center">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-4">
+          <span class="text-primary">Account</span>
+          <span class="badge bg-primary rounded-circle pt-2"><svg class="search" width="6" height="8">
+              <use xlink:href="#user"></use>
+            </svg></span>
+        </h4>
+
+        <section class="login-tabs">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="tabs-listing">
+                <nav>
+                  <div class="nav nav-tabs d-flex justify-content-center border-dark-subtle pb-3" id="nav-tab"
+                    role="tablist">
+                    <button class="nav-link account-tab mx-3 fs-4 text-capitalize fw-semibold active"
+                      id="nav-sign-in-tab" data-bs-toggle="tab" data-bs-target="#nav-sign-in" type="button" role="tab"
+                      aria-controls="nav-sign-in" aria-selected="true">Log In</button>
+                    <button class="nav-link account-tab mx-3 fs-4  text-capitalize fw-semibold" id="nav-register-tab"
+                      data-bs-toggle="tab" data-bs-target="#nav-register" type="button" role="tab"
+                      aria-controls="nav-register" aria-selected="false">Sign Up</button>
+                  </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade active show" id="nav-sign-in" role="tabpanel"
+                    aria-labelledby="nav-sign-in-tab">
+                    <div class="col">
+
+                      <p class="mb-0 py-2">Log-In With Social</p>
+                      <hr class="my-1">
+                      <div class="row g-2 py-4">
+                        <div class="d-grid col-md-6">
+                          <a href="#" class="btn btn-outline-dark px-1 py-2 rounded-0">
+                            <div class="d-flex p-2 flex-wrap justify-content-center align-items-center">
+                              <svg class="cart" width="15" height="15">
+                                <use xlink:href="#google"></use>
+                              </svg>
+                              <p class="mb-0 ps-3">Google</p>
+                            </div>
+                          </a>
+                        </div>
+                        <div class="d-grid col-md-6">
+                          <a href="#" class="btn btn-outline-dark px-1 py-2 rounded-0">
+                            <div class="d-flex p-2 flex-wrap justify-content-center align-items-center">
+                              <svg class="cart" width="15" height="15">
+                                <use xlink:href="#facebook"></use>
+                              </svg>
+                              <p class="mb-0 ps-3">Facebook</p>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+
+
+                      <p class="mb-0">Or Log-In With Email</p>
+                      <hr class="my-1">
+
+                      <form id="form1" class="form-group flex-wrap ">
+                        <div class="form-input col-lg-12 my-4">
+
+                          <input type="text" id="exampleInputEmail1" name="email" placeholder="Enter email address"
+                            class="form-control mb-3 p-4">
+                          <input type="password" id="inputPassword1" placeholder="Enter password"
+                            class="form-control mb-3 p-4" aria-describedby="passwordHelpBlock">
+
+                          <label class="py-3 d-flex p-2 flex-wrap justify-content-between">
+                            <div>
+                              <input type="checkbox" required="" class="d-inline">
+                              <span class="label-body ">Remember Me</span>
+                            </div>
+
+                            <div id="passwordHelpBlock" class="form-text ">
+                              <a href="#" class="text-primary  fw-bold"> Forgot Password?</a>
+                            </div>
+                          </label>
+                          <div class="d-grid my-3">
+                            <a href="#" class="btn btn-dark btn-lg rounded-1 p-3">Log In</a>
+                          </div>
+
+                        </div>
+                      </form>
+
+                    </div>
+
+                  </div>
+                  <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
+                    <div class="col">
+
+                      <p class="mb-0 py-2">Sign-up With Social</p>
+                      <hr class="my-1">
+                      <div class="row g-2 py-4">
+                        <div class="d-grid col-md-6">
+                          <a href="#" class="btn btn-outline-dark px-1 py-2 rounded-0">
+                            <div class="d-flex p-2 flex-wrap justify-content-center align-items-center">
+                              <svg class="cart" width="15" height="15">
+                                <use xlink:href="#google"></use>
+                              </svg>
+                              <p class="mb-0 ps-3">Google</p>
+                            </div>
+                          </a>
+                        </div>
+                        <div class="d-grid col-md-6">
+                          <a href="#" class="btn btn-outline-dark px-1 py-2 rounded-0">
+                            <div class="d-flex p-2 flex-wrap justify-content-center align-items-center">
+                              <svg class="cart" width="15" height="15">
+                                <use xlink:href="#facebook"></use>
+                              </svg>
+                              <p class="mb-0 ps-3">Facebook</p>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+
+                      <p class="mb-0">Or Sign-Up With Email</p>
+                      <hr class="my-1">
+
+                      <form id="form1" class="form-group flex-wrap ">
+                        <div class="form-input col-lg-12 my-4">
+
+                          <input type="text" id="exampleInputName" name="email" placeholder="Your full name"
+                            class="form-control mb-3 p-4">
+                          <input type="text" id="exampleInputEmail1" name="email" placeholder="Your email address"
+                            class="form-control mb-3 p-4">
+                          <input type="password" id="inputPassword1" placeholder="Set your password"
+                            class="form-control mb-3 p-4" aria-describedby="passwordHelpBlock">
+                          <input type="password" id="inputPassword2" placeholder="Retype your password"
+                            class="form-control mb-3 p-4" aria-describedby="passwordHelpBlock">
+
+                          <label class="py-3 d-flex flex-wrap justify-content-between">
+                            <div>
+                              <input type="checkbox" required="" class="d-inline">
+                              <span class="label-body ">Remember Me</span>
+                            </div>
+
+                            <div id="passwordHelpBlock" class="form-text ">
+                              <a href="#" class="text-primary  fw-bold"> Forgot Password?</a>
+                            </div>
+                          </label>
+                          <div class="d-grid my-3">
+                            <a href="#" class="btn btn-dark btn-lg rounded-1 p-3">Sign Up</a>
+                          </div>
+
+                        </div>
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
+    <div class="offcanvas-header justify-content-center">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-4">
+          <span class="text-primary">Your cart</span>
+          <span class="badge bg-primary rounded-circle pt-2">3</span>
+        </h4>
+
+        <ul class="list-group mb-4">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Leather Jacket</h6>
+              <small class="text-body-secondary">Brief description</small>
+            </div>
+            <span class="text-body-secondary">$120</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Hermese Bag</h6>
+              <small class="text-body-secondary">Brief description</small>
+            </div>
+            <span class="text-body-secondary">$80</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Life Style Glasses</h6>
+              <small class="text-body-secondary">Brief description</small>
+            </div>
+            <span class="text-body-secondary">$50</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="fw-bold">Total (USD)</span>
+            <strong>$250</strong>
+          </li>
+        </ul>
+
+        <button class="w-100 btn p-0 py-2 btn-dark" type="submit">Continue to checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- header nav section -->
+  <header id="header" class="fixed-top">
+    <nav id="primary-header" class="navbar bg-white second-header navbar-expand-lg py-lg-4">
+      <div class="container-md justify-content-between d-flex">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/logo.png" class="logo img-fluid">
+        </a>
+        <button class="navbar-toggler border-0 d-flex d-lg-none order-3 p-2 shadow-none" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false">
+          <svg class=" text-primary" width="60" height="60">
+            <use xlink:href="#navbar-icon"></use>
+          </svg>
+        </button>
+        <div class="header-bottom offcanvas offcanvas-end" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
+          <div class="offcanvas-header px-4 pt-5 pb-0">
+            <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close"
+              data-bs-target="#bdNavbar"></button>
+          </div>
+          <div class="offcanvas-body align-items-center justify-content-end">
+            <ul class="navbar-nav align-items-center mt-1 me-5">
+              <li class="nav-item px-4">
+                <a class="nav-link nav-link-ltr text-uppercase p-0" aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item px-4">
+                <a class="nav-link nav-link-ltr text-uppercase p-0" href="about-us.html">About </a>
+              </li>
+              <li class="nav-item dropdown px-4">
+                <a class="nav-link dropdown-toggle nav-link-ltr text-uppercase p-0" href="#" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  BLOG
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="blog.html">Blog<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                  <li><a class="dropdown-item" href="single-post.html">Blog-Single<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown px-4">
+                <a class="nav-link dropdown-toggle nav-link-ltr text-uppercase p-0" href="#" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  SHOP
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="shop.html">Shop<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                  <li><a class="dropdown-item" href="single-product.html">Single-Product<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                </ul>
+              </li>
+              <li class="nav-item px-4 dropdown">
+                <a class="nav-link dropdown-toggle nav-link-ltr text-uppercase p-0" href="#" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Pages
+                </a>
+                <ul class="dropdown-menu p-3 p-lg-0" aria-labelledby="pages">
+                  <li><a href="about-us.html" class="dropdown-item">About Us<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                  <li><a class="dropdown-item" href="blog.html">Blog<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                  <li><a class="dropdown-item" href="single-post.html">Single-Post<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                  <li><a class="dropdown-item" href="shop.html">Shop<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                  <li><a class="dropdown-item" href="single-product.html">Single-Product<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                  <li><a href="cart.html" class="dropdown-item">Cart<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                  <li><a href="wishlist.html" class="dropdown-item">Wishlist<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                  <li><a href="checkout.html" class="dropdown-item">Checkout<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                  <li><a href="contact.html" class="dropdown-item">Contact<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                  <li><a href="faqs.html" class="dropdown-item">FAQs<span
+                        class="badge bg-secondary-subtle text-dark ms-2">PRO</span></a></li>
+                </ul>
+              </li>
+              <li class="nav-item px-4">
+                <a class="nav-link nav-link-ltr text-uppercase p-0" href="contact.html">Contact</a>
+              </li>
+              <li class="nav-item px-4">
+                <a href="https://templatesjungle.gumroad.com/l/bloom"
+                  class="nav-link fw-bold p-0 text-decoration-underline" target="_blank">GET PRO</a>
+              </li>
+            </ul>
+            <ul class="d-flex list-unstyled justify-content-center align-items-center ms-5 m-lg-0 m-5 text-center me-5">
+              <li class="d-flex align-items-center me-3">
+                <a href="# " data-bs-toggle="offcanvas" data-bs-target="#offcanvasAccount"
+                  aria-controls="offcanvasCart"> <svg class="icon" width="20" height="20">
+                    <use xlink:href="#user"></use>
+                  </svg></a>
+              </li>
+              <li class="d-flex align-items-center me-3 nav-icons search-item">
+                <a href="" class="search-button"> <svg class="icon" width="20" height="20">
+                    <use xlink:href="#search"></use>
+                  </svg></a>
+              </li>
+              <li class="d-flex align-items-center me-4">
+                <a class="" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                  aria-controls="offcanvasCart"> <svg class="icon" width="20" height="20">
+                    <use xlink:href="#cart"></use>
+                  </svg></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- header-banner section -->
+  <section id="slider">
+    <div class="swiper slider position-relative ">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide d-flex jarallax"
+          style="background-image: url(images/slider-image.jpg); background-size: cover; background-repeat: no-repeat; height: 100vh; background-position: center;">
+          <div class="container m-auto ">
+            <div class="text-center bg-white bg-opacity-50 p-5">
+              <h6 class="banner-topic text-uppercase">Mindful Living</h6>
+              <h3 class="banner-title display-2">How to Create a Balanced Lifestyle in a Busy World?</h3>
+
+              <p class="text-uppercase" style="font-size: 14px;">Mar 15, 2025 <span> | </span> by <span
+                  class="fw-bold">Emma Richardson</span></p>
+              <a href="shop.html" class="btn btn-dark mt-3">
+                Read Now
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide d-flex jarallax"
+          style="background-image: url(images/slider-image1.jpg); background-size: cover; background-repeat: no-repeat; height: 100vh; background-position: center;">
+          <div class="container m-auto ">
+            <div class="text-center bg-white bg-opacity-50 p-5">
+              <h6 class="banner-topic text-uppercase">Wellness Journey</h6>
+              <h3 class="banner-title display-2">Morning Rituals That Transform Your Entire Day</h3>
+
+              <p class="text-uppercase" style="font-size: 14px;">Mar 16, 2025 <span> | </span> by <span
+                  class="fw-bold">Sophia Martinez</span></p>
+              <a href="shop.html" class="btn btn-dark mt-3">
+                Read Now
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide d-flex jarallax"
+          style="background-image: url(images/slider-image2.jpg); background-size: cover; background-repeat: no-repeat; height: 100vh; background-position: center;">
+          <div class="container m-auto ">
+            <div class="text-center bg-white bg-opacity-50 p-5">
+              <h6 class="banner-topic text-uppercase">Home & Sanctuary</h6>
+              <h3 class="banner-title display-2">Creating a Peaceful Home Environment for Better Mental Health</h3>
+
+              <p class="text-uppercase" style="font-size: 14px;">Mar 17, 2025 <span> | </span> by <span
+                  class="fw-bold">James Wilson</span></p>
+              <a href="shop.html" class="btn btn-dark mt-3">
+                Read Now
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="slider-pagination pb-4 d-block d-xl-none"></div>
+      </div>
+      <div
+        class="position-absolute top-50 end-0 translate-middle-y z-2 d-xl-flex d-none m-auto me-0 me-md-5 main-slider-button-next">
+        <svg class=" light-color" width="60" height="60">
+          <use xlink:href="#right-arrow"></use>
+        </svg>
+      </div>
+      <div
+        class="position-absolute top-50 start-0 translate-middle-y z-2 d-xl-flex d-none m-auto ms-0 ms-md-5 main-slider-button-prev">
+        <svg class=" light-color" width="60" height="60">
+          <use xlink:href="#left-arrow"></use>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!--Posts Section Starts -->
+  <section id="blog-card" class="padding-small">
+    <div class="container-md">
+      <h3 class="text-center display-6 mb-5 text-uppercase">Latest Posts</h3>
+      <div class="row ">
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="blog-post shadow-sm p-4">
+            <div class="image-zoom-effect">
+              <a href="single-post.html" class="blog-img"><img src="images/blog1.jpg" alt="Mindful morning routine"
+                  class="img-fluid image-holder"></a>
+            </div>
+            <div class="pt-3">
+              <span class="fw-medium text-uppercase text-primary" style="font-size: 13px;">Daily Rituals</span>
+            </div>
+            <div class="">
+              <h3 class="pt-2"><a href="single-post.html" class="blog-link">5 Morning Habits That Transform Your Entire
+                  Day</a></h3>
+              <a href="#">
+                <p class="text-secondary text-uppercase" style="font-size: 12px;">Mar 15, 2025 <span> | </span> by <span
+                    class="fw-bold">Emma Richardson</span><svg class="text-secondary ms-2" width="16" height="16">
+                    <use xlink:href="#share"></use>
+                  </svg></p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="blog-post shadow-sm p-4">
+            <div class="image-zoom-effect">
+              <a href="single-post.html" class="blog-img"><img src="images/blog2.jpg" alt="Minimalist home decor"
+                  class="img-fluid image-holder"></a>
+            </div>
+            <div class="pt-3">
+              <span class="fw-medium text-uppercase text-primary" style="font-size: 13px;">Home Sanctuary</span>
+            </div>
+            <div class="">
+              <h3 class="pt-2"><a href="single-post.html" class="blog-link">Creating a Calming Space: Minimalist Decor
+                  Ideas</a></h3>
+              <a href="#">
+                <p class="text-secondary text-uppercase" style="font-size: 12px;">Mar 16, 2025 <span> | </span> by <span
+                    class="fw-bold">James Wilson</span><svg class="text-secondary ms-2" width="16" height="16">
+                    <use xlink:href="#share"></use>
+                  </svg></p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="blog-post shadow-sm p-4">
+            <div class="image-zoom-effect">
+              <a href="single-post.html" class="blog-img"><img src="images/blog3.jpg" alt="Healthy meal preparation"
+                  class="img-fluid image-holder"></a>
+            </div>
+            <div class="pt-3">
+              <span class="fw-medium text-uppercase text-primary" style="font-size: 13px;">Nutrition</span>
+            </div>
+            <div class="">
+              <h3 class="pt-2"><a href="single-post.html" class="blog-link">Simple Meal Prep Ideas for Busy Weekdays</a>
+              </h3>
+              <a href="#">
+                <p class="text-secondary text-uppercase" style="font-size: 12px;">Mar 17, 2025 <span> | </span> by <span
+                    class="fw-bold">Sophia Martinez</span><svg class="text-secondary ms-2" width="16" height="16">
+                    <use xlink:href="#share"></use>
+                  </svg></p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="blog-post shadow-sm p-4">
+            <div class="image-zoom-effect">
+              <a href="single-post.html" class="blog-img"><img src="images/blog4.jpg" alt="Mindfulness meditation"
+                  class="img-fluid image-holder"></a>
+            </div>
+            <div class="pt-3">
+              <span class="fw-medium text-uppercase text-primary" style="font-size: 13px;">Mental Wellness</span>
+            </div>
+            <div class="">
+              <h3 class="pt-2"><a href="single-post.html" class="blog-link">10-Minute Meditation Practices for
+                  Beginners</a></h3>
+              <a href="#">
+                <p class="text-secondary text-uppercase" style="font-size: 12px;">Mar 18, 2025 <span> | </span> by
+                  <span class="fw-bold">Michael Chen</span><svg class="text-secondary ms-2" width="16" height="16">
+                    <use xlink:href="#share"></use>
+                  </svg>
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="blog-post shadow-sm p-4">
+            <div class="image-zoom-effect">
+              <a href="single-post.html" class="blog-img"><img src="images/blog5.jpg" alt="Sustainable living"
+                  class="img-fluid image-holder"></a>
+            </div>
+            <div class="pt-3">
+              <span class="fw-medium text-uppercase text-primary" style="font-size: 13px;">Eco Living</span>
+            </div>
+            <div class="">
+              <h3 class="pt-2"><a href="single-post.html" class="blog-link">Easy Sustainable Swaps for Everyday Life</a>
+              </h3>
+              <a href="#">
+                <p class="text-secondary text-uppercase" style="font-size: 12px;">Mar 19, 2025 <span> | </span> by
+                  <span class="fw-bold">Olivia Green</span><svg class="text-secondary ms-2" width="16" height="16">
+                    <use xlink:href="#share"></use>
+                  </svg>
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="blog-post shadow-sm p-4">
+            <div class="image-zoom-effect">
+              <a href="single-post.html" class="blog-img"><img src="images/blog6.jpg" alt="Digital detox"
+                  class="img-fluid image-holder"></a>
+            </div>
+            <div class="pt-3">
+              <span class="fw-medium text-uppercase text-primary" style="font-size: 13px;">Digital Wellness</span>
+            </div>
+            <div class="">
+              <h3 class="pt-2"><a href="single-post.html" class="blog-link">The Benefits of a Weekly Digital Detox</a>
+              </h3>
+              <a href="#">
+                <p class="text-secondary text-uppercase" style="font-size: 12px;">Mar 20, 2025 <span> | </span> by
+                  <span class="fw-bold">David Kim</span><svg class="text-secondary ms-2" width="16" height="16">
+                    <use xlink:href="#share"></use>
+                  </svg>
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5">
+        <a href="shop.html" class="btn btn-primary">
+          Read All
+        </a>
+      </div>
+  </section>
+
+  <!-- Videos section start  -->
+  <section id="video-fashionista" class="position-relative bg-primary padding-small jarallax"
+    style="background-image: url(images/background-img1.jpg); background-size: cover; background-repeat: no-repeat; height: 100vh; background-position: center;">
+    <div class="container-md ">
+      <h3 class="text-center display-6 text-white mb-5 text-uppercase">Top Videos</h3>
+      <div class="swiper-button-next vid-swiper-next d-none d-md-block vid-arrow position-absolute me-0 me-lg-5">
+        <svg class=" light-color" width="80" height="80">
+          <use xlink:href="#right-arrow"></use>
+        </svg>
+      </div>
+      <div class="swiper-button-prev vid-swiper-prev d-none d-md-block vid-arrow position-absolute ms-0 ms-lg-5"><svg
+          class=" light-color" width="80" height="80">
+          <use xlink:href="#left-arrow"></use>
+        </svg></div>
+      <div class="col-md-12">
+        <div class="swiper vid-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="card border-0 bg-primary">
+                <a href="single-post.html">
+                  <div class="position-relative">
+                    <img src="images/vid1.jpg" class="card-img-top rounded-0" alt="Morning meditation practice">
+                    <a type="button" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/W_tIumKa8VY"
+                      data-bs-target="#myModal" class="play-btn position-absolute top-50 start-50 translate-middle">
+                      <div class="play border border-white p-3  rounded-circle">
+                        <svg class="play-icon text-white" width="40" height="40">
+                          <use xlink:href="#play"></use>
+                        </svg>
+                      </div>
+                    </a>
+                  </div>
+                </a>
+                <div class="card-body p-4">
+                  <a href="single-post.html">
+                    <h3 class="py-2 text-white"><a href="single-post.html" class="blog-link">5-Minute Morning Meditation
+                        for Busy People</a></h3>
+                  </a>
+                  <div class="card-text ">
+                    <p class="text-white">Start your day with clarity and calm. This quick meditation practice helps
+                      center your mind and set positive intentions for the day ahead.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card border-0 bg-primary">
+                <a href="single-post.html">
+                  <div class="position-relative">
+                    <img src="images/vid2.jpg" class="card-img-top rounded-0 " alt="Healthy meal preparation">
+                    <a type="button" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/W_tIumKa8VY"
+                      data-bs-target="#myModal" class="play-btn position-absolute top-50 start-50 translate-middle">
+                      <div class="play border border-white p-3  rounded-circle">
+                        <svg class="play-icon text-white" width="40" height="40">
+                          <use xlink:href="#play"></use>
+                        </svg>
+                      </div>
+                  </div>
+                </a>
+                <div class="card-body p-4">
+                  <a href="single-post.html">
+                    <h3 class="py-2 text-white"><a href="single-post.html" class="blog-link">Quick & Healthy Meal Prep
+                        for the Week</a></h3>
+                  </a>
+                  <div class="card-text ">
+                    <p class="text-white">Learn how to prepare nutritious meals in under an hour. These recipes will
+                      save you time while keeping your diet balanced and delicious.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card border-0 bg-primary">
+                <a href="single-post.html">
+                  <div class="position-relative">
+                    <img src="images/vid3.jpg" class="card-img-top rounded-0 " alt="Home organization tips">
+                    <a type="button" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/W_tIumKa8VY"
+                      data-bs-target="#myModal" class="play-btn position-absolute top-50 start-50 translate-middle">
+                      <div class="play border border-white p-3  rounded-circle">
+                        <svg class="play-icon text-white" width="40" height="40">
+                          <use xlink:href="#play"></use>
+                        </svg>
+                      </div>
+                  </div>
+                </a>
+                <div class="card-body p-4">
+                  <a href="single-post.html">
+                    <h3 class="py-2 text-white"><a href="single-post.html" class="blog-link">Declutter Your Space: Home
+                        Organization Guide</a></h3>
+                  </a>
+                  <div class="card-text ">
+                    <p class="text-white">Transform your living space with these simple organization hacks. Create a
+                      peaceful environment that promotes relaxation and productivity.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card border-0 bg-primary">
+                <a href="single-post.html">
+                  <div class="position-relative">
+                    <img src="images/vid4.jpg" class="card-img-top rounded-0 " alt="Mindful walking in nature">
+                    <a type="button" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/W_tIumKa8VY"
+                      data-bs-target="#myModal" class="play-btn position-absolute top-50 start-50 translate-middle">
+                      <div class="play border border-white p-3  rounded-circle">
+                        <svg class="play-icon text-white" width="40" height="40">
+                          <use xlink:href="#play"></use>
+                        </svg>
+                      </div>
+                  </div>
+                </a>
+                <div class="card-body p-4">
+                  <a href="single-post.html">
+                    <h3 class="py-2 text-white"><a href="single-post.html" class="blog-link">The Art of Mindful Walking
+                        in Nature</a></h3>
+                  </a>
+                  <div class="card-text ">
+                    <p class="text-white">Discover how connecting with nature through walking can reduce stress and
+                      improve mental clarity. Perfect for urban dwellers seeking peace.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card border-0 bg-primary">
+                <a href="single-post.html">
+                  <div class="position-relative">
+                    <img src="images/vid5.jpg" class="card-img-top rounded-0 " alt="Digital detox techniques">
+                    <a type="button" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/W_tIumKa8VY"
+                      data-bs-target="#myModal" class="play-btn position-absolute top-50 start-50 translate-middle">
+                      <div class="play border border-white p-3  rounded-circle">
+                        <svg class="play-icon text-white" width="40" height="40">
+                          <use xlink:href="#play"></use>
+                        </svg>
+                      </div>
+                  </div>
+                </a>
+                <div class="card-body p-4">
+                  <a href="single-post.html">
+                    <h3 class="py-2 text-white"><a href="single-post.html" class="blog-link">Digital Detox: Reclaim Your
+                        Time & Attention</a></h3>
+                  </a>
+                  <div class="card-text ">
+                    <p class="text-white">Learn practical strategies to reduce screen time and be more present. Improve
+                      your relationships and mental wellbeing with these simple techniques.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination text-center mt-lg-5"></div>
+      </div>
+    </div>
+  </section>
+
+  <!--Posts Section Starts -->
+  <section id="popular-post" class="padding-small">
+    <div class="container-md">
+      <div class="pb-4 d-flex align-items-center justify-content-between flex-wrap col-md-12">
+        <h3 class="text-center display-6 text-uppercase">Popular Posts</h3>
+        <a href="blog.html" class="btn btn-primary">
+          Read All
+        </a>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-4">
+          <div class="blog-post shadow-sm p-4">
+            <div class="image-zoom-effect">
+              <a href="single-post.html" class="blog-img"><img src="images/vid4.jpg" alt="Mindful living practices"
+                  class="img-fluid image-holder"></a>
+            </div>
+            <div class="pt-3">
+              <span class="fw-medium text-uppercase text-primary" style="font-size: 13px;">Mindfulness</span>
+            </div>
+            <div class="">
+              <h3 class="pt-2"><a href="single-post.html" class="blog-link">Daily Mindfulness Practices for Busy
+                  Lives</a></h3>
+              <a href="#">
+                <p class="text-secondary text-uppercase" style="font-size: 12px;">Mar 15, 2025 <span> | </span> by
+                  <span class="fw-bold">Emma Richardson</span><svg class="text-secondary ms-2" width="16" height="16">
+                    <use xlink:href="#share"></use>
+                  </svg>
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="blog-post shadow-sm p-4">
+            <div class="image-zoom-effect">
+              <a href="single-post.html" class="blog-img"><img src="images/vid5.jpg" alt="Home organization ideas"
+                  class="img-fluid image-holder"></a>
+            </div>
+            <div class="pt-3">
+              <span class="fw-medium text-uppercase text-primary" style="font-size: 13px;">Home Organization</span>
+            </div>
+            <div class="">
+              <h3 class="pt-2"><a href="single-post.html" class="blog-link">Simple Home Organization Hacks for Small
+                  Spaces</a></h3>
+              <a href="#">
+                <p class="text-secondary text-uppercase" style="font-size: 12px;">Mar 16, 2025 <span> | </span> by
+                  <span class="fw-bold">James Wilson</span><svg class="text-secondary ms-2" width="16" height="16">
+                    <use xlink:href="#share"></use>
+                  </svg>
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="blog-post shadow-sm p-4">
+            <div class="image-zoom-effect">
+              <a href="single-post.html" class="blog-img"><img src="images/vid3.jpg" alt="Healthy eating habits"
+                  class="img-fluid image-holder"></a>
+            </div>
+            <div class="pt-3">
+              <span class="fw-medium text-uppercase text-primary" style="font-size: 13px;">Nutrition</span>
+            </div>
+            <div class="">
+              <h3 class="pt-2"><a href="single-post.html" class="blog-link">5 Simple Habits for Healthier Eating</a>
+              </h3>
+              <a href="#">
+                <p class="text-secondary text-uppercase" style="font-size: 12px;">Mar 17, 2025 <span> | </span> by
+                  <span class="fw-bold">Sophia Martinez</span><svg class="text-secondary ms-2" width="16" height="16">
+                    <use xlink:href="#share"></use>
+                  </svg>
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- shop section -->
+  <section id="shop-now" class="product-store padding-small pt-0">
+    <div class="container-md">
+      <div class="row">
+        <div class="pb-4 d-flex align-items-center justify-content-between flex-wrap col-md-12">
+          <h3 class="display-6 text-uppercase">New Collections</h3>
+          <a href="blog.html" class="btn btn-primary">
+            View All Products
+          </a>
+        </div>
+      </div>
+
+      <div id="featured-swiper" class="product-swiper">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="product-card shadow-sm p-4 image-zoom-effect link-effect d-flex flex-wrap">
+                <div class="image-holder">
+                  <img src="images/product-item1.jpg" alt="Organic Cotton Throw Blanket"
+                    class="product-image img-fluid">
+                </div>
+                <div class="cart-concern w-100 d-flex mt-2 justify-content-between">
+                  <p class="card-title text-uppercase fw-semibold text-primary" style="font-size: 14px;">
+                    <a href="single-product.html" class="text-primary">Cozy Throw Blanket</a>
+                  </p>
+                  <div class="cart-info">
+                    <a class="pseudo-text-effect text-end" href="#" data-after="ADD TO CART"><span
+                        class="fs-6 fw-medium">$65</span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="product-card shadow-sm p-4 image-zoom-effect link-effect d-flex flex-wrap">
+                <div class="image-holder">
+                  <img src="images/product-item2.jpg" alt="Ceramic Plant Pot" class="product-image img-fluid">
+                </div>
+                <div class="cart-concern w-100 d-flex mt-2 justify-content-between">
+                  <p class="card-title text-uppercase fw-semibold text-primary" style="font-size: 14px;">
+                    <a href="single-product.html" class="text-primary">Ceramic Plant Pot</a>
+                  </p>
+                  <div class="cart-info">
+                    <a class="pseudo-text-effect" href="#" data-after="ADD TO CART">
+                      <span class="fs-6 fw-medium">$38</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="product-card shadow-sm p-4 image-zoom-effect link-effect d-flex flex-wrap">
+                <div class="image-holder">
+                  <img src="images/product-item3.jpg" alt="Bamboo Cutting Board Set" class="product-image img-fluid">
+                </div>
+                <div class="cart-concern w-100 d-flex mt-2 justify-content-between">
+                  <p class="card-title text-uppercase fw-semibold text-primary" style="font-size: 14px;">
+                    <a href="single-product.html" class="text-primary">Bamboo Board Set</a>
+                  </p>
+                  <div class="cart-info">
+                    <a class="pseudo-text-effect" href="#" data-after="ADD TO CART">
+                      <span class="fs-6 fw-medium">$45</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="product-card shadow-sm p-4 image-zoom-effect link-effect d-flex flex-wrap">
+                <div class="image-holder">
+                  <img src="images/product-item4.jpg" alt="Handcrafted Ceramic Mugs" class="product-image img-fluid">
+                </div>
+                <div class="cart-concern w-100 d-flex mt-2 justify-content-between">
+                  <p class="card-title text-uppercase fw-semibold text-primary" style="font-size: 14px;">
+                    <a href="single-product.html" class="text-primary">Artisan Coffee Mugs</a>
+                  </p>
+                  <div class="cart-info">
+                    <a class="pseudo-text-effect" href="#" data-after="ADD TO CART">
+                      <span class="fs-6 fw-medium">$32</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="product-card shadow-sm p-4 image-zoom-effect link-effect d-flex flex-wrap">
+                <div class="image-holder">
+                  <img src="images/product-item5.jpg" alt="Yoga Mat & Accessories" class="product-image img-fluid">
+                </div>
+                <div class="cart-concern w-100 d-flex mt-2 justify-content-between">
+                  <p class="card-title text-uppercase fw-semibold text-primary" style="font-size: 14px;">
+                    <a href="single-product.html" class="text-primary">Premium Yoga Mat</a>
+                  </p>
+                  <div class="cart-info">
+                    <a class="pseudo-text-effect" href="#" data-after="ADD TO CART">
+                      <span class="fs-6 fw-medium">$58</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="product-card shadow-sm p-4 image-zoom-effect link-effect d-flex flex-wrap">
+                <div class="image-holder">
+                  <img src="images/product-item6.jpg" alt="Aromatherapy Diffuser" class="product-image img-fluid">
+                </div>
+                <div class="cart-concern w-100 d-flex mt-2 justify-content-between">
+                  <p class="card-title text-uppercase fw-semibold text-primary" style="font-size: 14px;">
+                    <a href="single-product.html" class="text-primary">Essential Oil Diffuser</a>
+                  </p>
+                  <div class="cart-info">
+                    <a class="pseudo-text-effect" href="#" data-after="ADD TO CART">
+                      <span class="fs-6 fw-medium">$49</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- subscribe section -->
+  <section id="subscribe" class="padding-small jarallax"
+    style="background-image: url(images/background-img.jpg); background-size: cover; background-repeat: no-repeat; height: 45vh; background-position: center;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <h3 class="display-5 text-center mb-5 text-uppercase">Subscribe our newsletter</h3>
+          <form>
+            <div class="input-group">
+              <input type="email" class="form-control rounded-0 border-black" placeholder="Your e-mail address here">
+              <button class="btn btn-dark" type="submit" style="font-size: 14px;">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer section -->
+  <footer id="footer" class="bg-primary">
+    <div class="container-md padding-small">
+      <div class="row flex-wrap justify-content-between">
+        <div class="col-lg-3 col-md-6 pb-3 pb-lg-0 ">
+          <div class="footer-menu">
+            <div class="logo mb-3">
+              <a href="index.html"><img src="images/logo-white.png" alt="logo"></a>
+            </div>
+            <p class="text-white pt-2">Vel non nibh vestibulum massa
+              ullamcorper. Bibendum ultrices venenatis, id id sed mass commodo eros duis ut cras neque.</p>
+            <div class="social-links mt-4">
+              <ul class="d-flex list-unstyled gap-3">
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon text-light fs-4 me-4" icon="ri:facebook-fill"></iconify-icon>
+                  </a>
+                </li>
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon text-light fs-4 me-4" icon="ri:twitter-fill"></iconify-icon>
+                  </a>
+                </li>
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon text-light fs-4 me-4" icon="ri:pinterest-fill"></iconify-icon>
+                  </a>
+                </li>
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon text-light fs-4 me-4" icon="ri:instagram-fill"></iconify-icon>
+                  </a>
+                </li>
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon text-light fs-4 me-4" icon="ri:youtube-fill"></iconify-icon>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 pb-3 pb-lg-0 ">
+          <div class="footer-menu text-white">
+            <h6 class="pb-3 text-uppercase text-white">Quick links</h6>
+            <ul class="menu-list d-flex flex-column list-unstyled" style="font-size: 12px;">
+              <li class="pb-1 text-uppercase">
+                <a href="#">About </a>
+              </li>
+              <li class="pb-1 text-uppercase">
+                <a href="#">Shop </a>
+              </li>
+              <li class="pb-1 text-uppercase">
+                <a href="#">Contact</a>
+              </li>
+              <li class="pb-1 text-uppercase">
+                <a href="#">Subscribe</a>
+              </li>
+              <li class="pb-1 text-uppercase">
+                <a href="#">Term & Condition</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 pb-3 pb-lg-0">
+          <div class="footer-menu text-white">
+            <h6 class=" pb-3 text-uppercase fw-semibold text-white">Services</h6>
+            <ul class="menu-list d-flex flex-column list-unstyled" style="font-size: 12px;">
+              <li class="pb-1 text-uppercase">
+                <a href="#">Life Style</a>
+              </li>
+              <li class="pb-1 text-uppercase">
+                <a href="#">ENTERTAINMENT </a>
+              </li>
+              <li class="pb-1 text-uppercase">
+                <a href="#">beauty</a>
+              </li>
+              <li class="pb-1 text-uppercase">
+                <a href="#"> LIFESTYLE</a>
+              </li>
+              <li class="pb-1 text-uppercase">
+                <a href="#">TRAVEL</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 pb-3 pb-lg-0">
+          <div class="footer-menu text-white">
+            <h6 class=" pb-3 text-uppercase fw-semibold text-white">Categories</h6>
+            <ul class="menu-list d-flex flex-column list-unstyled" style="font-size: 12px;">
+              <li class="pb-1 text-uppercase">
+                <a href="about.html">Life Style</a>
+              </li>
+              <li class="pb-1 text-uppercase">
+                <a href="about.html">ENTERTAINMENT </a>
+              </li>
+              <li class="pb-1 text-uppercase">
+                <a href="services.html">beauty</a>
+              </li>
+              <li class="pb-1 text-uppercase">
+                <a href="about.html"> LIFESTYLE</a>
+              </li>
+              <li class="pb-1 text-uppercase">
+                <a href="contact.html">TRAVEL</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" bg-primary border-top ">
+      <div class="container-md footer-bottom d-md-flex text-center justify-content-between py-3">
+        <p class="mb-0 text-white">© Bloom. All Right Reserved.</p>
+        <p class="mb-0 text-white">HTML Template by: <a href="https://templatesjungle.com/" target="_blank"
+            class=" fw-semibold"> TemplatesJungle</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Video Popup -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><svg class="bi" width="40"
+              height="40">
+              <use xlink:href="#close-sharp"></use>
+            </svg></button>
+          <div class="ratio ratio-16x9">
+            <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always"
+              allow="autoplay"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="js/plugins.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</body>
+
+</html>
