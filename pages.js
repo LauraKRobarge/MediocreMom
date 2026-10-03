@@ -75,7 +75,7 @@
   }
   MM.on("hmplay", function (b) { S.track = S.track === b.dataset.id ? null : b.dataset.id; homeMusic(); });
   function socials(a) {
-    return MM.socialIcons("labels btns") + (a.socials || []).filter(function (s) { return s.url && !/^(instagram|facebook)$/i.test(s.label); }).map(function (s) { return '<a class="mm-btn ghost" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.label) + "</a>"; }).join("");
+    return MM.socialIcons("labels btns") + (a.socials || []).filter(function (s) { return s.url && !/^(instagram|facebook|tiktok)$/i.test(s.label); }).map(function (s) { return '<a class="mm-btn ghost" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.label) + "</a>"; }).join("");
   }
   function contact(a) {
     if (!a.contactForm) return "";
@@ -97,25 +97,17 @@
   function music() {
     S.tag = S.tag || "all";
     var pls = MM.list("playlists").sort(MM.byOrder);
-    var feat = pls.find(function (p) { return p.featured && (p.status === "public" || MM.edit()); }) || pls[0];
+    var feat = pls.find(function (p) { return p.featured && (p.status === "public" || MM.edit()); });
+    if (feat) pls = [feat].concat(pls.filter(function (p) { return p !== feat; }));
     var tags = ["all"].concat(Array.from(new Set([].concat.apply([], pls.map(function (p) { return p.tags || []; })))));
-    var shown = pls.filter(function (p) { return p !== feat && (S.tag === "all" || (p.tags || []).indexOf(S.tag) > -1); });
+    var shown = pls.filter(function (p) { return S.tag === "all" || (p.tags || []).indexOf(S.tag) > -1; });
     var tracks = MM.list("tracks").sort(MM.byOrder);
     var h = MM.pageHead("music", MM.shareBtn("sound-judgement.html", "Share this page") + newBtn("playlists", "+ Add a playlist"));
     h += '<section class="mm-section"><div class="mm-wrap">';
-    if (feat) {
-      var emb = MM.embedUrl(feat.url);
-      h += '<span class="mm-kicker">Featured playlist</span><div class="mm-feature" id="' + feat.id + '" style="margin-top:10px"><div class="mm-body">' + MM.badge(feat).replace("mm-badge", "mm-badge\" style=\"align-self:flex-start") +
-        '<div class="mm-tags">' + (feat.tags || []).map(function (t) { return '<span class="mm-tag">' + esc(t) + "</span>"; }).join("") + "</div><h2>" + esc(feat.title) + '</h2><p style="font-size:19px;color:#747474;margin:0">' + esc(feat.description) + "</p>" + notes(feat) +
-        '<div class="mm-row">' + (feat.url ? '<a class="mm-btn" href="' + esc(feat.url) + '" target="_blank" rel="noopener">Open in ' + MM.service(feat.url) + "</a>" : "") + MM.shareBtn("sound-judgement.html#" + feat.id) + "</div>" +
-        (emb ? '<p style="font-size:13px;color:#747474;margin:0">Full playback may need you to be signed in to ' + MM.service(feat.url) + ".</p>" : "") + "</div>" +
-        '<div class="mm-media" style="border-right:0;background:#111">' + (emb ? '<iframe src="' + MM.imgsrc(emb) + '" style="width:100%;height:100%;min-height:380px;border:0;display:block" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="' + esc(feat.title) + ' player"></iframe>' : feat.cover ? '<img src="' + MM.imgsrc(feat.cover) + '" alt="">' : MM.ph(MM.edit() ? "paste a Spotify, Apple Music or YouTube link to show the player" : "player", "gold")) + "</div>" +
-        (MM.edit() ? '<div style="grid-column:1/-1">' + MM.tools("playlists", feat) + "</div>" : "") + "</div>";
+    if (pls.length) {
+      if (tags.length > 2) h += chips(tags.map(function (t) { return [t, t === "all" ? "All" : t]; }), S.tag, "tagfilter");
+      h += shown.length ? '<div class="mm-pls" data-sortable="playlists">' + shown.map(plBlock).join("") + "</div>" : empty("No playlists with that tag.");
     } else h += empty(MM.edit() ? "Add your first playlist to get started." : "Playlists coming soon.");
-    if (pls.length > 1) {
-      h += '<h2 class="mm-h2" style="margin-top:64px">More playlists</h2><p class="mm-sub">Filter by mood, genre, or activity.</p>' + chips(tags.map(function (t) { return [t, t === "all" ? "All" : t]; }), S.tag, "tagfilter");
-      h += shown.length ? '<div class="mm-grid" data-sortable="playlists">' + shown.map(plCard).join("") + "</div>" : empty("No playlists with that tag.");
-    }
     h += '</div></section><section class="mm-section" id="on-repeat"><div class="mm-wrap" style="max-width:860px"><div class="mm-row" style="justify-content:space-between"><h2 class="mm-h2">On Repeat</h2>' + newBtn("tracks", "+ Add track", "small ghost") + "</div>" +
       '<p class="mm-sub">The songs I can\'t stop playing right now.</p>' + (tracks.length ? '<div data-sortable="tracks">' + tracks.map(function (t, i) {
         return '<div class="mm-track" data-sid="' + t.id + '"><span class="n">' + (i + 1) + '</span><div><div class="ttl">' + esc(t.title) + (t.artist ? ' <span style="font-weight:400;color:#747474">· ' + esc(t.artist) + "</span>" : "") + " " + MM.badge(t) + "</div>" + (t.note ? '<div class="note">' + esc(t.note) + "</div>" : "") + "</div>" +
@@ -128,17 +120,25 @@
     if (!p.notes) return "";
     return '<details><summary style="cursor:pointer;font-weight:700">Why these songs</summary><div style="font-size:15px;color:#747474;margin-top:8px">' + MM.md(p.notes.split("\n").join("\n\n")) + "</div></details>";
   }
-  function plCard(p) {
-    var emb = MM.embedUrl(p.url), playing = S.playing === p.id && emb;
-    return '<article class="mm-card' + (p.status === "archived" ? " dim" : "") + '" id="' + p.id + '" data-sid="' + p.id + '">' + MM.badge(p) +
-      '<div class="mm-media" style="aspect-ratio:1/1;background:#111">' + (playing ? '<iframe src="' + MM.imgsrc(emb) + '" style="width:100%;height:100%;border:0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="' + esc(p.title) + ' player"></iframe>' : p.cover ? '<img src="' + MM.imgsrc(p.cover) + '" alt="Cover for ' + esc(p.title) + '">' : MM.ph("playlist cover", "gold")) + "</div>" +
-      '<div class="mm-body"><div class="mm-tags">' + (p.tags || []).map(function (t) { return '<span class="mm-tag">' + esc(t) + "</span>"; }).join("") + "</div><h3>" + esc(p.title) + "</h3><p>" + esc(p.description) + "</p>" + notes(p) + MM.filesHTML(p.files) +
-      '<div class="mm-row" style="margin-top:auto;padding-top:8px">' + (emb ? '<button class="mm-btn small" data-act="play" data-id="' + p.id + '">' + (playing ? "Close player" : "Play here") + "</button>" : "") +
-      (p.url ? '<a class="mm-btn ghost small" href="' + esc(p.url) + '" target="_blank" rel="noopener">Open in ' + MM.service(p.url) + "</a>" : "") + MM.shareBtn("sound-judgement.html#" + p.id, "Share").replace("mm-btn ghost small", "mm-btn ghost small") + "</div></div>" +
-      MM.tools("playlists", p, '<button data-act="feature" data-id="' + p.id + '">Feature</button>' + MM.moveBtns("playlists", p)) + "</article>";
+  function songsOf(p) {
+    return String(p.songs || "").split("\n").map(function (ln) {
+      ln = ln.trim(); if (!ln) return null;
+      var parts = ln.indexOf("\t") > -1 ? ln.split("\t").map(function (x) { return x.trim(); }).filter(Boolean) : ln.split(/\s+[–—-]\s+/);
+      if (ln.indexOf("\t") > -1 && parts.length > 2 && /^\d+:\d\d$/.test(parts[1])) parts.splice(1, 1);
+      return { title: parts[0].replace(/^\d+[.)]\s+/, ""), artist: parts.slice(1, 2).join("") };
+    }).filter(Boolean);
+  }
+  function plBlock(p) {
+    var svc = MM.service(p.url) || "Apple Music", songs = songsOf(p);
+    return '<article class="mm-pl' + (p.status === "archived" ? " dim" : "") + '" id="' + p.id + '" data-sid="' + p.id + '">' +
+      '<div class="side"><div class="cover">' + (p.cover ? '<img src="' + MM.imgsrc(p.cover) + '" alt="Cover for ' + esc(p.title) + '">' : MM.ph("playlist cover", "gold")) + "</div>" +
+      '<div class="ttl">' + MM.badge(p) + "<h3>" + esc(p.title) + "</h3>" + (songs.length ? "<span>" + songs.length + (songs.length === 1 ? " song" : " songs") + "</span>" : "") + "</div>" +
+      '<div class="mm-row">' + (p.url ? '<a class="mm-btn small" href="' + esc(p.url) + '" target="_blank" rel="noopener">Open in ' + esc(svc) + "</a>" : "") + MM.shareBtn("sound-judgement.html#" + p.id) + "</div>" +
+      '<p class="disc">Full playback may need you to be signed in to ' + esc(svc) + ".</p></div>" +
+      '<ol class="songs">' + (songs.length ? songs.map(function (s, i) { return '<li><span class="n">' + (i + 1) + '</span><span class="t"><strong>' + esc(s.title) + "</strong>" + (s.artist ? "<span>" + esc(s.artist) + "</span>" : "") + "</span></li>"; }).join("") : '<li class="none">' + (MM.edit() ? "Edit this playlist to add its songs." : "Song list coming soon.") + "</li>") + "</ol>" +
+      (MM.edit() ? '<div style="grid-column:1/-1">' + MM.tools("playlists", p, '<button data-act="feature" data-id="' + p.id + '">Feature</button>' + MM.moveBtns("playlists", p)) + "</div>" : "") + "</article>";
   }
   MM.on("tagfilter", function (b) { S.tag = b.dataset.v; music(); });
-  MM.on("play", function (b) { S.playing = S.playing === b.dataset.id ? null : b.dataset.id; music(); });
   MM.on("feature", function (b) { MM.patch("playlists", b.dataset.id, { featured: true }); MM.toast("Featured"); });
 
   /* ================= WRITINGS ================= */
@@ -357,8 +357,9 @@
     var list = all.filter(function (l) { return S.type === "all" || l.type === S.type; });
     var h = MM.pageHead("links", newBtn("links", "+ Add a link") + (MM.edit() ? '<label class="mm-btn ghost">+ Upload a resource<input type="file" multiple hidden data-quickfile></label>' : "")) + '<section class="mm-section"><div class="mm-wrap">' + chips(types.map(function (t) { return [t, t === "all" ? "Everything" : t]; }), S.type, "ltype");
     h += list.length ? '<div class="mm-grid" data-sortable="links">' + list.map(function (l) {
+      var th = l.thumb || ((l.files || []).filter(function (f) { return f && f.ref && MM.isImage(f.ref, f.type); })[0] || {}).ref;
       var dom = l.url ? "" : "File"; try { dom = new URL(l.url).hostname.replace(/^www\./, ""); } catch (e) {}
-      return '<article class="mm-card link" id="' + l.id + '" data-sid="' + l.id + '">' + MM.badge(l) + '<div class="mm-body" style="padding-top:' + (MM.edit() ? "44px" : "22px") + '"><span class="mm-type">' + esc(l.type || "Link") + " · " + esc(dom) + '</span><h3><a href="' + esc(MM.href("links", l)) + '" target="_blank" rel="noopener">' + esc(l.title) + " ↗</a></h3><p>" + esc(l.description) + '</p><div class="mm-tags">' + (l.tags || []).map(function (t) { return '<span class="mm-tag">' + esc(t) + "</span>"; }).join("") + "</div>" + ((l.files || []).length ? MM.filesHTML(l.files) : "") + "</div>" + MM.tools("links", l, MM.moveBtns("links", l)) + "</article>";
+      return '<article class="mm-card link" id="' + l.id + '" data-sid="' + l.id + '">' + MM.badge(l) + (th ? '<a class="mm-media" style="aspect-ratio:16/10" href="' + esc(MM.href("links", l)) + '" target="_blank" rel="noopener" tabindex="-1"><img src="' + MM.imgsrc(th) + '" alt="" loading="lazy"></a>' : "") + '<div class="mm-body" style="padding-top:' + (MM.edit() ? "44px" : "22px") + '"><span class="mm-type">' + esc(l.type || "Link") + " · " + esc(dom) + '</span><h3><a href="' + esc(MM.href("links", l)) + '" target="_blank" rel="noopener">' + esc(l.title) + " ↗</a></h3><p>" + esc(l.description) + '</p><div class="mm-tags">' + (l.tags || []).map(function (t) { return '<span class="mm-tag">' + esc(t) + "</span>"; }).join("") + "</div>" + ((l.files || []).length ? MM.filesHTML(l.files) : "") + "</div>" + MM.tools("links", l, MM.moveBtns("links", l)) + "</article>";
     }).join("") + "</div>" : empty(MM.edit() ? "Add your first rabbit hole." : "Links coming soon.");
     app().innerHTML = h + "</div></section>";
     var qf = app().querySelector("[data-quickfile]");

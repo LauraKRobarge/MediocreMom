@@ -116,9 +116,10 @@
   };
   var IG = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg>';
   var FB = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.198 21.5h4v-8.01h3.604l.396-3.98h-4V7.5a1 1 0 0 1 1-1h3v-4h-3a5 5 0 0 0-5 5v2.01h-2l-.396 3.98h2.396z"/></svg>';
+  var TT = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 0 1-2.59-2.59 2.59 2.59 0 0 1 3.38-2.47V9.69a5.73 5.73 0 0 0-.79-.05A5.66 5.66 0 0 0 4.2 15.3 5.66 5.66 0 0 0 9.86 21a5.66 5.66 0 0 0 5.68-5.66V9.01a7.33 7.33 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.24-1.48z"/></svg>';
   MM.socialIcons = function (cls) {
     var a = db.about || {}, out = "";
-    [["instagram", "Instagram", IG], ["facebook", "Facebook", FB]].forEach(function (s) {
+    [["instagram", "Instagram", IG], ["facebook", "Facebook", FB], ["tiktok", "TikTok", TT]].forEach(function (s) {
       if (a[s[0]]) out += '<a class="mm-soc" href="' + esc(a[s[0]]) + '" target="_blank" rel="noopener" aria-label="' + s[1] + '">' + s[2] + (cls === "labels" ? "<span>" + s[1] + "</span>" : "") + "</a>";
       else if (MM.edit()) out += '<button class="mm-soc empty" data-act="editabout" title="Add your ' + s[1] + ' link" aria-label="Add your ' + s[1] + ' link">' + s[2] + (cls === "labels" ? "<span>Add " + s[1] + "</span>" : "") + "</button>";
     });
@@ -414,7 +415,8 @@
     playlists: [
       { k: "title", t: "text", l: "Title", req: 1 },
       { k: "description", t: "textarea", l: "Description", rows: 2 },
-      { k: "url", t: "text", l: "Playlist link", hint: "Paste a Spotify, Apple Music, or YouTube playlist link. Supported links play right on the page." },
+      { k: "url", t: "text", l: "Playlist link", hint: "Paste the Apple Music playlist link. The Open in Apple Music button uses it." },
+      { k: "songs", t: "textarea", l: "Song list", rows: 10, hint: "One song per line, like: Dirt Cheap - Cody Johnson. You can also select the songs in Apple Music, copy, and paste them here." },
       { k: "cover", t: "image", l: "Cover image" },
       { k: "tags", t: "tags", l: "Tags", hint: "e.g. Driving, Melodic Metal, Brain Won't Shut Up, Current Obsession" },
       { k: "notes", t: "textarea", l: "Notes on the songs (optional)", rows: 3, hint: "Why a song made the list. One per line works well." },
@@ -461,6 +463,7 @@
     links: [
       { k: "title", t: "text", l: "Title", req: 1 },
       { k: "url", t: "text", l: "Link", hint: "Or leave blank and upload a file below." },
+      { k: "thumb", t: "image", l: "Thumbnail", hint: "Shown at the top of the card. Leave empty to use the first uploaded image." },
       { k: "description", t: "textarea", l: "Why it's worth the detour", rows: 3 },
       { k: "type", t: "select", l: "Type", o: ["Website", "Article", "Video", "Podcast", "Tool", "Other"] },
       { k: "tags", t: "tags", l: "Tags" },
@@ -755,6 +758,7 @@
       { k: "interests", t: "tags", l: "Interests", hint: "Separate with commas" },
       { k: "instagram", t: "text", l: "Instagram link", hint: "e.g. https://instagram.com/yourname" },
       { k: "facebook", t: "text", l: "Facebook link", hint: "e.g. https://facebook.com/yourname" },
+      { k: "tiktok", t: "text", l: "TikTok link", hint: "e.g. https://tiktok.com/@yourname" },
       { k: "socialsText", t: "textarea", l: "Other links (optional)", rows: 3, hint: "One per line: Label | https://link" },
       { k: "files", t: "files", l: "Files & resources for the About page", hint: "e.g. a media kit, résumé, or printable." },
       { k: "email", t: "text", l: "Email for the contact form", hint: "Messages open in the visitor's email app, addressed to you. Leave blank to hide the form." },
