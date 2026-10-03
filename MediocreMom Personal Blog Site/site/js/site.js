@@ -106,6 +106,7 @@
     }
   };
   MM.src = function (v) { v = v == null ? "" : String(v); return v.indexOf("idb:") === 0 ? FILES.urls[v.slice(4)] || "" : v; };
+  MM.logo = function () { return (window.__resources && window.__resources.logo) || "images/logo.png"; };
   MM.imgsrc = function (v) { return esc(MM.src(v)); };
   MM.upload = function (file) {
     if (/^image\/(jpeg|png|webp|bmp)$/.test(file.type)) return MM.readImage(file).then(function (b) { return MM.files.put(b, file.name); });
@@ -336,7 +337,7 @@
     if (hd) {
       hd.innerHTML = bar + '<header><div class="mm-topbar"><div class="mm-wrap"><span class="tagline">Music · Writing · Photos · Lists · The daily debrief</span><span style="flex:1"></span>' +
         (MM.signedIn() ? '<button data-act="signout">Sign out</button>' : '<button data-act="signin">Sign in</button>') + '</div></div>' +
-        '<div class="mm-brandrow"><a class="brand" href="index.html">MediocreMom</a>' +
+        '<div class="mm-brandrow"><a class="brand" href="index.html" aria-label="MediocreMom home"><img src="' + MM.logo() + '" alt="MediocreMom" class="mm-logo"></a>' +
         '<div class="mm-header-tools"><button class="mm-iconbtn" data-act="search" aria-label="Search">' + ICON_SEARCH + '</button>' +
         '<button class="mm-iconbtn mm-menu-toggle" data-act="navtoggle" aria-label="Menu" aria-expanded="false" aria-controls="mm-nav">' + ICON_MENU + "</button></div></div>" +
         '<nav id="mm-nav" aria-label="Main navigation">' + MM.NAV.map(function (n) {
@@ -345,7 +346,7 @@
     }
     var ft = document.getElementById("mm-footer");
     if (ft) {
-      ft.innerHTML = '<footer class="mm-footer"><div class="mm-wrap"><div><a class="brand" href="index.html">MediocreMom</a>' +
+      ft.innerHTML = '<footer class="mm-footer"><div class="mm-wrap"><div><a class="brand" href="index.html" aria-label="MediocreMom home"><img src="' + MM.logo() + '" alt="MediocreMom" class="mm-logo-foot"></a>' +
         "<p>Doing my best, give or take. Thanks for stopping by.</p></div>" +
         '<div><h6>Quick links</h6><ul aria-label="Footer navigation"><li><a href="index.html">Home</a></li>' + MM.NAV.map(function (n) { return '<li><a href="' + n[0] + '">' + esc(n[1]) + "</a></li>"; }).join("") + "</ul></div>" +
         '<div><h6>Just for me</h6>' + (MM.signedIn() ? '<button class="signin" data-act="signout">Sign out</button>' : '<button class="signin" data-act="signin">Private sign-in</button>') + "</div>" +

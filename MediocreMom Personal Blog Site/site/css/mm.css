@@ -375,3 +375,10 @@ details>summary::-webkit-details-marker{display:none}
 [data-sortable]>[draggable="true"]{cursor:grab}
 .mm-dragging{opacity:.35;outline:2px dashed var(--primary);outline-offset:4px}
 .mm-pagehead p.mm-sorthint{font-size:13px;color:var(--ink-2);margin:16px auto 0;max-width:none}
+
+/* Logo */
+.brand{display:inline-flex;align-items:center}
+.mm-logo{height:110px;width:auto;display:block}
+.mm-brandrow{padding-top:16px;padding-bottom:6px}
+.mm-logo-foot{height:96px;width:auto;display:block;background:#FDFBF9;padding:8px 14px}
+@media(max-width:990px){.mm-logo{height:64px}.mm-brandrow{padding-top:12px;padding-bottom:12px}}
