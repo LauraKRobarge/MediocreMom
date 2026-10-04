@@ -466,9 +466,9 @@
       { k: "url", t: "text", l: "Link", hint: "Or leave blank and upload a file below." },
       { k: "thumb", t: "image", l: "Thumbnail", hint: "Shown at the top of the card. Leave empty to use the first uploaded image." },
       { k: "description", t: "textarea", l: "Why it's worth the detour", rows: 3 },
-      { k: "type", t: "select", l: "Type", o: ["Website", "Article", "Video", "Podcast", "Tool", "Other"] },
-      { k: "tags", t: "tags", l: "Tags" },
-      { k: "files", t: "files", l: "Files & resources", hint: "Upload PDFs, documents, audio or images, or add links to resources. Drag ☰ or use ↑ ↓ to reorder." }
+      { k: "type", t: "select", l: "Category", o: ["Website", "Article", "Video", "Podcast", "Tool", "PDF", "Document", "Image", "Other"] },
+      { k: "files", t: "files", l: "Files & resources", hint: "Upload PDFs, documents, audio or images, or add links to resources. Drag ☰ or use ↑ ↓ to reorder." },
+      { k: "showLink", t: "check", l: "Show the link or file name on the tile" }
     ],
     ventures: [
       { k: "title", t: "text", l: "Name", req: 1 },
