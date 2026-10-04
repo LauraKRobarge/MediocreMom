@@ -504,3 +504,11 @@ main[aria-label="Explore MediocreMom"] .artwork{outline:1px solid #e9e6e1}
 .mm-card.link .lk{display:flex;flex-direction:column;gap:2px;font-size:14px;position:relative;z-index:2;margin-top:2px}
 .mm-card.link .lk a{color:var(--primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mm-card.link .lk a:hover{text-decoration:underline}
+
+.mm-pls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 40px}
+.mm-pl{display:flex;flex-direction:column;gap:16px;background:none;padding:0;box-shadow:none}
+.mm-pl .plemb{width:100%;height:450px;border:0;border-radius:12px;display:block}
+.mm-pl .plemb.yt{height:auto;aspect-ratio:16/9;border-radius:0}
+.mm-pl .cover{aspect-ratio:1/1;max-width:450px}
+.mm-pl .mm-tools{margin-top:0}
+@media(max-width:900px){.mm-pls{grid-template-columns:1fr}}

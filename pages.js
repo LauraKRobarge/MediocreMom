@@ -137,15 +137,14 @@
     }).filter(Boolean);
   }
   function plBlock(p) {
-    var svc = MM.service(p.url) || "Apple Music", songs = songsOf(p);
+    var svc = MM.service(p.url) || "Apple Music", emb = MM.embedUrl(p.url);
     return '<article class="mm-pl' + (p.status === "archived" ? " dim" : "") + '" id="' + p.id + '" data-sid="' + p.id + '">' +
-      '<div class="side"><div class="cover">' + (p.cover ? '<img src="' + MM.imgsrc(p.cover) + '" alt="Cover for ' + esc(p.title) + '">' : MM.ph("playlist cover", "gold")) + "</div>" +
-      '<div class="ttl">' + MM.badge(p) + "<h3>" + esc(p.title) + "</h3>" + (songs.length ? "<span>" + songs.length + (songs.length === 1 ? " song" : " songs") + "</span>" : "") + "</div>" +
-      '<div class="mm-row">' + (p.url ? '<a class="mm-btn small" href="' + esc(p.url) + '" target="_blank" rel="noopener">Open in ' + esc(svc) + "</a>" : "") + (MM.embedUrl(p.url) ? '<button class="mm-btn ghost small" data-act="play" data-id="' + p.id + '">' + (S.playing === p.id ? "Close player" : "Play here") + "</button>" : "") + MM.shareBtn("sound-judgement.html#" + p.id) + "</div>" +
-      (S.playing === p.id ? '<iframe class="plemb" src="' + MM.imgsrc(MM.embedUrl(p.url)) + '" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="' + esc(p.title) + ' player"></iframe>' : "") +
-      '<p class="disc">Full playback may need you to be signed in to ' + esc(svc) + ".</p></div>" +
-      '<ol class="songs mm-songs">' + (songs.length ? songs.map(function (s, i) { return songRow(s, p.id + ":" + i, i + 1, "plsong", S.song); }).join("") : '<li class="none">' + (MM.edit() ? "Edit this playlist to add its songs." : "Song list coming soon.") + "</li>") + "</ol>" +
-      (MM.edit() ? '<div style="grid-column:1/-1">' + MM.tools("playlists", p, '<button data-act="feature" data-id="' + p.id + '">Feature</button>' + MM.moveBtns("playlists", p)) + "</div>" : "") + "</article>";
+      '<div class="ttl">' + (MM.edit() ? MM.badge(p) : "") + "<h3>" + esc(p.title) + "</h3></div>" +
+      (emb ? '<iframe class="plemb' + (/youtube/.test(emb) ? " yt" : "") + '" src="' + MM.imgsrc(emb) + '" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="' + esc(p.title) + ' player"></iframe>'
+        : p.cover ? '<div class="cover"><img src="' + MM.imgsrc(p.cover) + '" alt="Cover for ' + esc(p.title) + '"></div>' : '<div class="mm-hm-player empty">' + (MM.edit() ? "Add the Apple Music playlist link to show the player." : "Player coming soon.") + "</div>") +
+      '<div class="mm-row">' + (p.url ? '<a class="mm-btn small" href="' + esc(p.url) + '" target="_blank" rel="noopener">Open in ' + esc(svc) + "</a>" : "") + MM.shareBtn("sound-judgement.html#" + p.id) + "</div>" +
+      '<p class="disc">Full playback may need you to be signed in to ' + esc(svc) + ".</p>" +
+      (MM.edit() ? MM.tools("playlists", p, '<button data-act="feature" data-id="' + p.id + '">Feature</button>' + MM.moveBtns("playlists", p)) : "") + "</article>";
   }
   MM.on("tagfilter", function (b) { S.tag = b.dataset.v; music(); });
   MM.on("play", function (b) { S.playing = S.playing === b.dataset.id ? null : b.dataset.id; music(); });

@@ -328,7 +328,7 @@
 
   /* ---------- header / editbar / footer ---------- */
   MM.NAV = [
-    ["rabbit-hole.html", "Rabbit Hole"], ["daily-debrief.html", "Daily Debrief"], ["listful-thinking.html", "Listful Thinking"],
+    ["index.html", "Home"], ["rabbit-hole.html", "Rabbit Hole"], ["daily-debrief.html", "Daily Debrief"], ["listful-thinking.html", "Listful Thinking"],
     ["sound-judgement.html", "Sound Judgement"], ["duly-noted.html", "Duly Noted. Probably Forgotten."], ["my-rebel-grace.html", "My Rebel Grace"],
     ["proof-of-life.html", "Proof of Life"], ["casual-oversharing.html", "Casual Oversharing"], ["about.html", "About"]
   ];
@@ -415,8 +415,7 @@
     playlists: [
       { k: "title", t: "text", l: "Title", req: 1 },
       { k: "description", t: "textarea", l: "Description", rows: 2 },
-      { k: "url", t: "text", l: "Playlist link", hint: "Paste the Apple Music playlist link. The Open in Apple Music button uses it." },
-      { k: "songs", t: "textarea", l: "Song list", rows: 10, hint: "One song per line: Song - Artist | song link. Example: Dirt Cheap - Cody Johnson | https://music.apple.com/us/album/dirt-cheap/1630405633?i=1630405851. Songs with a link get a play button. In Apple Music, use ··· → Share → Copy Link on a song." },
+      { k: "url", t: "text", l: "Playlist link", hint: "Paste the Apple Music playlist link (··· → Share → Copy Link). The player and the Open in Apple Music button use it." },
       { k: "cover", t: "image", l: "Cover image" },
       { k: "tags", t: "tags", l: "Tags", hint: "e.g. Driving, Melodic Metal, Brain Won't Shut Up, Current Obsession" },
       { k: "notes", t: "textarea", l: "Notes on the songs (optional)", rows: 3, hint: "Why a song made the list. One per line works well." },
