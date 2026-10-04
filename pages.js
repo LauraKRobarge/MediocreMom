@@ -65,14 +65,20 @@
   }
   function homeMusic() {
     var box = document.getElementById("home-music"); if (!box) return;
-    var pls = db.playlists.filter(function (x) { return x.status === "public"; }).sort(MM.byOrder);
-    var feat = pls.find(function (x) { return x.featured && MM.embedUrl(x.url); }) || pls.find(function (x) { return MM.embedUrl(x.url); });
-    var tr = db.tracks.filter(function (t) { return t.status === "public" && MM.embedUrl(t.url); }).sort(MM.byOrder)[0];
-    var src = feat ? feat : tr, emb = src && MM.embedUrl(src.url);
+    var all = db.tracks.filter(function (t) { return t.status === "public"; }).sort(MM.byOrder);
+    var picks = all.filter(function (t) { return t.home; }); if (!picks.length) picks = all.slice(0, 5);
     box.innerHTML = '<div class="mm-homemusic"><div class="mm-hm-box"><div class="mm-center"><h2 class="mm-h2">On Repeat in My Head</h2><p class="mm-sub">Same song, 400 times. Very well-adjusted behavior.</p></div><div class="mm-hm-inner">' +
-      (emb ? '<iframe src="' + MM.imgsrc(emb) + '" class="mm-hm-player' + (/youtube/.test(emb) ? " yt" : "") + '" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="' + esc(src.title) + ' player"></iframe>'
-        : '<div class="mm-hm-player empty">' + (MM.edit() ? "Paste a Spotify, Apple Music or YouTube link on a playlist (Sound Judgement → Edit) to play it here." : "Player coming soon.") + "</div>") + '<div class="mm-row" style="justify-content:center;margin-top:24px"><a class="mm-btn ghost" href="sound-judgement.html">All playlists</a></div></div></div></div>';
+      (picks.length ? '<ol class="mm-songs">' + picks.map(function (t, i) { return songRow({ title: t.title, artist: t.artist, url: t.url }, "h" + t.id, i + 1, "hmplay", S.track); }).join("") + "</ol>"
+        : '<div class="mm-hm-player empty">' + (MM.edit() ? "Add songs under On Repeat on Sound Judgement, with a song link, to play them here." : "Songs coming soon.") + "</div>") +
+      '<p class="mm-disc" style="text-align:center">Full playback may need you to be signed in to Apple Music.</p><div class="mm-row" style="justify-content:center;margin-top:16px"><a class="mm-btn ghost" href="sound-judgement.html">All playlists</a></div></div></div></div>';
   }
+  function songRow(s, key, n, act, cur) {
+    var emb = MM.embedUrl(s.url), on = emb && cur === key;
+    return '<li class="' + (on ? "on" : "") + '"><span class="n">' + n + '</span><span class="t"><strong>' + esc(s.title) + "</strong>" + (s.artist ? "<span>" + esc(s.artist) + "</span>" : "") + "</span>" +
+      (emb ? '<button class="mm-play" data-act="' + act + '" data-id="' + key + '" aria-label="' + (on ? "Close player for " : "Play ") + esc(s.title) + '">' + (on ? "✕" : "▶") + "</button>" : s.url ? '<a class="mm-play" href="' + esc(s.url) + '" target="_blank" rel="noopener" aria-label="Listen to ' + esc(s.title) + '">↗</a>' : "<span></span>") +
+      (on ? '<iframe class="emb' + (/youtube/.test(emb) ? " yt" : "") + '" src="' + MM.imgsrc(emb) + '" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="' + esc(s.title) + ' player"></iframe>' : "") + "</li>";
+  }
+  MM.songRow = songRow;
   MM.on("hmplay", function (b) { S.track = S.track === b.dataset.id ? null : b.dataset.id; homeMusic(); });
   function socials(a) {
     return MM.socialIcons("labels btns") + (a.socials || []).filter(function (s) { return s.url && !/^(instagram|facebook|tiktok)$/i.test(s.label); }).map(function (s) { return '<a class="mm-btn ghost" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.label) + "</a>"; }).join("");
@@ -110,8 +116,8 @@
     } else h += empty(MM.edit() ? "Add your first playlist to get started." : "Playlists coming soon.");
     h += '</div></section><section class="mm-section" id="on-repeat"><div class="mm-wrap" style="max-width:860px"><div class="mm-row" style="justify-content:space-between"><h2 class="mm-h2">On Repeat</h2>' + newBtn("tracks", "+ Add track", "small ghost") + "</div>" +
       '<p class="mm-sub">The songs I can\'t stop playing right now.</p>' + (tracks.length ? '<div data-sortable="tracks">' + tracks.map(function (t, i) {
-        return '<div class="mm-track" data-sid="' + t.id + '"><span class="n">' + (i + 1) + '</span><div><div class="ttl">' + esc(t.title) + (t.artist ? ' <span style="font-weight:400;color:#747474">· ' + esc(t.artist) + "</span>" : "") + " " + MM.badge(t) + "</div>" + (t.note ? '<div class="note">' + esc(t.note) + "</div>" : "") + "</div>" +
-          '<div class="mm-row">' + (t.url ? '<a class="mm-btn ghost small" href="' + esc(t.url) + '" target="_blank" rel="noopener">Listen</a>' : "") + (MM.edit() ? '<span class="mm-tools" style="border:0;background:none;padding:0"><button data-act="edit" data-c="tracks" data-id="' + t.id + '">Edit</button>' + MM.moveBtns("tracks", t) + '<button data-act="del" data-c="tracks" data-id="' + t.id + '">Delete</button></span>' : "") + "</div></div>";
+        return '<div class="mm-track" data-sid="' + t.id + '"><span class="n">' + (i + 1) + '</span><div><div class="ttl">' + esc(t.title) + (t.artist ? ' <span style="font-weight:400;color:#747474">· ' + esc(t.artist) + "</span>" : "") + " " + MM.badge(t) + "</div>" + (t.note ? '<div class="note">' + esc(t.note) + "</div>" : "") + (S.song === "t" + t.id && MM.embedUrl(t.url) ? '<iframe class="mm-trackemb" src="' + MM.imgsrc(MM.embedUrl(t.url)) + '" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="' + esc(t.title) + ' player"></iframe>' : "") + "</div>" +
+          '<div class="mm-row">' + (MM.embedUrl(t.url) ? '<button class="mm-btn ghost small" data-act="trplay" data-id="t' + t.id + '">' + (S.song === "t" + t.id ? "Close" : "▶ Play") + "</button>" : t.url ? '<a class="mm-btn ghost small" href="' + esc(t.url) + '" target="_blank" rel="noopener">Listen</a>' : "") + (MM.edit() ? '<span class="mm-tools" style="border:0;background:none;padding:0"><button data-act="edit" data-c="tracks" data-id="' + t.id + '">Edit</button>' + MM.moveBtns("tracks", t) + '<button data-act="del" data-c="tracks" data-id="' + t.id + '">Delete</button></span>' : "") + "</div></div>";
       }).join("") + "</div>" : empty("Nothing on repeat yet.")) + "</div></section>";
     app().innerHTML = h;
     if (location.hash && !S.scrolled) { S.scrolled = 1; var t = document.getElementById(location.hash.slice(1)); if (t) window.scrollTo(0, t.getBoundingClientRect().top + scrollY - 80); }
@@ -125,7 +131,9 @@
       ln = ln.trim(); if (!ln) return null;
       var parts = ln.indexOf("\t") > -1 ? ln.split("\t").map(function (x) { return x.trim(); }).filter(Boolean) : ln.split(/\s+[–—-]\s+/);
       if (ln.indexOf("\t") > -1 && parts.length > 2 && /^\d+:\d\d$/.test(parts[1])) parts.splice(1, 1);
-      return { title: parts[0].replace(/^\d+[.)]\s+/, ""), artist: parts.slice(1, 2).join("") };
+      var url = ""; parts = parts.map(function (x) { var m = x.match(/\s*\|\s*(https?:\S+)\s*$/); if (m) { url = m[1]; x = x.slice(0, m.index); } else if (/^https?:\S+$/.test(x)) { url = x; x = ""; } return x.trim(); }).filter(Boolean);
+      if (!parts.length) parts = ["Untitled"];
+      return { title: parts[0].replace(/^\d+[.)]\s+/, ""), artist: parts.slice(1, 2).join(""), url: url };
     }).filter(Boolean);
   }
   function plBlock(p) {
@@ -133,12 +141,16 @@
     return '<article class="mm-pl' + (p.status === "archived" ? " dim" : "") + '" id="' + p.id + '" data-sid="' + p.id + '">' +
       '<div class="side"><div class="cover">' + (p.cover ? '<img src="' + MM.imgsrc(p.cover) + '" alt="Cover for ' + esc(p.title) + '">' : MM.ph("playlist cover", "gold")) + "</div>" +
       '<div class="ttl">' + MM.badge(p) + "<h3>" + esc(p.title) + "</h3>" + (songs.length ? "<span>" + songs.length + (songs.length === 1 ? " song" : " songs") + "</span>" : "") + "</div>" +
-      '<div class="mm-row">' + (p.url ? '<a class="mm-btn small" href="' + esc(p.url) + '" target="_blank" rel="noopener">Open in ' + esc(svc) + "</a>" : "") + MM.shareBtn("sound-judgement.html#" + p.id) + "</div>" +
+      '<div class="mm-row">' + (p.url ? '<a class="mm-btn small" href="' + esc(p.url) + '" target="_blank" rel="noopener">Open in ' + esc(svc) + "</a>" : "") + (MM.embedUrl(p.url) ? '<button class="mm-btn ghost small" data-act="play" data-id="' + p.id + '">' + (S.playing === p.id ? "Close player" : "Play here") + "</button>" : "") + MM.shareBtn("sound-judgement.html#" + p.id) + "</div>" +
+      (S.playing === p.id ? '<iframe class="plemb" src="' + MM.imgsrc(MM.embedUrl(p.url)) + '" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="' + esc(p.title) + ' player"></iframe>' : "") +
       '<p class="disc">Full playback may need you to be signed in to ' + esc(svc) + ".</p></div>" +
-      '<ol class="songs">' + (songs.length ? songs.map(function (s, i) { return '<li><span class="n">' + (i + 1) + '</span><span class="t"><strong>' + esc(s.title) + "</strong>" + (s.artist ? "<span>" + esc(s.artist) + "</span>" : "") + "</span></li>"; }).join("") : '<li class="none">' + (MM.edit() ? "Edit this playlist to add its songs." : "Song list coming soon.") + "</li>") + "</ol>" +
+      '<ol class="songs mm-songs">' + (songs.length ? songs.map(function (s, i) { return songRow(s, p.id + ":" + i, i + 1, "plsong", S.song); }).join("") : '<li class="none">' + (MM.edit() ? "Edit this playlist to add its songs." : "Song list coming soon.") + "</li>") + "</ol>" +
       (MM.edit() ? '<div style="grid-column:1/-1">' + MM.tools("playlists", p, '<button data-act="feature" data-id="' + p.id + '">Feature</button>' + MM.moveBtns("playlists", p)) + "</div>" : "") + "</article>";
   }
   MM.on("tagfilter", function (b) { S.tag = b.dataset.v; music(); });
+  MM.on("play", function (b) { S.playing = S.playing === b.dataset.id ? null : b.dataset.id; music(); });
+  MM.on("plsong", function (b) { S.song = S.song === b.dataset.id ? null : b.dataset.id; music(); });
+  MM.on("trplay", function (b) { S.song = S.song === b.dataset.id ? null : b.dataset.id; music(); });
   MM.on("feature", function (b) { MM.patch("playlists", b.dataset.id, { featured: true }); MM.toast("Featured"); });
 
   /* ================= WRITINGS ================= */

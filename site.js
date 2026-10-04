@@ -416,7 +416,7 @@
       { k: "title", t: "text", l: "Title", req: 1 },
       { k: "description", t: "textarea", l: "Description", rows: 2 },
       { k: "url", t: "text", l: "Playlist link", hint: "Paste the Apple Music playlist link. The Open in Apple Music button uses it." },
-      { k: "songs", t: "textarea", l: "Song list", rows: 10, hint: "One song per line, like: Dirt Cheap - Cody Johnson. You can also select the songs in Apple Music, copy, and paste them here." },
+      { k: "songs", t: "textarea", l: "Song list", rows: 10, hint: "One song per line: Song - Artist | song link. Example: Dirt Cheap - Cody Johnson | https://music.apple.com/us/album/dirt-cheap/1630405633?i=1630405851. Songs with a link get a play button. In Apple Music, use ··· → Share → Copy Link on a song." },
       { k: "cover", t: "image", l: "Cover image" },
       { k: "tags", t: "tags", l: "Tags", hint: "e.g. Driving, Melodic Metal, Brain Won't Shut Up, Current Obsession" },
       { k: "notes", t: "textarea", l: "Notes on the songs (optional)", rows: 3, hint: "Why a song made the list. One per line works well." },
@@ -428,7 +428,8 @@
       { k: "title", t: "text", l: "Song", req: 1 },
       { k: "artist", t: "text", l: "Artist" },
       { k: "note", t: "textarea", l: "Why it's on repeat", rows: 2 },
-      { k: "url", t: "text", l: "Listening link (optional)" }
+      { k: "url", t: "text", l: "Song link", hint: "Apple Music: ··· → Share → Copy Link on the song. Adds a play button." },
+      { k: "home", t: "check", l: "Show on the home page" }
     ],
     photos: [
       { k: "src", t: "image", l: "Photo", big: 1 },
