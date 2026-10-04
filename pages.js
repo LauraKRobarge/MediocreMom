@@ -373,8 +373,8 @@
       var dom = l.url ? "" : "File"; try { dom = new URL(l.url).hostname.replace(/^www\./, ""); } catch (e) {}
       var fl = (l.files || []).filter(function (f) { return f && f.ref; });
       var cat = l.type || (l.url ? "Link" : fl[0] ? MM.ext(fl[0].name || fl[0].ref) : "Resource");
-      var show = l.showLink ? '<div class="lk">' + (l.url ? '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(dom) + "</a>" : "") + fl.map(function (f) { return '<a href="' + esc(MM.src(f.ref)) + '" target="_blank" rel="noopener">' + esc(f.name || "File") + "</a>"; }).join("") + "</div>" : "";
-      return '<article class="mm-card link" id="' + l.id + '" data-sid="' + l.id + '">' + (MM.edit() ? MM.badge(l) : "") + (th ? '<a class="mm-media" style="aspect-ratio:16/10" href="' + esc(MM.href("links", l)) + '" target="_blank" rel="noopener" tabindex="-1"><img src="' + MM.imgsrc(th) + '" alt="" loading="lazy"></a>' : "") + '<div class="mm-body"' + (MM.edit() && !th ? ' style="padding-top:44px"' : "") + '><span class="mm-type">' + esc(cat) + '</span><h3><a href="' + esc(MM.href("links", l)) + '" target="_blank" rel="noopener">' + esc(l.title) + "</a></h3>" + (l.description ? "<p>" + esc(l.description) + "</p>" : "") + show + "</div>" + MM.tools("links", l, MM.moveBtns("links", l)) + "</article>";
+      var show = l.showLink ? '<div class="lk">' + (l.url ? '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(dom) + "</a>" : "") + fl.map(function (f) { return lkA(MM.src(f.ref), MM.isImage(f.ref, f.type), f.name || "File", f.name || l.title); }).join("") + "</div>" : "";
+      return '<article class="mm-card link" id="' + l.id + '" data-sid="' + l.id + '">' + (MM.edit() ? MM.badge(l) : "") + (th ? '<button type="button" class="mm-media" style="aspect-ratio:16/10;border:0;padding:0;width:100%;cursor:zoom-in;background:none;position:relative;z-index:2" data-act="lkimg" data-src="' + MM.imgsrc(th) + '" data-cap="' + esc(l.title) + '" aria-label="View image for ' + esc(l.title) + '"><img src="' + MM.imgsrc(th) + '" alt="" loading="lazy"></button>' : "") + '<div class="mm-body"' + (MM.edit() && !th ? ' style="padding-top:44px"' : "") + '><span class="mm-type">' + esc(cat) + '</span><h3>' + lkA(l.url || (fl[0] ? MM.src(fl[0].ref) : "rabbit-hole.html"), !l.url && fl[0] && MM.isImage(fl[0].ref, fl[0].type), l.title, l.title) + "</h3>" + (l.description ? "<p>" + esc(l.description) + "</p>" : "") + show + "</div>" + MM.tools("links", l, MM.moveBtns("links", l)) + "</article>";
     }).join("") + "</div>" : empty(MM.edit() ? "Add your first rabbit hole." : "Links coming soon.");
     app().innerHTML = h + "</div></section>";
     var qf = app().querySelector("[data-quickfile]");
@@ -386,6 +386,10 @@
       });
     };
   }
+  function lkA(href, isImg, text, cap) {
+    return isImg ? '<a href="' + esc(href) + '" data-act="lkimg" data-src="' + esc(href) + '" data-cap="' + esc(cap) + '">' + esc(text) + "</a>" : '<a href="' + esc(href) + '" target="_blank" rel="noopener">' + esc(text) + "</a>";
+  }
+  MM.on("lkimg", function (b) { MM.lightbox([{ src: b.dataset.src, caption: b.dataset.cap }], 0); });
   MM.on("ltype", function (b) { S.type = b.dataset.v; links(); });
 
   /* ================= MY REBEL GRACE ================= */
