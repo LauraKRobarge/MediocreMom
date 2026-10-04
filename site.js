@@ -357,7 +357,7 @@
         '<a href="duly-noted.html">Reminders</a><a href="trash.html">Trash' + (tn ? " (" + tn + ")" : "") + "</a>" +
         '<button data-act="preview-on">Preview as visitor</button><span class="sp"></span>' +
         '<div class="mm-dropdown"><button data-act="menu" aria-haspopup="true">Site data ▾</button><div class="mm-dropdown-menu" style="left:auto;right:0">' +
-        '<button data-act="export-public">Export public content.js</button><button data-act="backup">Download full backup</button><button data-act="import">Restore from backup</button><button data-act="passcode">Change passcode</button><button data-act="start-fresh">Clear sample content</button></div></div>' +
+        '<button data-act="export-public">Export for publishing (.zip)</button><button data-act="backup">Download full backup</button><button data-act="import">Restore from backup</button><button data-act="passcode">Change passcode</button><button data-act="start-fresh">Clear sample content</button></div></div>' +
         '<button data-act="signout">Sign out</button></div></div>';
     }
     if (hd) {
@@ -896,14 +896,58 @@
     return Promise.all(refs.map(function (r) { return MM.files.toDataURL(r).then(function (d) { return [r, d]; }, function () { return [r, ""]; }); }))
       .then(function (pairs) { pairs.forEach(function (p) { text = text.split('"' + p[0] + '"').join(JSON.stringify(p[1])); }); return text; });
   }
+  var CRC = (function () { var t = new Uint32Array(256); for (var n = 0; n < 256; n++) { var c = n; for (var k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+  function crc32(u) { var c = 0xFFFFFFFF; for (var i = 0; i < u.length; i++) c = CRC[(c ^ u[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+  function makeZip(files) {
+    var enc = new TextEncoder(), parts = [], cen = [], off = 0;
+    files.forEach(function (f) {
+      var nm = enc.encode(f[0]), d = f[1], crc = crc32(d), h = new DataView(new ArrayBuffer(30));
+      h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(10, 0, true); h.setUint16(12, 0x5921, true);
+      h.setUint32(14, crc, true); h.setUint32(18, d.length, true); h.setUint32(22, d.length, true); h.setUint16(26, nm.length, true);
+      parts.push(h.buffer, nm, d);
+      var c = new DataView(new ArrayBuffer(46));
+      c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(14, 0x5921, true);
+      c.setUint32(16, crc, true); c.setUint32(20, d.length, true); c.setUint32(24, d.length, true); c.setUint16(28, nm.length, true); c.setUint32(42, off, true);
+      cen.push(c.buffer, nm); off += 30 + nm.length + d.length;
+    });
+    var size = cen.reduce(function (s, x) { return s + x.byteLength; }, 0), e = new DataView(new ArrayBuffer(22));
+    e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, size, true); e.setUint32(16, off, true);
+    return new Blob(parts.concat(cen, [e.buffer]), { type: "application/zip" });
+  }
+  var EXT = { "image/jpeg": "jpg", "image/png": "png", "image/gif": "gif", "image/webp": "webp", "image/heic": "heic", "application/pdf": "pdf", "audio/mpeg": "mp3", "audio/mp4": "m4a", "video/mp4": "mp4" };
+  function extFor(blob, name) { var m = String(name || "").match(/\.([a-z0-9]{1,5})$/i); return EXT[blob.type] || (m ? m[1].toLowerCase() : "bin"); }
+  function shrink(blob) {
+    if (!/^image\/(jpeg|png|webp)$/.test(blob.type) || blob.size < 1200000 || !window.createImageBitmap) return Promise.resolve(blob);
+    return createImageBitmap(blob).then(function (bm) {
+      var s = Math.min(1, 2400 / Math.max(bm.width, bm.height)), cv = document.createElement("canvas");
+      cv.width = Math.round(bm.width * s); cv.height = Math.round(bm.height * s);
+      var x = cv.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, cv.width, cv.height); x.drawImage(bm, 0, 0, cv.width, cv.height);
+      return new Promise(function (res) { cv.toBlob(function (b) { res(b && b.size < blob.size ? b : blob); }, "image/jpeg", 0.85); });
+    }).catch(function () { return blob; });
+  }
+  function hashStr(s) { var h = 2166136261; for (var i = 0; i < s.length; i += 7) h = Math.imul(h ^ s.charCodeAt(i), 16777619); return (h >>> 0).toString(36) + s.length.toString(36); }
   function exportPublic() {
     var out = { about: db.about, pages: db.pages, trash: [] };
     COLS.forEach(function (c) { out[c] = db[c].filter(function (x) { return x.status === "public"; }); });
-    MM.toast("Preparing export…");
-    inlineFiles(JSON.stringify(out, null, 2)).then(function (json) {
-      download("content.js", "/* MediocreMom public content, exported " + MM.now() + ". Replace content.js with this file when you publish. */\nwindow.MM_SEED = " + json + ";\n", "text/javascript");
-      MM.toast("Exported public content and its files. Private items and drafts were left out.");
+    MM.toast("Preparing your publish files… this can take a minute.");
+    var text = JSON.stringify(out, null, 2), jobs = [];
+    Array.from(new Set(text.match(/idb:[a-z0-9]+/gi) || [])).forEach(function (r) {
+      jobs.push(fetch(MM.src(r)).then(function (x) { return x.blob(); }).then(function (b) { return { key: '"' + r + '"', base: "mm-" + r.slice(4), blob: b, name: (FILES.meta[r.slice(4)] || {}).name }; }, function () { return null; }));
     });
+    Array.from(new Set(text.match(/"data:[a-z]+\/[a-z0-9.+-]+;base64,[A-Za-z0-9+\/=]+"/gi) || [])).forEach(function (q) {
+      jobs.push(fetch(q.slice(1, -1)).then(function (x) { return x.blob(); }).then(function (b) { return { key: q, base: "mm-d" + hashStr(q), blob: b }; }, function () { return null; }));
+    });
+    Promise.all(jobs).then(function (list) {
+      return Promise.all(list.filter(Boolean).map(function (j) { return shrink(j.blob).then(function (b) { j.out = b; return j; }); }));
+    }).then(function (list) {
+      list.forEach(function (j) { j.file = j.base + "." + (j.out !== j.blob ? "jpg" : extFor(j.blob, j.name)); text = text.split(j.key).join(JSON.stringify(j.file)); });
+      var js = "/* MediocreMom public content, exported " + MM.now() + ". Upload this file and the mm- files with it when you publish. */\nwindow.MM_SEED = " + text + ";\n";
+      return Promise.all(list.map(function (j) { return j.out.arrayBuffer().then(function (a) { return [j.file, new Uint8Array(a)]; }); })).then(function (files) {
+        files.unshift(["content.js", new TextEncoder().encode(js)]);
+        var a = document.createElement("a"); a.href = URL.createObjectURL(makeZip(files)); a.download = "mediocremom-publish-" + MM.today() + ".zip"; document.body.appendChild(a); a.click(); a.remove();
+        MM.toast("Exported content.js and " + list.length + " file" + (list.length === 1 ? "" : "s") + ". Unzip, then upload everything inside.");
+      });
+    }).catch(function (e) { alert("Export failed: " + (e && e.message || e)); });
   }
   function backup() {
     MM.toast("Preparing backup…");
