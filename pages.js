@@ -343,13 +343,14 @@
     app().innerHTML = h; bindFilters(photos);
     var up = app().querySelector("[data-upload]");
     if (up) up.onchange = function () {
-      var files = Array.from(up.files); if (!files.length) return;
+      var files = Array.from(up.files); up.value = ""; if (!files.length || S.uploading) return; S.uploading = true;
       var album = prompt("Album name for these photos (optional):", S.album !== "all" ? S.album : "") || "";
       Promise.all(files.map(function (f) { return MM.upload(f); })).then(function (srcs) {
         var top = Math.min.apply(null, [0].concat(db.photos.map(function (x) { return x.order || 0; })));
         srcs.forEach(function (src, i) { db.photos.unshift({ id: MM.uid(), order: top - srcs.length + i, src: src, caption: files[i].name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " "), album: album, date: MM.today(), favorite: false, inActivity: false, status: "private", created: MM.now(), updated: MM.now() }); });
+        S.uploading = false;
         if (MM.save()) MM.toast(srcs.length + " photo" + (srcs.length > 1 ? "s" : "") + " added as private"); photos();
-      });
+      }, function () { S.uploading = false; });
     };
     if (!S.opened) {
       S.opened = 1;

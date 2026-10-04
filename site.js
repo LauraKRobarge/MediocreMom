@@ -220,7 +220,14 @@
     var d = null;
     try { var s = localStorage.getItem(LS); if (s) d = JSON.parse(s); } catch (e) {}
     d = d || clone(window.MM_SEED || {});
-    COLS.forEach(function (c) { d[c] = d[c] || []; });
+    COLS.forEach(function (c) {
+      var seen = {}, srcs = {};
+      d[c] = (d[c] || []).filter(function (x) {
+        if (!x || seen[x.id]) return false; seen[x.id] = 1;
+        if (c === "photos" && x.src) { if (srcs[x.src]) return false; srcs[x.src] = 1; }
+        return true;
+      });
+    });
     d.trash = d.trash || []; d.about = d.about || {}; d.pages = d.pages || {};
     var cut = Date.now() - 30 * 864e5;
     d.trash = d.trash.filter(function (t) { return new Date(t.deletedAt) > cut; });
