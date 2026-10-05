@@ -229,6 +229,7 @@
       });
     });
     d.trash = d.trash || []; d.about = d.about || {}; d.pages = d.pages || {};
+    if (window.MM_SEED && window.MM_SEED.passHash && !d.passHash) d.passHash = window.MM_SEED.passHash;
     var cut = Date.now() - 30 * 864e5;
     d.trash = d.trash.filter(function (t) { return new Date(t.deletedAt) > cut; });
     return d;
@@ -316,18 +317,25 @@
     });
   };
 
+  function sha(s) { return crypto.subtle.digest("SHA-256", new TextEncoder().encode("mm-salt:" + s)).then(function (b) { return Array.from(new Uint8Array(b)).map(function (x) { return x.toString(16).padStart(2, "0"); }).join(""); }); }
+  function passOk(v) {
+    if (db.passHash) return sha(v).then(function (h) { return h === db.passHash; });
+    return Promise.resolve(v === (localStorage.getItem(PASS) || "mediocre"));
+  }
   MM.signIn = function () {
     var m = MM.modal({
       title: "Private sign-in", narrow: true,
-      body: '<form id="mm-signin"><div class="mm-field"><label for="mm-pass">Passcode</label><input id="mm-pass" type="password" autocomplete="current-password" required></div><p class="hint" style="font-size:13px;color:#4a4642;margin:0">The first-time passcode is <code>mediocre</code>. Change it from the editing bar after you sign in.</p></form>',
+      body: '<form id="mm-signin"><div class="mm-field"><label for="mm-pass">Passcode</label><input id="mm-pass" type="password" autocomplete="current-password" required></div></form>',
       foot: '<span class="sp"></span><button class="mm-btn" form="mm-signin" type="submit">Sign in</button>'
     });
     var f = m.el.querySelector("#mm-signin"), inp = m.el.querySelector("#mm-pass");
     inp.focus();
     f.onsubmit = function (e) {
       e.preventDefault();
-      if (inp.value === (localStorage.getItem(PASS) || "mediocre")) { localStorage.setItem(AUTH, "1"); sessionStorage.removeItem(PREV); location.reload(); }
-      else { inp.value = ""; inp.placeholder = "That's not it. Try again."; inp.focus(); }
+      passOk(inp.value).then(function (ok) {
+        if (ok) { localStorage.setItem(AUTH, "1"); sessionStorage.removeItem(PREV); location.reload(); }
+        else { inp.value = ""; inp.placeholder = "That's not it. Try again."; inp.focus(); }
+      });
     };
   };
   MM.signOut = function () { localStorage.removeItem(AUTH); sessionStorage.removeItem(PREV); location.reload(); };
@@ -927,7 +935,7 @@
   }
   function hashStr(s) { var h = 2166136261; for (var i = 0; i < s.length; i += 7) h = Math.imul(h ^ s.charCodeAt(i), 16777619); return (h >>> 0).toString(36) + s.length.toString(36); }
   function exportPublic() {
-    var out = { about: db.about, pages: db.pages, trash: [] };
+    var out = { about: db.about, pages: db.pages, passHash: db.passHash, trash: [] };
     COLS.forEach(function (c) { out[c] = db[c].filter(function (x) { return x.status === "public"; }); });
     MM.toast("Preparing your publish files… this can take a minute.");
     var text = JSON.stringify(out, null, 2), jobs = [];
@@ -972,7 +980,7 @@
     if (!ghTok()) return Promise.resolve();
     if (GH.busy) { GH.again = true; return Promise.resolve(); }
     GH.busy = true; ghStatus("Publishing…");
-    var out = { about: db.about, pages: db.pages, trash: [] };
+    var out = { about: db.about, pages: db.pages, passHash: db.passHash, trash: [] };
     COLS.forEach(function (c) { out[c] = db[c].filter(function (x) { return x.status === "public"; }); });
     var text = JSON.stringify(out, null, 2), cache = {};
     try { cache = JSON.parse(localStorage.getItem(GH.map) || "{}"); } catch (e) {}
@@ -1098,7 +1106,7 @@
       case "gh-disconnect": if (confirm("Stop auto-publishing from this browser?")) { localStorage.removeItem(GH.key); MM.toast("Disconnected."); MM.rerender && MM.rerender(); } break;
       case "backup": backup(); break;
       case "import": importBackup(); break;
-      case "passcode": var p = prompt("New passcode (at least 4 characters):"); if (p && p.length >= 4) { localStorage.setItem(PASS, p); MM.toast("Passcode changed"); } break;
+      case "passcode": var p = prompt("New passcode (at least 4 characters):"); if (p && p.length >= 4) { sha(p).then(function (h) { db.passHash = h; localStorage.setItem(PASS, p); MM.save(); MM.toast(ghTok() ? "Passcode changed. It works in every browser once published." : "Passcode changed. Publish to use it in other browsers."); }); } break;
       case "start-fresh":
         if (confirm("Move all sample posts, playlists, photos, lists, reminders, links and ventures to the trash? Your About text and page intros stay.")) {
           COLS.forEach(function (c2) { db[c2].forEach(function (it2) { db.trash.push({ c: c2, item: it2, deletedAt: MM.now() }); }); db[c2] = []; });
