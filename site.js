@@ -976,9 +976,10 @@
     var el = document.getElementById("mm-gh-status");
     if (el) { el.textContent = msg; el.style.color = err ? "#b3261e" : ""; }
   }
-  function ghPublish() {
+  function ghPublish(tries) {
+    tries = tries || 0;
     if (!ghTok()) return Promise.resolve();
-    if (GH.busy) { GH.again = true; return Promise.resolve(); }
+    if (GH.busy && !tries) { GH.again = true; return Promise.resolve(); }
     GH.busy = true; ghStatus("Publishing…");
     var out = { about: db.about, pages: db.pages, passHash: db.passHash, trash: [] };
     COLS.forEach(function (c) { out[c] = db[c].filter(function (x) { return x.status === "public"; }); });
@@ -1016,15 +1017,17 @@
     }).then(function (t) {
       return gh("/git/commits", { method: "POST", body: { message: "Update content " + MM.today(), tree: t.sha, parents: [head.sha] } });
     }).then(function (c) {
-      return gh("/git/refs/heads/" + GH.branch, { method: "PATCH", body: { sha: c.sha } });
+      return gh("/git/refs/heads/" + GH.branch, { method: "PATCH", body: { sha: c.sha, force: false } });
     }).then(function () {
       try { localStorage.setItem(GH.map, JSON.stringify(cache)); } catch (e) {}
       GH.lastOk = new Date(); ghStatus("Published " + GH.lastOk.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }));
     }).catch(function (e) {
       var m = String(e && e.message || e);
+      if (/^(409|422)/.test(m) && tries < 4) { GH.retry = true; return new Promise(function (r) { setTimeout(r, 1500 * (tries + 1)); }).then(function () { return ghPublish(tries + 1); }); }
       ghStatus("Not published", true);
       MM.toast(/^401/.test(m) ? "GitHub key expired or wrong. Use Site data ▾ → Connect GitHub again." : "Couldn't publish: " + m + ". Will retry on your next save.");
     }).then(function () {
+      if (GH.retry) { GH.retry = false; return; }
       GH.busy = false;
       if (GH.again) { GH.again = false; ghPublish(); }
     });
