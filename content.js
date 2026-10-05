@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-10-05T00:23:27 */
+/* MediocreMom public content, published 2026-10-05T00:27:21 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -3324,21 +3324,6 @@ window.MM_SEED = {
       "updated": "2026-10-03T23:38:31",
       "publishedAt": "2026-10-03T22:37:58",
       "sharedAt": "2026-10-03T22:37:58"
-    },
-    {
-      "id": "v1rti2x",
-      "order": 240,
-      "src": "mm-fmut7ltb38d917w5.jpg",
-      "caption": "Selfie 49",
-      "album": "SELFIE-INDULGENCE",
-      "date": "2026-10-03",
-      "favorite": false,
-      "inActivity": false,
-      "status": "public",
-      "created": "2026-10-03T22:36:14",
-      "updated": "2026-10-03T22:37:45",
-      "publishedAt": "2026-10-03T22:37:45",
-      "sharedAt": "2026-10-03T22:37:45"
     },
     {
       "id": "we20fzl",
