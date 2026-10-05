@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-10-05T01:26:43 */
+/* MediocreMom public content, published 2026-10-05T01:28:00 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -310,6 +310,36 @@ window.MM_SEED = {
     }
   ],
   "photos": [
+    {
+      "id": "wwsm4tz",
+      "order": -116,
+      "src": "mm-fmuut46l7derpond.jpg",
+      "caption": "IMG 2069",
+      "album": "DUMB DOGS",
+      "date": "2026-10-05",
+      "favorite": false,
+      "inActivity": false,
+      "status": "public",
+      "created": "2026-10-05T01:26:09",
+      "updated": "2026-10-05T01:26:14",
+      "publishedAt": "2026-10-05T01:26:14",
+      "sharedAt": "2026-10-05T01:26:14"
+    },
+    {
+      "id": "5k3efvd",
+      "order": -117,
+      "src": "mm-fmuut46m7huzix8l.jpg",
+      "caption": "IMG 0713",
+      "album": "DUMB DOGS",
+      "date": "2026-10-05",
+      "favorite": false,
+      "inActivity": false,
+      "status": "public",
+      "created": "2026-10-05T01:26:09",
+      "updated": "2026-10-05T01:26:13",
+      "publishedAt": "2026-10-05T01:26:13",
+      "sharedAt": "2026-10-05T01:26:13"
+    },
     {
       "id": "zvftnvx",
       "order": -100,
