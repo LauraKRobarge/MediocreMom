@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-10-05T01:31:07 */
+/* MediocreMom public content, published 2026-10-05T01:41:49 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -115,11 +115,11 @@ window.MM_SEED = {
       "title": "The Weight You Never Carried",
       "category": "Poetry",
       "excerpt": "I carried our children, our home,\nand a life you barely helped hold together.\nYou watched me break\nand still called your bare minimum enough.\n\nI’m done explaining the weight\nto someone who never helped carry it\n\nFrom now on, I carry only what’s mine.\nYour pride was never mine to hold.",
-      "body": "You sat there for years while I held everything together. \nI raised children,\nPaid bills,\nKept food in the fridge,\nAnd love in a home\nThat barely had any left to give. \nYou watched me struggle.\nYou watched me break. \nYou watched me cry quietly behind doors and still, \nYou thought you were doing your part. \nAnd still you thought your bare minimum match my exhaustion.\nYou thought playing games,\nWhile I played the role of mother, partner, and provider,\nWas balance.\nYou never showed up the way I needed. \nYou never stepped in when I was drowning.\nYou never offered relief,\nOnly blame. \nAnd now you have no to think you're right?\nTo say I didn't do enough,\nWhen I did everything for everyone, \nIncluding the ones you forgot? \nI know now that no matter \nhow much I gave, \nYou are never going to see me.\nBecause seeing me would have \nMeant seeing your own reflection \nAnd you've spent your life \nAvoiding mirrors.\nSo I'm done explaining.\nDone defending.\nDone trying to understand\nSomeone who never tried\nTo understand me. \nI carried this house, \nMy children. \nThis life.\nYou only carried \nYour pride. \nI don't carry any of it,\nFor you anymore. \nOnly what’s mine.\nOnly what's worth it",
+      "body": "You sat there for years while I held everything together. \nI raised children,\nPaid bills,\nKept food in the fridge,\nAnd love in a home that barely had any left to give. \n\nYou watched me struggle.\nYou watched me break. \nYou watched me cry quietly behind closed doors.\n\nStill you thought your bare minimum matched my exhaustion.\nYou thought playing games,\nWhile I played the role of mother, father, partner, and provider was balance.\n\nYou never showed up the way I needed. \nYou never stepped in when I was drowning.\nYou never offered relief, only blame. \n\nYou have no right to say I didn't do enough,\nWhen I did everything for everyone, \n\nI know now that no matter how much I gave, \nYou are never going to see me.\nBecause seeing me would have meant seeing your own reflection \nAnd you've spent your life avoiding mirrors.\n\nSo I'm done explaining.\nDone defending.\nDone trying to understand someone who never tried to understand me. \n\nI carried this house, \nMy children. \nThis life.\nI carried what was suppose to be your part,\nYou only carried your pride.",
       "cover": "mm-fmuultirkz5vks19.jpg",
       "featured": true,
       "files": [],
-      "updated": "2026-10-04T22:02:42",
+      "updated": "2026-10-05T01:41:45",
       "created": "2026-10-04T22:02:42",
       "order": -6,
       "publishedAt": "2026-10-04T22:02:42",
