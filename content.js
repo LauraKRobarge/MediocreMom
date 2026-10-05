@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-10-05T00:20:31 */
+/* MediocreMom public content, published 2026-10-05T00:22:18 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -1541,21 +1541,6 @@ window.MM_SEED = {
       "sharedAt": "2026-10-04T01:42:50"
     },
     {
-      "id": "7x5q3qi",
-      "order": 67,
-      "src": "mm-fmutdf2y8h8m4nqw.jpg",
-      "caption": "",
-      "album": "BLUE BUTTON DOWN SERIES",
-      "date": "2026-10-04",
-      "favorite": false,
-      "inActivity": false,
-      "status": "public",
-      "created": "2026-10-04T01:18:59",
-      "updated": "2026-10-05T00:18:11",
-      "publishedAt": "2026-10-04T01:43:41",
-      "sharedAt": "2026-10-04T01:43:41"
-    },
-    {
       "id": "h73bit0",
       "order": 106,
       "src": "mm-fmutdf3k1er34mfw.jpg",
@@ -2124,21 +2109,6 @@ window.MM_SEED = {
       "updated": "2026-10-05T00:19:16",
       "publishedAt": "2026-10-04T01:37:31",
       "sharedAt": "2026-10-04T01:37:31"
-    },
-    {
-      "id": "v3w5xlp",
-      "order": 45,
-      "src": "mm-fmutdf2xzpjswxs4.jpg",
-      "caption": "",
-      "album": "BLUE BUTTON DOWN SERIES",
-      "date": "2026-10-04",
-      "favorite": false,
-      "inActivity": false,
-      "status": "public",
-      "created": "2026-10-04T01:18:59",
-      "updated": "2026-10-05T00:19:33",
-      "publishedAt": "2026-10-04T01:37:11",
-      "sharedAt": "2026-10-04T01:37:11"
     },
     {
       "id": "4o5scha",
