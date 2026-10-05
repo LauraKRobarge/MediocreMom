@@ -235,7 +235,7 @@
   }
   var db = (MM.db = load());
   MM.save = function () {
-    try { localStorage.setItem(LS, JSON.stringify(db)); return true; }
+    try { localStorage.setItem(LS, JSON.stringify(db)); if (typeof ghSchedule === "function") ghSchedule(); return true; }
     catch (e) { alert("Your browser's storage is full. Try smaller photos, empty the trash, or export a backup."); return false; }
   };
   MM.get = function (c, id) { return (db[c] || []).find(function (x) { return x.id === id; }); };
@@ -355,9 +355,9 @@
         '<div class="mm-dropdown"><button class="mm-create" data-act="menu" aria-haspopup="true">+ Create New</button><div class="mm-dropdown-menu">' +
         CREATE.map(function (c) { return '<button data-act="new" data-c="' + c[0] + '">' + c[1] + "</button>"; }).join("") + "</div></div>" +
         '<a href="duly-noted.html">Reminders</a><a href="trash.html">Trash' + (tn ? " (" + tn + ")" : "") + "</a>" +
-        '<button data-act="preview-on">Preview as visitor</button><span class="sp"></span>' +
+        '<button data-act="preview-on">Preview as visitor</button><span class="sp"></span>' + (ghTok() ? '<span id="mm-gh-status" style="font-size:13px;opacity:.8;align-self:center">Auto-publish on</span>' : "") +
         '<div class="mm-dropdown"><button data-act="menu" aria-haspopup="true">Site data ▾</button><div class="mm-dropdown-menu" style="left:auto;right:0">' +
-        '<button data-act="export-public">Export for publishing (.zip)</button><button data-act="backup">Download full backup</button><button data-act="import">Restore from backup</button><button data-act="passcode">Change passcode</button><button data-act="start-fresh">Clear sample content</button></div></div>' +
+        (ghTok() ? '<button data-act="gh-publish">Publish now</button><button data-act="gh-disconnect">Disconnect GitHub</button>' : '<button data-act="gh-connect">Connect GitHub (auto-publish)</button>') + '<button data-act="export-public">Export for publishing (.zip)</button><button data-act="backup">Download full backup</button><button data-act="import">Restore from backup</button><button data-act="passcode">Change passcode</button><button data-act="start-fresh">Clear sample content</button></div></div>' +
         '<button data-act="signout">Sign out</button></div></div>';
     }
     if (hd) {
@@ -949,6 +949,90 @@
       });
     }).catch(function (e) { alert("Export failed: " + (e && e.message || e)); });
   }
+  /* ---------- auto-publish to GitHub ---------- */
+  var GH = { owner: "laurakrobarge", repo: "MediocreMom", branch: "main", key: "mm-gh-token", map: "mm-gh-files", busy: false, again: false, timer: null };
+  function ghTok() { try { return localStorage.getItem(GH.key) || ""; } catch (e) { return ""; } }
+  function gh(path, opt) {
+    opt = opt || {};
+    return fetch("https://api.github.com/repos/" + GH.owner + "/" + GH.repo + path, {
+      method: opt.method || "GET",
+      headers: { Authorization: "Bearer " + ghTok(), Accept: "application/vnd.github+json", "Content-Type": "application/json" },
+      body: opt.body ? JSON.stringify(opt.body) : undefined
+    }).then(function (r) {
+      if (!r.ok) return r.text().then(function (t) { var m = ""; try { m = JSON.parse(t).message; } catch (e) {} throw new Error(r.status + (m ? " " + m : "")); });
+      return r.json();
+    });
+  }
+  function b64(u8) { var s = "", n = 0x8000; for (var i = 0; i < u8.length; i += n) s += String.fromCharCode.apply(null, u8.subarray(i, i + n)); return btoa(s); }
+  function ghStatus(msg, err) {
+    var el = document.getElementById("mm-gh-status");
+    if (el) { el.textContent = msg; el.style.color = err ? "#b3261e" : ""; }
+  }
+  function ghPublish() {
+    if (!ghTok()) return Promise.resolve();
+    if (GH.busy) { GH.again = true; return Promise.resolve(); }
+    GH.busy = true; ghStatus("Publishing…");
+    var out = { about: db.about, pages: db.pages, trash: [] };
+    COLS.forEach(function (c) { out[c] = db[c].filter(function (x) { return x.status === "public"; }); });
+    var text = JSON.stringify(out, null, 2), cache = {};
+    try { cache = JSON.parse(localStorage.getItem(GH.map) || "{}"); } catch (e) {}
+    var refs = [];
+    Array.from(new Set(text.match(/idb:[a-z0-9]+/gi) || [])).forEach(function (r) { refs.push({ key: '"' + r + '"', id: r, base: "mm-" + r.slice(4), name: (FILES.meta[r.slice(4)] || {}).name }); });
+    Array.from(new Set(text.match(/"data:[a-z]+\/[a-z0-9.+-]+;base64,[A-Za-z0-9+\/=]+"/gi) || [])).forEach(function (q) { refs.push({ key: q, id: q.slice(1, -1), base: "mm-d" + hashStr(q) }); });
+    var head, tree = {};
+    return gh("/git/ref/heads/" + GH.branch).then(function (r) { head = r.object.sha; return gh("/git/commits/" + head); }).then(function (c) {
+      head = { sha: head, tree: c.tree.sha };
+      return gh("/git/trees/" + c.tree.sha + "?recursive=1");
+    }).then(function (t) {
+      (t.tree || []).forEach(function (x) { tree[x.path] = 1; });
+      var items = [];
+      return refs.reduce(function (p, j) {
+        return p.then(function () {
+          var have = cache[j.base];
+          if (have && tree[have]) { j.file = have; return; }
+          return fetch(MM.src(j.id)).then(function (x) { return x.blob(); }).then(function (b) {
+            return shrink(b).then(function (o) {
+              j.file = j.base + "." + (o !== b ? "jpg" : extFor(b, j.name));
+              if (tree[j.file]) { cache[j.base] = j.file; return; }
+              return o.arrayBuffer().then(function (a) { return gh("/git/blobs", { method: "POST", body: { content: b64(new Uint8Array(a)), encoding: "base64" } }); })
+                .then(function (bl) { items.push({ path: j.file, mode: "100644", type: "blob", sha: bl.sha }); cache[j.base] = j.file; });
+            });
+          }, function () { j.file = null; });
+        });
+      }, Promise.resolve()).then(function () { return items; });
+    }).then(function (items) {
+      refs.forEach(function (j) { if (j.file) text = text.split(j.key).join(JSON.stringify(j.file)); });
+      var js = "/* MediocreMom public content, published " + MM.now() + " */\nwindow.MM_SEED = " + text + ";\n";
+      items.push({ path: "content.js", mode: "100644", type: "blob", content: js });
+      return gh("/git/trees", { method: "POST", body: { base_tree: head.tree, tree: items } });
+    }).then(function (t) {
+      return gh("/git/commits", { method: "POST", body: { message: "Update content " + MM.today(), tree: t.sha, parents: [head.sha] } });
+    }).then(function (c) {
+      return gh("/git/refs/heads/" + GH.branch, { method: "PATCH", body: { sha: c.sha } });
+    }).then(function () {
+      try { localStorage.setItem(GH.map, JSON.stringify(cache)); } catch (e) {}
+      GH.lastOk = new Date(); ghStatus("Published " + GH.lastOk.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }));
+    }).catch(function (e) {
+      var m = String(e && e.message || e);
+      ghStatus("Not published", true);
+      MM.toast(/^401/.test(m) ? "GitHub key expired or wrong. Use Site data ▾ → Connect GitHub again." : "Couldn't publish: " + m + ". Will retry on your next save.");
+    }).then(function () {
+      GH.busy = false;
+      if (GH.again) { GH.again = false; ghPublish(); }
+    });
+  }
+  MM.ghPublish = ghPublish;
+  function ghSchedule() { if (!ghTok()) return; clearTimeout(GH.timer); ghStatus("Unpublished changes…"); GH.timer = setTimeout(ghPublish, 3000); }
+  function ghConnect() {
+    var t = prompt("Paste your GitHub key (starts with github_pat_). It is stored only in this browser.");
+    if (!t) return; t = t.trim();
+    try { localStorage.setItem(GH.key, t); } catch (e) { alert("Couldn't save the key in this browser."); return; }
+    gh("").then(function (r) {
+      if (r.permissions && !r.permissions.push) throw new Error("This key can't write to the repo. Give it Contents: Read and write.");
+      MM.toast("Connected. Every save now publishes automatically."); MM.rerender && MM.rerender(); ghPublish();
+    }).catch(function (e) { localStorage.removeItem(GH.key); alert("That key didn't work: " + (e.message || e)); });
+  }
+  window.addEventListener("beforeunload", function (e) { if (ghTok() && (GH.busy || GH.timer && document.getElementById("mm-gh-status") && /Unpublished/.test(document.getElementById("mm-gh-status").textContent))) { e.preventDefault(); e.returnValue = ""; } });
   function backup() {
     MM.toast("Preparing backup…");
     inlineFiles(JSON.stringify(db, null, 2)).then(function (json) { download("mediocremom-backup-" + MM.today() + ".json", json, "application/json"); });
@@ -1009,6 +1093,9 @@
       case "editabout": MM.editAbout(); break;
       case "checkitem": var l = MM.get("lists", id); if (l) { var x = l.items.find(function (y) { return y.id === b.dataset.item; }); x.done = !x.done; l.updated = MM.now(); MM.save(); MM.rerender(); } break;
       case "export-public": exportPublic(); break;
+      case "gh-connect": ghConnect(); break;
+      case "gh-publish": clearTimeout(GH.timer); ghPublish(); break;
+      case "gh-disconnect": if (confirm("Stop auto-publishing from this browser?")) { localStorage.removeItem(GH.key); MM.toast("Disconnected."); MM.rerender && MM.rerender(); } break;
       case "backup": backup(); break;
       case "import": importBackup(); break;
       case "passcode": var p = prompt("New passcode (at least 4 characters):"); if (p && p.length >= 4) { localStorage.setItem(PASS, p); MM.toast("Passcode changed"); } break;
