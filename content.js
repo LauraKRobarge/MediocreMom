@@ -1,4 +1,4 @@
-/* MediocreMom public content, exported 2026-10-04T03:07:58. Upload this file and the mm- files with it when you publish. */
+/* MediocreMom public content, published 2026-10-05T00:03:47 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -61,6 +61,70 @@ window.MM_SEED = {
   },
   "trash": [],
   "writings": [
+    {
+      "id": "8dst0ks",
+      "status": "public",
+      "title": "Just Another Lesson",
+      "category": "Poetry",
+      "excerpt": "She was loyal.\nShe was clear.\nShe wanted you.\n\nYou treated her effort like it would never run out.\nNow she’s done proving her worth\nto someone who kept overlooking it.\n\nShe won’t beg, chase, or wait.\nShe stayed longer than she should have.\nShe won’t make that mistake twice.",
+      "body": "Imagine losing a woman who doesn't sleep around, doesn't play games, is clear about what she wants, works hard for what she has, knows her worth and only wants you.\n\nEmbarrassing.\n\nShe was loyal when she didn't have to be.\n\nShe gave you effort you didn't deserve. \n\nShe saw potential in you that you couldn't even see. \n\nShe stayed when she should have walked away, and now she's done.\n\nShe won't beg, she won't chase, she won't wait.\n\nShe's healing, growing and leveling up. \n\nShe's realizing she was the prize all along.\n\nOne day, you'll see her glow up from a distance, but by then, she'll be with someone who never made her question her worth.\n\nSomeone who values her love, her loyalty and her presence.\n\nYou, you'll just be another lesson she learned the hard way. \n\nSo don't be an idiot.",
+      "cover": "mm-fmuumtvetwj71vmj.jpg",
+      "featured": false,
+      "files": [],
+      "updated": "2026-10-04T22:30:13",
+      "created": "2026-10-04T22:30:13",
+      "order": -9,
+      "publishedAt": "2026-10-04T22:30:13",
+      "sharedAt": "2026-10-04T22:30:13"
+    },
+    {
+      "id": "xadqqax",
+      "status": "public",
+      "title": "You Heard Me Only When I Stopped Asking",
+      "category": "Reflection",
+      "excerpt": "When I was still asking,\nI was still hoping.\n\nEvery difficult conversation\nwas me trying to save us.\n\nYou thought my silence meant things were better.\nI was grieving what hadn’t changed.\n\nBy the time you were ready to listen,\nI had stopped believing you would.",
+      "body": "One thing we don’t talk about enough is the difference between trying to save a relationship and trying to stop someone from leaving.\n\nThis isn’t true of every man or woman, but it’s a pattern many women recognize: she starts trying to fix things while she still wants to stay. He starts trying when she’s ready to leave.\n\nAt first, she talks. She explains what hurts, asks for help, and says something needs to change. She’s still reaching for him because she still believes they can get better.\n\nBut she can only keep having the same conversation for so long. When her needs are dismissed, nothing changes, or every attempt ends in an argument, she starts going quiet.\n\nResentment builds. Affection fades. She begins grieving a relationship she’s still living in.\n\nHe may mistake that silence for peace. Then, when she pulls away or finally leaves, he acts blindsided, as though the conversations they’ve had for years never happened.\n\nSuddenly, there are promises. Attention. All the words she once begged to hear.\n\nAnd she wants to believe him. She doesn’t want to resent the man she loves. She wants the relationship she worked so hard to save.\n\nBut those promises need to survive beyond the moment he feels he might lose her. If the effort disappears as soon as she stays, they end up right back where they started, only now she has even less hope.\n\nGetting back to normal means very little when normal was making her miserable.\n\nWe try to talk before we stop wanting to be touched. We ask for change before we file the papers. We keep reaching because some part of us still believes there’s something worth saving.\n\nPlease listen while she’s still talking. Ask what she needs, take it seriously, and follow through.\n\nDon’t wait until she’s finished grieving to decide you’re ready to try.",
+      "cover": "mm-fmuumm086bwc0po8.jpg",
+      "featured": false,
+      "files": [],
+      "updated": "2026-10-04T22:25:51",
+      "created": "2026-10-04T22:25:51",
+      "order": -8,
+      "publishedAt": "2026-10-04T22:25:51",
+      "sharedAt": "2026-10-04T22:25:51"
+    },
+    {
+      "id": "ogtox1y",
+      "status": "public",
+      "title": "Nobody Checks on the Strong Ones",
+      "category": "Reflection",
+      "excerpt": "Nobody checks on the strong one.\nThey see what she handles,\nnever what it costs her.\n\nShe’s everyone’s first call,\nbut spends her hardest nights alone.\n\nFor once, she wishes someone would ask\nhow she’s doing\nand stay for the fucking answer.",
+      "body": "Nobody fucking checks on the strong one. They assume she’s fine because she always handles it. Because she doesn’t fall apart in front of them. Because somehow, she keeps getting shit done.\n\nThey don’t see what it costs her. The nights spent overthinking. The bone-deep exhaustion. The tears she wipes away before anyone walks in. The times she wishes someone would notice she’s struggling without making her explain it.\n\nShe’s the reliable one. The person everyone calls when their world falls apart. But when she needs someone? Fucking silence.\n\nMaybe she’s carried it all for so long that if someone asked whether she was okay, she wouldn’t know where to begin.\n\nShe’s tired. She needs help, affection, and a place where she can fall apart without having to put herself back together alone.\n\nFor once, someone should check on her and stay long enough to hear the real answer.",
+      "cover": "mm-fmuum4mk2rf1v2h3.jpg",
+      "featured": false,
+      "files": [],
+      "updated": "2026-10-04T22:10:36",
+      "created": "2026-10-04T22:10:36",
+      "order": -7,
+      "publishedAt": "2026-10-04T22:10:36",
+      "sharedAt": "2026-10-04T22:10:36"
+    },
+    {
+      "id": "viic19h",
+      "status": "public",
+      "title": "The Weight You Never Carried",
+      "category": "Poetry",
+      "excerpt": "I carried our children, our home,\nand a life you barely helped hold together.\nYou watched me break\nand still called your bare minimum enough.\n\nI’m done explaining the weight\nto someone who never helped carry it\n\nFrom now on, I carry only what’s mine.\nYour pride was never mine to hold.",
+      "body": "You sat there for years while I held everything together. \nI raised children,\nPaid bills,\nKept food in the fridge,\nAnd love in a home\nThat barely had any left to give. \nYou watched me struggle.\nYou watched me break. \nYou watched me cry quietly behind doors and still, \nYou thought you were doing your part. \nAnd still you thought your bare minimum match my exhaustion.\nYou thought playing games,\nWhile I played the role of mother, partner, and provider,\nWas balance.\nYou never showed up the way I needed. \nYou never stepped in when I was drowning.\nYou never offered relief,\nOnly blame. \nAnd now you have no to think you're right?\nTo say I didn't do enough,\nWhen I did everything for everyone, \nIncluding the ones you forgot? \nI know now that no matter \nhow much I gave, \nYou are never going to see me.\nBecause seeing me would have \nMeant seeing your own reflection \nAnd you've spent your life \nAvoiding mirrors.\nSo I'm done explaining.\nDone defending.\nDone trying to understand\nSomeone who never tried\nTo understand me. \nI carried this house, \nMy children. \nThis life.\nYou only carried \nYour pride. \nI don't carry any of it,\nFor you anymore. \nOnly what’s mine.\nOnly what's worth it",
+      "cover": "mm-fmuultirkz5vks19.jpg",
+      "featured": true,
+      "files": [],
+      "updated": "2026-10-04T22:02:42",
+      "created": "2026-10-04T22:02:42",
+      "order": -6,
+      "publishedAt": "2026-10-04T22:02:42",
+      "sharedAt": "2026-10-04T22:02:42"
+    },
     {
       "id": "2n0b5k0",
       "status": "public",
@@ -149,7 +213,7 @@ window.MM_SEED = {
       "excerpt": "I became so skilled at wearing happiness that eventually even I forgot it was only a mask. But pretending has a cost. Eventually, carrying a version of myself that didn’t exist became heavier than carrying the truth.",
       "body": "I have always found peace in journaling.\nI tell my stories. I give words to the thoughts, fears, and quiet wounds I carry with me from one day to the next.\nThey are the parts of me no one sees.\nThe chapters no one will ever read until long after my soul has left this earth.\nSome of what I've endured would surprise you.\nIt might even make you wonder how I carried it in silence for so long.\nHow no one ever noticed the cracks beneath the surface.\nThe truth is, I became an artist in my own survival.\nI learned to smile at the right moments, laugh at the right jokes, and convince the world that everything was exactly as it should be.\nI became so skilled at wearing happiness that eventually even I forgot it was only a mask.\nBut there was never a perfect life.\nThere were moments that broke me.\nWords that reshaped me.\nHands that took more than they ever gave.\nManipulation disguised as love.\nBetrayal disguised as loyalty.\nPromises that dissolved into lies.\nI surrendered pieces of myself simply because I didn't know another way to survive.\nSome of the choices I made in the aftermath changed the course of my life forever.\nNot because they were the choices I wanted, but because they were the only ones I believed I had.\nStill, I kept going.\nI kept performing.\nI kept convincing everyone around me that I had everything under control.\nBut pretending has a cost.\nEventually, carrying a version of myself that didn't exist became heavier than carrying the truth.\nI am tired.\nNot the kind of tired that sleep can fix,\nbut the kind that settles into my bones after years of fighting battles no one knew I was fighting.\nThe kind that steals my appetite, quiets my voice, and makes even simple conversations feel like mountains to climb.\nI think l am finally understanding that surviving and truly living are not the same thing.\nMaybe the bravest thing I can do isn't pretending I'm unbreakable.\nMaybe it's finally admitting that I've been carrying too much for far too long.\nOne day, people will say,\n\"She always seemed so happy.\"\nThey'll remember my smile.\nMy sarcasm.\nMy jokes.\nThe way I always asked how everyone else was doing.\nThey won't remember the nights I spent trying to convince myself I could do it all again tomorrow.\nBecause that's the cruelest part about invisible pain.\nIt rarely announces itself.\nIt doesn't ask to be seen.\nIt simply teaches me how to disappear while standing in a crowded room.\nIt teaches me to speak through silence.\nIt hides behind my kindness.\nBehind my responsibility.\nBehind the words, \"I'm fine.\"\nBehind every photograph where my smile reached my lips but never quite reached my eyes.\nThe greatest tragedies are not always the ones the world witnesses.\nSometimes they're the ones that unfold quietly, behind closed doors, inside people like me,\nwho become so skilled at carrying impossible weight that no one thinks to ask whether I'm still standing.\nUntil one day...\nI'm not.",
       "cover": "mm-fmusouczes3rhqv3.jpg",
-      "featured": true,
+      "featured": false,
       "files": [],
       "updated": "2026-10-03T15:50:54",
       "created": "2026-10-03T13:48:28",
@@ -158,7 +222,27 @@ window.MM_SEED = {
       "sharedAt": "2026-10-03T13:51:13"
     }
   ],
-  "journal": [],
+  "journal": [
+    {
+      "id": "9c296w9",
+      "status": "public",
+      "date": "2026-10-04",
+      "title": "Daily Tarot Reading",
+      "mood": "Good",
+      "tags": [
+        "TAROT"
+      ],
+      "body": "CARDS:\n- The Chariot\n- Two of Swords (Reversed)\n- Ace of Swords (Reversed)\n- The Hermit\n\nWHAT DOES THIS MEAN?\nAs a reflection on your life and job search, these cards suggest you have the drive to move forward, but uncertainty may be making it harder to choose where to put your energy. They can’t predict whether or when you’ll get an offer, but they can give you useful questions to consider.\n\n- The Chariot upright: Take an active role in your next chapter. In your job search, this could mean choosing a few roles that fit your strengths and pursuing them consistently.\n\n- Two of Swords reversed: You may feel torn between finding work quickly and finding work you actually want. Decide what’s essential, what’s negotiable, and whether a temporary option could give you breathing room.\n\n- Ace of Swords reversed: Pay attention to how you explain your experience. You’ve done support, team leadership, technical troubleshooting, onboarding, and operations. That range is valuable, but each application needs a clear story about why you fit that particular role.\n\n- The Hermit upright: Reflect on which parts of your previous jobs made you feel capable and engaged, and which left you drained. Use that knowledge to guide your search. Quiet reflection can help, alongside reaching out to former colleagues and contacts.\n\nFor your life more broadly, the question might be: What do I want my next chapter to feel like, and which choices are within my control?\n\nThe practical message is to choose a direction without demanding certainty first. Pick two or three target job titles, tailor your résumé to each, and give yourself a manageable weekly rhythm for applications and follow-ups. You can adjust your direction as you learn more.",
+      "photos": [
+        "mm-fmuukcznm5jxui6u.jpg"
+      ],
+      "files": [],
+      "updated": "2026-10-04T21:26:28",
+      "created": "2026-10-04T21:25:15",
+      "publishedAt": "2026-10-04T21:25:15",
+      "sharedAt": "2026-10-04T21:25:15"
+    }
+  ],
   "playlists": [
     {
       "id": "qni4rho",
