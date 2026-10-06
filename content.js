@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-10-05T01:41:49 */
+/* MediocreMom public content, published 2026-10-05T23:18:33 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -6854,6 +6854,22 @@ window.MM_SEED = {
   "lists": [],
   "reminders": [],
   "links": [
+    {
+      "id": "g7ubghq",
+      "status": "public",
+      "title": "Instagram: \"Waiting for the End\" Linkin Park",
+      "url": "https://www.instagram.com/reel/Dd9CzwPxKSt/?utm_source=ig_web_copy_link&stkn=NTc4MTIwNjQ2YQ==",
+      "thumb": "mm-fmuw3zea06ouycen.jpg",
+      "description": "",
+      "type": "Website",
+      "showLink": true,
+      "files": [],
+      "updated": "2026-10-05T23:18:28",
+      "created": "2026-10-05T23:18:28",
+      "order": -8,
+      "publishedAt": "2026-10-05T23:18:28",
+      "sharedAt": "2026-10-05T23:18:28"
+    },
     {
       "id": "usxpx6x",
       "status": "public",
