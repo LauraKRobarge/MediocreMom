@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-10-05T23:39:24 */
+/* MediocreMom public content, published 2026-10-05T23:44:39 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -6854,6 +6854,22 @@ window.MM_SEED = {
   "lists": [],
   "reminders": [],
   "links": [
+    {
+      "id": "h5hjb4n",
+      "status": "public",
+      "title": "Instagram: “Waste My Time\" Marc Atlas",
+      "url": "https://www.instagram.com/reel/Dd3QnnbOoru/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
+      "thumb": "mm-fmuw4x3m9am4l66v.jpg",
+      "description": "",
+      "type": "Video",
+      "showLink": true,
+      "files": [],
+      "updated": "2026-10-05T23:44:34",
+      "created": "2026-10-05T23:44:34",
+      "order": -2,
+      "publishedAt": "2026-10-05T23:44:34",
+      "sharedAt": "2026-10-05T23:44:34"
+    },
     {
       "id": "7yqdcrq",
       "status": "public",
