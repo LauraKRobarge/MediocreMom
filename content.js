@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-10-05T23:21:41 */
+/* MediocreMom public content, published 2026-10-05T23:24:41 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -6854,6 +6854,22 @@ window.MM_SEED = {
   "lists": [],
   "reminders": [],
   "links": [
+    {
+      "id": "7l9oe4h",
+      "status": "public",
+      "title": "It gets better. It does get better.",
+      "url": "https://www.instagram.com/reel/DbkvRATs0Vq/?utm_source=ig_web_copy_link&stkn=NTc4MTIwNjQ2YQ==",
+      "thumb": "mm-fmuw47k58x0viu62.jpg",
+      "description": "",
+      "type": "Video",
+      "showLink": false,
+      "files": [],
+      "updated": "2026-10-05T23:24:37",
+      "created": "2026-10-05T23:24:37",
+      "order": -9,
+      "publishedAt": "2026-10-05T23:24:37",
+      "sharedAt": "2026-10-05T23:24:37"
+    },
     {
       "id": "g7ubghq",
       "status": "public",
