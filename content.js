@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-10-05T23:20:38 */
+/* MediocreMom public content, published 2026-10-05T23:21:41 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -6978,10 +6978,10 @@ window.MM_SEED = {
       "files": [
         {
           "id": "i2oq2aq",
-          "ref": "mm-fmut10gdyadney6d.jpg",
+          "ref": "mm-fmuw434blp5l9tjy.jpg",
           "name": "Alexithymia",
           "type": "image/jpeg",
-          "size": 163164,
+          "size": 201660,
           "caption": ""
         }
       ],
@@ -6990,35 +6990,39 @@ window.MM_SEED = {
       "tags": [
         "Word of the Day"
       ],
-      "updated": "2026-10-03T19:32:02",
+      "updated": "2026-10-05T23:21:02",
       "created": "2026-10-03T19:32:02",
       "order": -2,
       "publishedAt": "2026-10-03T19:32:02",
-      "sharedAt": "2026-10-03T19:32:02"
+      "sharedAt": "2026-10-03T19:32:02",
+      "thumb": "",
+      "showLink": false
     },
     {
       "id": "7app65g",
       "status": "public",
       "title": "A moment of quiet reflection",
-      "type": "Other",
+      "type": "Image",
       "files": [
         {
           "id": "poxsjwa",
-          "ref": "mm-fmusrdvso2eqm2ub.jpg",
+          "ref": "mm-fmuw43uk0mia1ghd.jpg",
           "name": "A moment of quiet reflection.png",
-          "type": "image/png",
-          "size": 2547805,
+          "type": "image/jpeg",
+          "size": 196119,
           "caption": ""
         }
       ],
       "url": "",
       "description": "",
       "tags": [],
-      "updated": "2026-10-03T15:03:11",
+      "updated": "2026-10-05T23:21:36",
       "created": "2026-10-03T15:03:11",
       "order": 0,
       "publishedAt": "2026-10-03T15:03:11",
-      "sharedAt": "2026-10-03T15:03:11"
+      "sharedAt": "2026-10-03T15:03:11",
+      "thumb": "",
+      "showLink": false
     }
   ],
   "ventures": []
