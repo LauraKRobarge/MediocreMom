@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-11-01T20:26:26 */
+/* MediocreMom public content, published 2026-11-01T20:28:26 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -223,6 +223,25 @@ window.MM_SEED = {
     }
   ],
   "journal": [
+    {
+      "id": "18cthmv",
+      "status": "public",
+      "date": "2026-11-01",
+      "title": "Apparently, Communication Was Asking Too Much",
+      "mood": "Fed up",
+      "tags": [
+        "MannySucks"
+      ],
+      "body": "He ended it. Again.\n\nAnd before anyone confuses this with heartbreak, I’m pissed off.\n\nI was honest about my feelings, and apparently that was more than he could handle. A conversation became an ending. Again. At this point, the pattern is getting a little fucking old.\n\nHe has told me himself that his inability to communicate could ruin his marriage. So he recognizes the problem. He can name it. He understands that it has consequences.\n\nWhat I haven’t seen is him doing much about it.\n\nAnd that’s what pisses me off. You don’t get unlimited credit for knowing you’re bad at something while everyone around you keeps dealing with the fallout. At some point, “I’m bad at communication” stops being an explanation and starts sounding like advance notice that you don’t intend to try.\n\nI wasn’t asking him to write poetry or deliver a TED Talk on emotional availability. Use your words. Answer a question. Stay in a conversation long enough for it to be uncomfortable without deciding the entire thing needs to end.\n\nWe are adults. This should not require a training manual.\n\nAnd yes, I think he needs to grow up. If you can participate in a connection, you can take some responsibility for the conversations that come with it. You can’t reasonably expect someone to share themselves with you and then act inconvenienced when they have something honest to say.\n\nI’m also tired of the idea that I should have worded things differently. Softer. Shorter. With a little joke at the end so he wouldn’t have to sit with what I actually meant.\n\nI said how I felt. He could have disagreed. He could have explained his side. There were several perfectly reasonable options available before reaching for the exit.\n\nAs for his marriage, he already knows what he stands to lose. I can’t predict what happens there, but I believe him when he says his communication is a serious problem. Recognizing it won’t protect anything if he keeps refusing to work on it.\n\nThat part is his responsibility.\n\nI’m not sitting here regretting that I spoke up. I’m pissed that a grown man who knows exactly what his problem is keeps making it everyone else’s problem too.\n\nI said what I meant. I’m not adding an “LOL” to make it easier to swallow.",
+      "photos": [
+        "mm-fmvyky7oa3oz22xr.jpg"
+      ],
+      "files": [],
+      "updated": "2026-11-01T20:28:22",
+      "created": "2026-11-01T20:26:22",
+      "publishedAt": "2026-11-01T20:26:35",
+      "sharedAt": "2026-11-01T20:28:22"
+    },
     {
       "id": "x502hff",
       "status": "public",
