@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-11-01T20:21:10 */
+/* MediocreMom public content, published 2026-11-01T20:26:26 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -223,6 +223,23 @@ window.MM_SEED = {
     }
   ],
   "journal": [
+    {
+      "id": "x502hff",
+      "status": "public",
+      "date": "2026-11-01",
+      "title": "Chocolate Fudge Frosting Recipe",
+      "mood": "Fed up",
+      "tags": [
+        "Recipe"
+      ],
+      "body": "* 2 cups 4 sticks unsalted butter, softened 454g\n* 1 tsp vanilla extract or vanilla bean paste 5g\n* 1 tsp fine salt 6g\n* 5 cups powdered sugar 625g\n* 1 cup black cocoa powder, sifted 100g\n* 3/4 cup heavy whipping cream, room temperature 180g\n* 1 3/4 cups dark chocolate chips, melted and cooled 300g\n\n1. Beat 2 cups or 4 sticks of butter, 1 tsp vanilla extract, and 1 tsp salt on a medium-high speed for 2 minutes with a paddle attachment. \n    * The butter should become lighter in color. \n    * Scrape the sides and bottom of the bowl as needed with a rubber spatula\n2. Gradually mix in 5 cups of powdered  sugar, 1 cup of black cocoa powder, and 3/4 of a cup of heavy cream on a low speed.\n3. Then, mix in 1 3/4 cups of melted and cooled dark chocolate at a low speed until the ingredients are fully incorporated.\n    * The chocolate should still be fluid, but no longer hot to the touch. \n    * I let mine sit for about 10 minutes before adding it to the frosting.\n4. Cover with plastic wrap to prevent crusting and set aside.",
+      "photos": [],
+      "files": [],
+      "updated": "2026-11-01T20:21:16",
+      "created": "2026-11-01T20:21:06",
+      "publishedAt": "2026-11-01T20:21:16",
+      "sharedAt": "2026-11-01T20:21:16"
+    },
     {
       "id": "9c296w9",
       "status": "public",
@@ -6851,26 +6868,7 @@ window.MM_SEED = {
       "sharedAt": "2026-10-03T21:52:27"
     }
   ],
-  "lists": [
-    {
-      "id": "zc7csf3",
-      "status": "public",
-      "title": "Chocolate Fudge Frosting",
-      "description": "* 2 cups 4 sticks unsalted butter, softened 454g\n\n* 1 tsp vanilla extract or vanilla bean paste 5g\n* 1 tsp fine salt 6g\n* 5 cups powdered sugar 625g\n* 1 cup black cocoa powder, sifted 100g\n* 3/4 cup heavy whipping cream, room temperature 180g\n* 1 3/4 cups dark chocolate chips, melted and cooled 300g\n\n1. Beat 2 cups or 4 sticks of butter, 1 tsp vanilla extract, and 1 tsp salt on a medium-high speed for 2 minutes with a paddle attachment. \n    * The butter should become lighter in color. \n    * Scrape the sides and bottom of the bowl as needed with a rubber spatula\n2. Gradually mix in 5 cups of powdered  sugar, 1 cup of black cocoa powder, and 3/4 of a cup of heavy cream on a low speed.\n3. Then, mix in 1 3/4 cups of melted and cooled dark chocolate at a low speed until the ingredients are fully incorporated.\n    * The chocolate should still be fluid, but no longer hot to the touch. \n    * I let mine sit for about 10 minutes before adding it to the frosting.\n4. Cover with plastic wrap to prevent crusting and set aside.",
-      "category": "Things to try",
-      "style": "checklist",
-      "hideDone": false,
-      "pinned": true,
-      "inActivity": true,
-      "files": [],
-      "items": [],
-      "updated": "2026-11-01T20:20:11",
-      "created": "2026-11-01T20:19:52",
-      "order": 0,
-      "publishedAt": "2026-11-01T20:19:52",
-      "sharedAt": "2026-11-01T20:19:52"
-    }
-  ],
+  "lists": [],
   "reminders": [],
   "links": [
     {
