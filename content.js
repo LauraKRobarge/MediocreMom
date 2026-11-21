@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-11-01T20:28:26 */
+/* MediocreMom public content, published 2026-11-20T22:01:59 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -59,6 +59,7 @@ window.MM_SEED = {
       "intro": "Designs, business ideas, and creative ventures with a little grace and a lot of nerve."
     }
   },
+  "passHash": "198b7d7f68b9fa805a04f11dee609ac7606d2c147c22ccb0621c38b055075ab8",
   "trash": [],
   "writings": [
     {
