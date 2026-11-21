@@ -24,14 +24,14 @@
       });
     });
   }
-  function photoItems(list) { return list.map(function (p) { return { src: p.src, caption: p.caption, share: "proof-of-life.html#" + p.id }; }); }
+  function photoItems(list, pg) { return list.map(function (p) { return { src: p.src, caption: p.caption, share: (pg || "proof-of-life.html") + "#" + p.id }; }); }
 
   /* ================= HOME ================= */
-  var ACT_TYPES = [["all", "All"], ["writings", "Writings"], ["journal", "Journal"], ["playlists", "Playlists"], ["photos", "Photos"], ["lists", "Lists"]];
+  var ACT_TYPES = [["all", "All"], ["writings", "Writings"], ["journal", "Journal"], ["playlists", "Playlists"], ["photos", "Photos"]];
   function activity() {
     var out = [];
     ["writings", "journal"].forEach(function (c) { db[c].forEach(function (it) { if (it.status === "public") out.push([c, it]); }); });
-    ["playlists", "photos", "lists"].forEach(function (c) { db[c].forEach(function (it) { if (it.status === "public" && it.inActivity) out.push([c, it]); }); });
+    ["playlists", "photos"].forEach(function (c) { db[c].forEach(function (it) { if (it.status === "public" && it.inActivity) out.push([c, it]); }); });
     return out.sort(function (a, b) { return String(b[1].sharedAt || b[1].publishedAt || "").localeCompare(String(a[1].sharedAt || a[1].publishedAt || "")); });
   }
   function home() {
@@ -50,7 +50,7 @@
     S.favs = favs;
     S.q2 = MM.quipBandFixed(["Unfortunately, I learned HTML."]);
     document.getElementById("home-favs").innerHTML = S.q2 +
-      '<div class="mm-wrap" style="margin-top:6.125em"><div class="mm-row" style="justify-content:space-between;margin-bottom:22px"><div><h2 class="mm-h2">Favorite Photos</h2><p class="mm-sub" style="margin:0">A few from Proof of Life that I keep coming back to.</p></div><a class="mm-btn ghost" href="proof-of-life.html">See all photos</a></div>' +
+      '<div class="mm-wrap" style="margin-top:6.125em"><div class="mm-row" style="justify-content:space-between;margin-bottom:22px"><div><h2 class="mm-h2">Favorite Photos</h2><p class="mm-sub" style="margin:0">A few from Exhibit A that I keep coming back to.</p></div><a class="mm-btn ghost" href="proof-of-life.html">See all photos</a></div>' +
       (favs.length ? '<div class="mm-fav">' + favs.map(function (p, i) {
         return '<button data-act="favphoto" data-i="' + i + '" aria-label="Enlarge: ' + esc(p.caption || "photo") + '">' + (p.src ? '<img src="' + MM.imgsrc(p.src) + '" alt="' + esc(p.caption || "") + '" loading="lazy">' : MM.ph("favorite photo")) + (p.caption ? '<span class="cap">' + esc(p.caption) + "</span>" : "") + "</button>";
       }).join("") + "</div>" : empty(MM.edit() ? "Mark photos as favorites on Proof of Life and they'll show up here." : "Favorites coming soon.")) + "</div>";
@@ -326,18 +326,19 @@
 
   /* ================= PHOTOS ================= */
   function photos() {
+    var C = document.body.dataset.page === "gphotos" ? "gphotos" : "photos", PG = C === "photos" ? "proof-of-life.html" : "george-photos.html";
     S.album = S.album || "all"; S.status = S.status || "all";
-    var all = MM.list("photos", { status: S.status }).sort(MM.sortFn("photos"));
+    var all = MM.list(C, { status: S.status }).sort(MM.sortFn("photos"));
     var albums = ["all"].concat(Array.from(new Set(all.map(function (p) { return p.album; }).filter(Boolean))));
     var list = all.filter(function (p) { return S.album === "all" || p.album === S.album; });
     S.plist = list;
-    var h = MM.pageHead("photos", (MM.edit() ? '<label class="mm-btn">+ Upload photos<input type="file" accept="image/*" multiple hidden data-upload></label>' : "") + MM.shareBtn(S.album === "all" ? "proof-of-life.html" : "proof-of-life.html?album=" + encodeURIComponent(S.album), S.album === "all" ? "Share this page" : "Share this album"));
-    h += '<section class="mm-section"><div class="mm-wrap"><div class="mm-row" style="justify-content:space-between;align-items:flex-start">' + chips(albums.map(function (a) { return [a, a === "all" ? "All photos" : a]; }), S.album, "album") + (MM.edit() ? '<div class="mm-searchbar">' + statusSelect(S.status) + "</div>" : "") + "</div>" +
-      (MM.edit() ? '<p class="mm-sub">Star up to six favorites for the home page. Uploaded photos start out private.</p>' : "");
-    h += list.length ? '<div class="mm-photos" data-sortable="photos">' + list.map(function (p, i) {
-      return '<figure class="ph" id="' + p.id + '" data-sid="' + p.id + '">' + MM.badge(p) + (MM.edit() ? '<button class="mm-star' + (p.favorite ? " on" : "") + '" data-act="toggle" data-c="photos" data-k="favorite" data-id="' + p.id + '" aria-label="' + (p.favorite ? "Remove from favorites" : "Mark as favorite") + '" aria-pressed="' + !!p.favorite + '">★</button>' : "") +
+    var h = MM.pageHead(C, (MM.edit() ? '<label class="mm-btn">+ Upload photos<input type="file" accept="image/*" multiple hidden data-upload></label>' : "") + MM.shareBtn(S.album === "all" ? PG : PG + "?album=" + encodeURIComponent(S.album), S.album === "all" ? "Share this page" : "Share this album"));
+    h += (C === "gphotos" ? gnav("gphotos") : "") + '<section class="mm-section"><div class="mm-wrap"><div class="mm-row" style="justify-content:space-between;align-items:flex-start">' + chips(albums.map(function (a) { return [a, a === "all" ? "All photos" : a]; }), S.album, "album") + (MM.edit() ? '<div class="mm-searchbar">' + statusSelect(S.status) + "</div>" : "") + "</div>" +
+      (MM.edit() ? '<p class="mm-sub">' + (C === "photos" ? "Star up to six favorites for the home page. " : "") + "Uploaded photos start out private.</p>" : "");
+    h += list.length ? '<div class="mm-photos" data-sortable="' + C + '">' + list.map(function (p, i) {
+      return '<figure class="ph" id="' + p.id + '" data-sid="' + p.id + '">' + MM.badge(p) + (MM.edit() && C === "photos" ? '<button class="mm-star' + (p.favorite ? " on" : "") + '" data-act="toggle" data-c="photos" data-k="favorite" data-id="' + p.id + '" aria-label="' + (p.favorite ? "Remove from favorites" : "Mark as favorite") + '" aria-pressed="' + !!p.favorite + '">★</button>' : "") +
         '<button data-act="openphoto" data-i="' + i + '" aria-label="Enlarge: ' + esc(p.caption || "photo") + '">' + (p.src ? '<img src="' + MM.imgsrc(p.src) + '" alt="' + esc(p.caption || "") + '" loading="lazy">' : MM.ph("photo", ["", "rose", "blue", "gold"][i % 4])) + "</button>" +
-        "<figcaption><span>" + esc(p.caption || "") + "</span><span>" + esc(p.album || "") + "</span></figcaption>" + MM.tools("photos", p, MM.moveBtns("photos", p)) + "</figure>";
+        "<figcaption><span>" + esc(p.caption || "") + "</span><span>" + esc(p.album || "") + "</span></figcaption>" + MM.tools(C, p, MM.moveBtns(C, p)) + "</figure>";
     }).join("") + "</div>" : empty(MM.edit() ? "Upload photos to get started." : "Photos coming soon.");
     h += "</div></section>";
     app().innerHTML = h; bindFilters(photos);
@@ -346,8 +347,8 @@
       var files = Array.from(up.files); up.value = ""; if (!files.length || S.uploading) return; S.uploading = true;
       var album = prompt("Album name for these photos (optional):", S.album !== "all" ? S.album : "") || "";
       Promise.all(files.map(function (f) { return MM.upload(f); })).then(function (srcs) {
-        var top = Math.min.apply(null, [0].concat(db.photos.map(function (x) { return x.order || 0; })));
-        srcs.forEach(function (src, i) { db.photos.unshift({ id: MM.uid(), order: top - srcs.length + i, src: src, caption: files[i].name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " "), album: album, date: MM.today(), favorite: false, inActivity: false, status: "private", created: MM.now(), updated: MM.now() }); });
+        var top = Math.min.apply(null, [0].concat(db[C].map(function (x) { return x.order || 0; })));
+        srcs.forEach(function (src, i) { db[C].unshift({ id: MM.uid(), order: top - srcs.length + i, src: src, caption: files[i].name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " "), album: album, date: MM.today(), favorite: false, inActivity: false, status: "private", created: MM.now(), updated: MM.now() }); });
         S.uploading = false;
         if (MM.save()) MM.toast(srcs.length + " photo" + (srcs.length > 1 ? "s" : "") + " added as private"); photos();
       }, function () { S.uploading = false; });
@@ -355,11 +356,11 @@
     if (!S.opened) {
       S.opened = 1;
       var al = MM.qs("album"); if (al && albums.indexOf(al) > -1) { S.album = al; photos(); return; }
-      if (location.hash) { var idx = list.findIndex(function (p) { return "#" + p.id === location.hash; }); if (idx > -1) MM.lightbox(photoItems(list), idx); }
+      if (location.hash) { var idx = list.findIndex(function (p) { return "#" + p.id === location.hash; }); if (idx > -1) MM.lightbox(photoItems(list, PG), idx); }
     }
   }
   MM.on("album", function (b) { S.album = b.dataset.v; photos(); });
-  MM.on("openphoto", function (b) { MM.lightbox(photoItems(S.plist), +b.dataset.i); });
+  MM.on("openphoto", function (b) { MM.lightbox(photoItems(S.plist, document.body.dataset.page === "gphotos" ? "george-photos.html" : "proof-of-life.html"), +b.dataset.i); });
 
   /* ================= RABBIT HOLE ================= */
   function links() {
@@ -405,6 +406,124 @@
     app().innerHTML = h + "</div></section>";
   }
 
+  /* ================= OPERATION GEORGE ================= */
+  var GSUB = [["george-contacts.html", "Contacts", "gcontacts"], ["george-wishes.html", "Well Wishes", "gwishes"], ["george-photos.html", "Photos", "gphotos"]];
+  function gnav(cur) {
+    return '<nav class="mm-gnav" aria-label="Operation George pages"><div class="mm-wrap">' + (cur !== "george" ? '<a class="mm-btn ghost small back" href="operation-george.html">← Back to Operation George</a>' : "") +
+      '<div class="mm-row">' + GSUB.map(function (s) { var on = s[2] === cur; return '<a class="mm-btn' + (on ? "" : " ghost") + '" href="' + s[0] + '"' + (on ? ' aria-current="page"' : "") + ">" + s[1] + "</a>"; }).join("") + "</div></div></nav>";
+  }
+  function gphotosOf(it) { return (it.photos || []).map(function (x) { return x && x.ref ? x.ref : x; }).filter(Boolean); }
+  function george() {
+    var all = MM.list("george").sort(function (a, b) { return (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0) || String(b.date || b.created).localeCompare(String(a.date || a.created)); });
+    var h = MM.pageHead("george", newBtn("george", "+ Post an update")) + gnav("george") + '<section class="mm-section"><div class="mm-wrap" style="max-width:860px">';
+    h += all.length ? all.map(function (u) {
+      var ann = u.kind === "Announcement", pics = gphotosOf(u);
+      return '<article class="mm-gpost' + (ann ? " ann" : "") + '" id="' + u.id + '"><div class="mm-row" style="gap:10px;margin-bottom:6px"><span class="mm-kicker">' + (ann ? "Announcement" : "Update") + (u.date ? " · " + MM.fmt(u.date, true) : "") + "</span>" + (u.pinned ? '<span class="mm-flag" style="position:static">Pinned</span>' : "") + MM.badge(u) + "</div>" +
+        "<h2>" + esc(u.title) + '</h2><div class="mm-prose">' + MM.md(u.body || "") + "</div>" +
+        (pics.length ? '<div class="mm-gpics">' + pics.map(function (src, i) { return '<button data-act="gpic" data-id="' + u.id + '" data-i="' + i + '" aria-label="Enlarge photo ' + (i + 1) + '"><img src="' + MM.imgsrc(src) + '" alt="" loading="lazy"></button>'; }).join("") + "</div>" : "") +
+        MM.filesHTML(u.files) + '<div class="mm-row" style="margin-top:14px">' + (u.status === "public" ? MM.shareBtn("operation-george.html#" + u.id, "Copy share link") : "") + "</div>" +
+        (MM.edit() ? '<div style="margin-top:12px">' + MM.tools("george", u, '<button data-act="toggle" data-c="george" data-k="pinned" data-id="' + u.id + '"' + (u.pinned ? ' class="on"' : "") + ">Pin</button>") + "</div>" : "") + "</article>";
+    }).join("") : empty(MM.edit() ? "Post the first update about George." : "Updates coming soon.");
+    app().innerHTML = h + "</div></section>";
+    if (location.hash && !S.scrolled) { S.scrolled = 1; var el = document.getElementById(location.hash.slice(1)); if (el) window.scrollTo(0, el.getBoundingClientRect().top + scrollY - 90); }
+  }
+  MM.on("gpic", function (b) { var u = MM.get("george", b.dataset.id); MM.lightbox(gphotosOf(u).map(function (s) { return { src: s, caption: u.title }; }), +b.dataset.i); });
+
+  var GROUPS = ["Family", "Friends", "Medical providers", "Other"];
+  function gcontacts() {
+    var all = MM.list("gcontacts").sort(MM.byOrder);
+    var h = MM.pageHead("gcontacts", newBtn("gcontacts", "+ Add a contact")) + gnav("gcontacts") + '<section class="mm-section"><div class="mm-wrap">';
+    if (MM.edit()) h += '<div class="mm-notice">New contacts are private. Set a contact to Public only if you\'re comfortable with anyone on the internet seeing those details.</div>';
+    var any = false;
+    GROUPS.forEach(function (g) {
+      var list = all.filter(function (c) { return (c.group || "Other") === g; }); if (!list.length) return; any = true;
+      h += '<h2 class="mm-h2" style="margin:36px 0 16px">' + g + '</h2><div class="mm-grid" data-sortable="gcontacts">' + list.map(function (c) {
+        var tel = String(c.phone || "").replace(/[^\d+]/g, "");
+        return '<article class="mm-card mm-contact" data-sid="' + c.id + '">' + MM.badge(c) + '<div class="mm-body"' + (MM.edit() ? ' style="padding-top:44px"' : "") + ">" + (c.role ? '<span class="mm-type">' + esc(c.role) + "</span>" : "") + "<h3>" + esc(c.title) + "</h3>" +
+          (c.phone ? '<a href="tel:' + esc(tel) + '">' + esc(c.phone) + "</a>" : "") + (c.email ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + "</a>" : "") +
+          (c.address ? '<p style="white-space:pre-line">' + esc(c.address) + "</p>" : "") + (c.notes ? '<p class="note">' + esc(c.notes) + "</p>" : "") + "</div>" + MM.tools("gcontacts", c, MM.moveBtns("gcontacts", c)) + "</article>";
+      }).join("") + "</div>";
+    });
+    if (!any) h += empty(MM.edit() ? "Add family, friends and George's medical providers." : "Contact details are shared privately. Reach out to the family directly.");
+    app().innerHTML = h + "</div></section>";
+  }
+
+  function csvRows(t) {
+    var rows = [], row = [], f = "", q = false;
+    for (var i = 0; i < t.length; i++) {
+      var ch = t[i];
+      if (q) { if (ch === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += ch; }
+      else if (ch === '"') q = true; else if (ch === ",") { row.push(f); f = ""; } else if (ch === "\n" || ch === "\r") { if (ch === "\r" && t[i + 1] === "\n") i++; row.push(f); rows.push(row); row = []; f = ""; } else f += ch;
+    }
+    if (f || row.length) { row.push(f); rows.push(row); }
+    return rows;
+  }
+  function wishCfg() { return db.pages.gwishes || {}; }
+  function formInfo(url) {
+    try {
+      var u = new URL(url), n = "", m = "";
+      u.searchParams.forEach(function (v, k) { if (/^entry\./.test(k)) { if (/^name$/i.test(v)) n = k; else if (/^message$/i.test(v)) m = k; } });
+      if (!n || !m) return null;
+      return { action: u.origin + u.pathname.replace(/\/viewform.*$/, "/formResponse"), name: n, msg: m };
+    } catch (e) { return null; }
+  }
+  function loadSheet() {
+    var cfg = wishCfg(); if (!cfg.csvUrl || S.sheetLoading) return;
+    S.sheetLoading = true;
+    fetch(cfg.csvUrl + (cfg.csvUrl.indexOf("?") > -1 ? "&" : "?") + "t=" + Date.now()).then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (t) {
+      S.sheet = csvRows(t).slice(1).filter(function (r) { return r[0] && (r[2] || "").trim(); }).map(function (r) { return { key: r[0] + "|" + r[1], date: r[0], from: r[1] || "A friend", body: r[2] }; });
+    }).catch(function () { S.sheet = S.sheet || []; S.sheetErr = true; }).then(function () { S.sheetLoading = false; S.sheetDone = true; gwishes(); });
+  }
+  function gwishes() {
+    var cfg = wishCfg(), fi = formInfo(cfg.formUrl || ""), hidden = cfg.hidden || [];
+    if (!S.sheetDone) loadSheet();
+    var own = MM.list("gwishes").map(function (w) { return { own: w, date: w.date || w.created, from: w.title, body: w.body }; });
+    var sheet = (S.sheet || []).filter(function (w) { return MM.edit() || hidden.indexOf(w.key) < 0; });
+    var pend = (S.pending || []).filter(function (p) { return !(S.sheet || []).some(function (w) { return w.from === p.from && w.body === p.body; }); });
+    var all = pend.concat(sheet, own).sort(function (a, b) { return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0); });
+    var h = MM.pageHead("gwishes", newBtn("gwishes", "+ Add a message", "ghost") + (MM.edit() ? '<button class="mm-btn ghost small" data-act="wishsetup">Set up visitor messages</button>' : "")) + gnav("gwishes") + '<section class="mm-section"><div class="mm-wrap" style="max-width:860px">';
+    if (fi) h += '<form class="mm-wishform" data-wish><h2 class="mm-h2" style="font-size:26px;margin:0 0 14px">Send George a message</h2><div class="mm-field"><label for="w-n">Your name</label><input id="w-n" type="text" required maxlength="80"></div><div class="mm-field"><label for="w-m">Message</label><textarea id="w-m" rows="4" required maxlength="2000"></textarea></div><button class="mm-btn" type="submit">Post message</button>' + (S.sent ? '<p class="mm-sub" style="margin:12px 0 0">Thank you! Your message will show for everyone within a few minutes.</p>' : "") + "</form>";
+    else if (MM.edit()) h += '<div class="mm-notice">Visitors can\'t post yet. Click <strong>Set up visitor messages</strong> to connect a free Google Form. Until then you can add messages yourself.</div>';
+    h += all.length ? '<div class="mm-wishes">' + all.map(function (w) {
+      var hid = w.key && hidden.indexOf(w.key) > -1, d = Date.parse(w.date);
+      return '<article class="mm-wish' + (hid ? " dim" : "") + '"' + (w.own ? ' data-sid="' + w.own.id + '"' : "") + "><p>" + esc(w.body) + '</p><footer><strong>' + esc(w.from) + "</strong>" + (d ? "<span>" + MM.fmt(new Date(d).toISOString()) + "</span>" : "") + (w.own ? MM.badge(w.own) : "") + (hid ? '<span class="mm-badge private">hidden</span>' : "") + "</footer>" +
+        (MM.edit() && w.key ? '<div class="mm-tools"><button data-act="wishhide" data-k="' + esc(w.key) + '">' + (hid ? "Show" : "Hide") + "</button></div>" : "") + (w.own ? MM.tools("gwishes", w.own) : "") + "</article>";
+    }).join("") + "</div>" : empty(S.sheetLoading ? "Loading messages…" : "No messages yet. Be the first to send George some love.");
+    app().innerHTML = h + "</div></section>";
+  }
+  document.addEventListener("submit", function (e) {
+    var f = e.target.closest("[data-wish]"); if (!f) return; e.preventDefault();
+    var fi = formInfo(wishCfg().formUrl || ""); if (!fi) return;
+    var n = f.querySelector("#w-n").value.trim(), m = f.querySelector("#w-m").value.trim(); if (!n || !m) return;
+    var btn = f.querySelector("button[type=submit]"); btn.disabled = true; btn.textContent = "Posting…";
+    var body = new URLSearchParams(); body.append(fi.name, n); body.append(fi.msg, m);
+    fetch(fi.action, { method: "POST", mode: "no-cors", body: body }).then(function () {
+      S.pending = (S.pending || []).concat([{ from: n, body: m, date: new Date().toISOString() }]); S.sent = true; gwishes();
+      setTimeout(function () { S.sheetDone = false; loadSheet(); }, 8000);
+    }, function () { btn.disabled = false; btn.textContent = "Post message"; alert("Couldn't send your message. Please try again."); });
+  });
+  MM.on("wishhide", function (b) {
+    var cfg = db.pages.gwishes = db.pages.gwishes || {}, h = cfg.hidden = cfg.hidden || [], i = h.indexOf(b.dataset.k);
+    if (i > -1) h.splice(i, 1); else h.push(b.dataset.k); MM.save(); gwishes();
+  });
+  MM.on("wishsetup", function () {
+    var cfg = wishCfg();
+    var m = MM.modal({ title: "Set up visitor messages", body:
+      '<ol style="padding-left:20px;line-height:1.6;margin:0 0 20px"><li>Go to <a href="https://forms.google.com" target="_blank" rel="noopener">forms.google.com</a> and create a blank form named “Well Wishes for George”.</li>' +
+      '<li>Add two <strong>Short answer / Paragraph</strong> questions: <strong>Name</strong> and <strong>Message</strong>.</li>' +
+      '<li>Click <strong>⋮ → Get pre-filled link</strong>. Type <strong>NAME</strong> in the Name box and <strong>MESSAGE</strong> in the Message box, click <strong>Get link → Copy link</strong>, and paste it below.</li>' +
+      '<li>In the form, open <strong>Responses → Link to Sheets</strong> to create a sheet. In the sheet: <strong>File → Share → Publish to web</strong>, choose <strong>Form responses 1</strong> and <strong>Comma-separated values (.csv)</strong>, click <strong>Publish</strong>, copy the link and paste it below.</li></ol>' +
+      '<div class="mm-field"><label for="ws-f">Pre-filled form link</label><input id="ws-f" type="text" value="' + esc(cfg.formUrl || "") + '" placeholder="https://docs.google.com/forms/d/e/…/viewform?usp=pp_url&entry…"></div>' +
+      '<div class="mm-field"><label for="ws-c">Published sheet link (.csv)</label><input id="ws-c" type="text" value="' + esc(cfg.csvUrl || "") + '" placeholder="https://docs.google.com/spreadsheets/d/e/…/pub?output=csv"></div>',
+      foot: '<span class="sp"></span><button class="mm-btn" data-wsave>Save</button>' });
+    m.el.querySelector("[data-wsave]").onclick = function () {
+      var f = m.el.querySelector("#ws-f").value.trim(), c = m.el.querySelector("#ws-c").value.trim();
+      if (f && !formInfo(f)) return alert("That form link is missing NAME and MESSAGE. Repeat step 3 and type exactly NAME and MESSAGE in the boxes.");
+      if (c && !/output=csv|format=csv/.test(c)) return alert("That sheet link isn't the .csv version. In Publish to web, choose Comma-separated values (.csv).");
+      var p = db.pages.gwishes = db.pages.gwishes || {}; p.formUrl = f; p.csvUrl = c; MM.save(); m.close(); S.sheetDone = false; gwishes(); MM.toast("Saved");
+    };
+  });
+
   /* ================= ABOUT ================= */
   function about() {
     var a = db.about;
@@ -428,6 +547,6 @@
   MM.on("purge", function (b) { if (confirm("Delete this forever? This can't be undone.")) { db.trash.splice(+b.dataset.i, 1); MM.save(); MM.renderChrome(); trash(); } });
   MM.on("emptytrash", function () { if (confirm("Permanently delete everything in the trash?")) { db.trash = MM.db.trash = []; MM.save(); location.reload(); } });
 
-  var PAGES = { home: home, music: music, writings: writings, journal: journal, lists: lists, read: read, reminders: reminders, photos: photos, links: links, ventures: ventures, about: about, trash: trash };
+  var PAGES = { home: home, music: music, writings: writings, journal: journal, read: read, photos: photos, gphotos: photos, links: links, ventures: ventures, about: about, trash: trash, george: george, gcontacts: gcontacts, gwishes: gwishes };
   MM.page = PAGES[document.body.dataset.page];
 })();

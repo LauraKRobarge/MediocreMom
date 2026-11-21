@@ -214,7 +214,7 @@
   };
 
   /* ---------- store ---------- */
-  var COLS = ["writings", "journal", "playlists", "tracks", "photos", "lists", "reminders", "links", "ventures"];
+  var COLS = ["writings", "journal", "playlists", "tracks", "photos", "lists", "reminders", "links", "ventures", "george", "gcontacts", "gwishes", "gphotos"];
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
   function load() {
     var d = null;
@@ -229,6 +229,13 @@
       });
     });
     d.trash = d.trash || []; d.about = d.about || {}; d.pages = d.pages || {};
+    var GP = { george: ["Operation George", "All Hands on Deck"], gcontacts: ["Contacts", "Friends, family and George's care team."], gwishes: ["Well Wishes", "Leave a message for George."], gphotos: ["Photos", "Pictures of George."] };
+    Object.keys(GP).forEach(function (k) { if (!d.pages[k]) d.pages[k] = { title: GP[k][0], intro: GP[k][1] }; });
+    if (!d.pages._titles2) {
+      var NT = { links: ["The Rabbit Hole", "Down the Rabbit Hole"], music: ["Sound Judgement", "Mood Swings & Mixtapes"], photos: ["Proof of Life", "Exhibit A"], writings: ["Casual Oversharing", "Literary Misconduct"], journal: ["The Daily Debrief", "The Daily Debrief"], ventures: ["My Rebel Grace", "My Rebel Grace"] };
+      Object.keys(NT).forEach(function (k) { var p = d.pages[k] = d.pages[k] || {}; if (!p.title || p.title === NT[k][0]) p.title = NT[k][1]; });
+      d.pages._titles2 = 1;
+    }
     if (window.MM_SEED && window.MM_SEED.passHash && !d.passHash) d.passHash = window.MM_SEED.passHash;
     var cut = Date.now() - 30 * 864e5;
     d.trash = d.trash.filter(function (t) { return new Date(t.deletedAt) > cut; });
@@ -250,7 +257,11 @@
     lists: { label: "List", page: "listful-thinking.html", tone: "blue" },
     reminders: { label: "Reminder", page: "duly-noted.html", tone: "rose" },
     links: { label: "Link", page: "rabbit-hole.html", tone: "" },
-    ventures: { label: "Venture", page: "my-rebel-grace.html", tone: "rose" }
+    ventures: { label: "Venture", page: "my-rebel-grace.html", tone: "rose" },
+    george: { label: "George update", page: "operation-george.html", tone: "blue" },
+    gcontacts: { label: "Contact", page: "george-contacts.html", tone: "" },
+    gwishes: { label: "Well wish", page: "george-wishes.html", tone: "rose" },
+    gphotos: { label: "George photo", page: "george-photos.html", tone: "" }
   };
   MM.href = function (c, it) {
     if (c === "writings" || c === "journal" || c === "lists") return "read.html?c=" + c + "&id=" + it.id;
@@ -258,9 +269,9 @@
     if (c === "tracks") return "sound-judgement.html#on-repeat";
     return MM.TYPES[c].page + "#" + it.id;
   };
-  MM.title = function (c, it) { return it.title || (c === "journal" ? "Journal entry · " + MM.fmt(it.date) : c === "photos" ? it.caption || "Untitled photo" : "Untitled"); };
+  MM.title = function (c, it) { return it.title || (c === "journal" ? "Journal entry · " + MM.fmt(it.date) : c === "photos" || c === "gphotos" ? it.caption || "Untitled photo" : "Untitled"); };
   MM.dateOf = function (c, it) { return c === "journal" ? it.date : c === "photos" ? it.date || it.created : it.publishedAt || it.created; };
-  MM.imgOf = function (c, it) { return c === "photos" ? it.src : c === "journal" ? (it.photos || [])[0] : it.cover || ""; };
+  MM.imgOf = function (c, it) { return c === "photos" || c === "gphotos" ? it.src : c === "journal" || c === "george" ? (it.photos || [])[0] : it.cover || ""; };
   MM.excerptOf = function (c, it) {
     if (c === "writings") return it.excerpt || MM.plain(it.body, 140);
     if (c === "journal") return MM.plain(it.body, 140);
@@ -343,14 +354,24 @@
 
   /* ---------- header / editbar / footer ---------- */
   MM.NAV = [
-    ["index.html", "Home"], ["rabbit-hole.html", "Rabbit Hole"], ["daily-debrief.html", "Daily Debrief"], ["listful-thinking.html", "Listful Thinking"],
-    ["sound-judgement.html", "Sound Judgement"], ["duly-noted.html", "Duly Noted. Probably Forgotten."], ["my-rebel-grace.html", "My Rebel Grace"],
-    ["proof-of-life.html", "Proof of Life"], ["casual-oversharing.html", "Casual Oversharing"], ["about.html", "About"]
+    ["index.html", "Home"], ["rabbit-hole.html", "Down the Rabbit Hole"], ["daily-debrief.html", "The Daily Debrief"], ["sound-judgement.html", "Mood Swings & Mixtapes"],
+    ["my-rebel-grace.html", "My Rebel Grace"], ["proof-of-life.html", "Exhibit A"], ["casual-oversharing.html", "Literary Misconduct"], ["operation-george.html", "Operation George"], ["about.html", "About"]
   ];
-  var CREATE = [["writings", "Writing"], ["journal", "Journal entry"], ["playlists", "Playlist"], ["tracks", "On Repeat track"], ["photos", "Photo"], ["lists", "List"], ["reminders", "Reminder"], ["links", "Rabbit Hole link"], ["ventures", "Venture"]];
+  var CREATE = [["writings", "Writing"], ["journal", "Journal entry"], ["playlists", "Playlist"], ["tracks", "On Repeat track"], ["photos", "Photo"], ["links", "Rabbit Hole link"], ["ventures", "Venture"], ["george", "George update"], ["gcontacts", "George contact"], ["gwishes", "Well wish"], ["gphotos", "George photo"]];
   var ICON_SEARCH = '<svg width="20" height="20" viewBox="0 0 512 512" aria-hidden="true"><path fill="currentColor" d="M456.69 421.39L362.6 327.3a173.8 173.8 0 0 0 34.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.8 173.8 0 0 0 327.3 362.6l94.09 94.09a25 25 0 0 0 35.3-35.3M97.92 222.72a124.8 124.8 0 1 1 124.8 124.8a124.95 124.95 0 0 1-124.8-124.8"/></svg>';
   var ICON_MENU = '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>';
 
+  var GEORGE_SUB = [["operation-george.html", "Updates"], ["george-contacts.html", "Contacts"], ["george-wishes.html", "Well Wishes"], ["george-photos.html", "Photos"]];
+  var ICON_SCROLL = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></svg>';
+  function navLink(n, cur) { return '<a href="' + n[0] + '"' + (cur === n[0] ? ' aria-current="page"' : "") + ">" + esc(n[1]) + "</a>"; }
+  function navMenu(cur) {
+    return '<div class="mm-dropdown mm-navdd"><button type="button" data-act="menu" aria-haspopup="true" aria-expanded="false">Menu ' + ICON_SCROLL + '</button><div class="mm-dropdown-menu" role="menu">' +
+      MM.NAV.map(function (n) {
+        if (n[0] !== "operation-george.html") return navLink(n, cur);
+        var on = GEORGE_SUB.some(function (g) { return g[0] === cur; });
+        return '<div class="mm-navsub' + (on ? " on" : "") + '">' + navLink(n, cur).replace("</a>", ' <span class="car" aria-hidden="true">›</span></a>') + '<div class="mm-navsub-menu" role="menu" aria-label="Operation George pages">' + GEORGE_SUB.map(function (g) { return navLink(g, cur); }).join("") + "</div></div>";
+      }).join("") + "</div></div>";
+  }
   function current() { var p = location.pathname.split("/").pop() || "index.html"; return p; }
   function renderChrome() {
     var cur = current(), hd = document.getElementById("mm-header");
@@ -362,7 +383,7 @@
       bar = '<div class="mm-editbar"><div class="mm-wrap"><strong>Editing view</strong>' +
         '<div class="mm-dropdown"><button class="mm-create" data-act="menu" aria-haspopup="true">+ Create New</button><div class="mm-dropdown-menu">' +
         CREATE.map(function (c) { return '<button data-act="new" data-c="' + c[0] + '">' + c[1] + "</button>"; }).join("") + "</div></div>" +
-        '<a href="duly-noted.html">Reminders</a><a href="trash.html">Trash' + (tn ? " (" + tn + ")" : "") + "</a>" +
+        '<a href="trash.html">Trash' + (tn ? " (" + tn + ")" : "") + "</a>" +
         '<button data-act="preview-on">Preview as visitor</button><span class="sp"></span>' + (ghTok() ? '<span id="mm-gh-status" style="font-size:13px;opacity:.8;align-self:center">Auto-publish on</span>' : "") +
         '<div class="mm-dropdown"><button data-act="menu" aria-haspopup="true">Site data ▾</button><div class="mm-dropdown-menu" style="left:auto;right:0">' +
         (ghTok() ? '<button data-act="gh-publish">Publish now</button><button data-act="gh-disconnect">Disconnect GitHub</button>' : '<button data-act="gh-connect">Connect GitHub (auto-publish)</button>') + '<button data-act="export-public">Export for publishing (.zip)</button><button data-act="backup">Download full backup</button><button data-act="import">Restore from backup</button><button data-act="passcode">Change passcode</button><button data-act="start-fresh">Clear sample content</button></div></div>' +
@@ -375,9 +396,7 @@
         '<div class="mm-header-tools"><button class="mm-iconbtn" data-act="search" aria-label="Search">' + ICON_SEARCH + '</button>' +
         '<button class="mm-iconbtn mm-menu-toggle" data-act="navtoggle" aria-label="Menu" aria-expanded="false" aria-controls="mm-nav">' + ICON_MENU + "</button></div></div>" +
         (cur === "index.html" ? '<div class="mm-headtag"><span>Somewhere between “Mom!” and a breakdown.</span><span>Lower your expectations. Then scroll.</span></div>' : "") +
-        '<nav id="mm-nav" aria-label="Main navigation">' + MM.NAV.map(function (n) {
-          return '<a href="' + n[0] + '"' + (cur === n[0] ? ' aria-current="page"' : "") + ">" + esc(n[1]) + "</a>";
-        }).join("") + "</nav></header>";
+        '<nav id="mm-nav" aria-label="Main navigation">' + navMenu(cur) + "</nav></header>";
     }
     var ft = document.getElementById("mm-footer");
     if (ft) {
@@ -416,7 +435,7 @@
       { k: "body", t: "rich", l: "Text" },
       { k: "cover", t: "image", l: "Cover image (optional)" },
       { k: "files", t: "files", l: "Files & resources", hint: "Upload PDFs, documents, audio or images, or add links to resources. Drag ☰ or use ↑ ↓ to reorder." },
-      { k: "featured", t: "check", l: "Feature this piece at the top of Casual Oversharing" }
+      { k: "featured", t: "check", l: "Feature this piece at the top of Literary Misconduct" }
     ],
     journal: [
       { k: "date", t: "date", l: "Date", def: function () { return MM.today(); } },
@@ -435,7 +454,7 @@
       { k: "tags", t: "tags", l: "Tags", hint: "e.g. Driving, Melodic Metal, Brain Won't Shut Up, Current Obsession" },
       { k: "notes", t: "textarea", l: "Notes on the songs (optional)", rows: 3, hint: "Why a song made the list. One per line works well." },
       { k: "files", t: "files", l: "Files & resources", hint: "Upload PDFs, documents, audio or images, or add links to resources. Drag ☰ or use ↑ ↓ to reorder." },
-      { k: "featured", t: "check", l: "Feature this playlist at the top of Sound Judgement" },
+      { k: "featured", t: "check", l: "Feature this playlist at the top of Mood Swings & Mixtapes" },
       { k: "inActivity", t: "check", l: "Show in Latest Activity on the home page" }
     ],
     tracks: [
@@ -484,6 +503,35 @@
       { k: "files", t: "files", l: "Files & resources", hint: "Upload PDFs, documents, audio or images, or add links to resources. Drag ☰ or use ↑ ↓ to reorder." },
       { k: "showLink", t: "check", l: "Show the link or file name on the tile" }
     ],
+    george: [
+      { k: "kind", t: "select", l: "Type", o: ["Update", "Announcement"] },
+      { k: "date", t: "date", l: "Date", def: function () { return MM.today(); } },
+      { k: "title", t: "text", l: "Title", req: 1 },
+      { k: "body", t: "rich", l: "Text" },
+      { k: "photos", t: "images", l: "Photos", hint: "Drag ☰ or use ↑ ↓ to reorder." },
+      { k: "files", t: "files", l: "Files & resources" },
+      { k: "pinned", t: "check", l: "Pin to the top of Operation George" }
+    ],
+    gcontacts: [
+      { k: "title", t: "text", l: "Name", req: 1 },
+      { k: "group", t: "select", l: "Group", o: ["Family", "Friends", "Medical providers", "Other"] },
+      { k: "role", t: "text", l: "Relationship or role", hint: "e.g. Aunt, Neighbor, Cardiologist, Pharmacy" },
+      { k: "phone", t: "text", l: "Phone" },
+      { k: "email", t: "text", l: "Email" },
+      { k: "address", t: "textarea", l: "Address", rows: 2 },
+      { k: "notes", t: "textarea", l: "Notes", rows: 2, hint: "e.g. best times to call, office hours, patient portal" }
+    ],
+    gwishes: [
+      { k: "title", t: "text", l: "From", req: 1 },
+      { k: "body", t: "textarea", l: "Message", rows: 4 },
+      { k: "date", t: "date", l: "Date", def: function () { return MM.today(); } }
+    ],
+    gphotos: [
+      { k: "src", t: "image", l: "Photo", big: 1 },
+      { k: "caption", t: "text", l: "Caption" },
+      { k: "album", t: "text", l: "Album" },
+      { k: "date", t: "date", l: "Date taken", def: function () { return MM.today(); } }
+    ],
     ventures: [
       { k: "title", t: "text", l: "Name", req: 1 },
       { k: "stage", t: "select", l: "Stage", o: ["Idea", "Sketching", "In progress", "Launched", "On a shelf"] },
@@ -494,7 +542,7 @@
       { k: "files", t: "files", l: "Files & resources", hint: "Upload PDFs, documents, audio or images, or add links to resources. Drag ☰ or use ↑ ↓ to reorder." }
     ]
   };
-  MM.DEFAULT_STATUS = { journal: "private", reminders: "private", tracks: "public" };
+  MM.DEFAULT_STATUS = { journal: "private", reminders: "private", tracks: "public", gcontacts: "private", gwishes: "public", george: "public" };
   var ACTIVITY = ["writings", "journal", "playlists", "photos", "lists"];
   var PROMPTS = ["What surprised you today?", "What's one thing you'd like to remember about this week?", "What did you say yes to that you'd like to say no to?", "Describe the best five minutes of today.", "What's taking up the most room in your head right now?", "What made you laugh recently?", "What would make tomorrow ten percent easier?", "Write about something small you're proud of."];
 
@@ -717,7 +765,7 @@
     x.updated = now;
     if (isNew) {
       x.created = x.created || now;
-      if ("order" in x || ["playlists", "tracks", "links", "ventures", "writings", "photos", "lists"].indexOf(c) > -1) x.order = Math.min.apply(null, [1].concat(db[c].map(function (y) { return y.order || 0; }))) - 1;
+      if ("order" in x || ["playlists", "tracks", "links", "ventures", "writings", "photos", "lists", "gcontacts", "gphotos"].indexOf(c) > -1) x.order = Math.min.apply(null, [1].concat(db[c].map(function (y) { return y.order || 0; }))) - 1;
       db[c].unshift(x);
     } else {
       var i = db[c].findIndex(function (y) { return y.id === x.id; }); db[c][i] = x;
@@ -881,7 +929,7 @@
     q.oninput = function () {
       var s = q.value.trim().toLowerCase(); if (s.length < 2) { res.innerHTML = ""; return; }
       var hits = [];
-      [["writings", ["title", "excerpt", "body", "category"]], ["journal", ["title", "body", "tags", "mood"]], ["lists", ["title", "description", "items"]], ["photos", ["caption", "album"]], ["playlists", ["title", "description", "tags", "notes"]], ["links", ["title", "description", "tags"]], ["ventures", ["title", "description", "body"]]].forEach(function (d) {
+      [["writings", ["title", "excerpt", "body", "category"]], ["journal", ["title", "body", "tags", "mood"]], ["photos", ["caption", "album"]], ["george", ["title", "body"]], ["gphotos", ["caption", "album"]], ["playlists", ["title", "description", "tags", "notes"]], ["links", ["title", "description", "tags"]], ["ventures", ["title", "description", "body"]]].forEach(function (d) {
         db[d[0]].forEach(function (it) {
           if (it.status !== "public") return;
           var hay = d[1].map(function (k) { var v = it[k]; return Array.isArray(v) ? v.map(function (x) { return typeof x === "string" ? x : x.text + " " + (x.note || ""); }).join(" ") : v || ""; }).join(" ").toLowerCase();
@@ -936,7 +984,7 @@
   function hashStr(s) { var h = 2166136261; for (var i = 0; i < s.length; i += 7) h = Math.imul(h ^ s.charCodeAt(i), 16777619); return (h >>> 0).toString(36) + s.length.toString(36); }
   function exportPublic() {
     var out = { about: db.about, pages: db.pages, passHash: db.passHash, trash: [] };
-    COLS.forEach(function (c) { out[c] = db[c].filter(function (x) { return x.status === "public"; }); });
+    COLS.forEach(function (c) { if (c === "lists" || c === "reminders") return; out[c] = db[c].filter(function (x) { return x.status === "public"; }); });
     MM.toast("Preparing your publish files… this can take a minute.");
     var text = JSON.stringify(out, null, 2), jobs = [];
     Array.from(new Set(text.match(/idb:[a-z0-9]+/gi) || [])).forEach(function (r) {
@@ -982,7 +1030,7 @@
     if (GH.busy && !tries) { GH.again = true; return Promise.resolve(); }
     GH.busy = true; ghStatus("Publishing…");
     var out = { about: db.about, pages: db.pages, passHash: db.passHash, trash: [] };
-    COLS.forEach(function (c) { out[c] = db[c].filter(function (x) { return x.status === "public"; }); });
+    COLS.forEach(function (c) { if (c === "lists" || c === "reminders") return; out[c] = db[c].filter(function (x) { return x.status === "public"; }); });
     var text = JSON.stringify(out, null, 2), cache = {};
     try { cache = JSON.parse(localStorage.getItem(GH.map) || "{}"); } catch (e) {}
     var refs = [];
@@ -1131,7 +1179,7 @@
   MM.rerender = function () { if (MM.page) MM.page(); };
   MM.boot = function () {
     MM.files.ready.then(function () {
-      renderChrome(); MM.rerender(); notify();
+      renderChrome(); MM.rerender();
       if (MM.edit()) {
         MM.files.gc(); MM.enableSort();
         new MutationObserver(function () { clearTimeout(MM._st); MM._st = setTimeout(MM.enableSort, 30); }).observe(document.body, { childList: true, subtree: true });
