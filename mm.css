@@ -561,3 +561,12 @@ main[aria-label="Explore MediocreMom"] .artwork{outline:1px solid #e9e6e1}
 @media(max-width:990px){.mm-navdot{display:none}}
 main[aria-label="Explore MediocreMom"]{max-width:1640px}
 @media(max-width:1700px){main[aria-label="Explore MediocreMom"]{margin:28px 16px 0}}
+/* Tighter home header spacing */
+@media(min-width:991px){
+  .mm-brandrow{padding:14px 2.7% 6px}
+  .mm-headtag{padding-bottom:2px}
+  #mm-header nav{padding:0 2.7% 6px}
+}
+main[aria-label="Explore MediocreMom"]{margin-top:14px}
+@media(max-width:1700px){main[aria-label="Explore MediocreMom"]{margin:14px 16px 0}}
+@media(max-width:600px){main[aria-label="Explore MediocreMom"]{margin:10px 12px 0}}
