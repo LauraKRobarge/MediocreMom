@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-11-20T23:29:03 */
+/* MediocreMom public content, published 2026-11-20T23:30:03 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -48,7 +48,7 @@ window.MM_SEED = {
     },
     "photos": {
       "title": "Exhibit A",
-      "intro": "I came. I saw. I asked everyone to move slightly to the left."
+      "intro": "Photographic evidence of a life reasonably well lived."
     },
     "links": {
       "title": "Down the Rabbit Hole",
@@ -59,8 +59,8 @@ window.MM_SEED = {
       "intro": "Creative ambition, questionable restraint, absolutely no adult supervision, a little grace, and a lot of nerve."
     },
     "george": {
-      "title": "Operation George",
-      "intro": "All Hands on Deck"
+      "title": "Operation George: All Hands on Deck",
+      "intro": "Navigating Alzheimer's, one stubborn father, and the unexpected reality of becoming the parent."
     },
     "gcontacts": {
       "title": "Contacts",
