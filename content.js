@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-11-20T23:25:14 */
+/* MediocreMom public content, published 2026-11-20T23:26:17 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -36,7 +36,7 @@ window.MM_SEED = {
     },
     "journal": {
       "title": "The Daily Debrief",
-      "intro": "Thoughts, reflections, and today's version of events."
+      "intro": "Today's events, as interpreted by an unreliable narrator."
     },
     "lists": {
       "title": "Listful Thinking",
