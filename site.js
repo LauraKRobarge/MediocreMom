@@ -365,7 +365,7 @@
   var ICON_SCROLL = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></svg>';
   function navLink(n, cur) { return '<a href="' + n[0] + '"' + (cur === n[0] ? ' aria-current="page"' : "") + ">" + esc(n[1]) + "</a>"; }
   function navMenu(cur) {
-    return '<div class="mm-dropdown mm-navdd"><button type="button" data-act="menu" aria-haspopup="true" aria-expanded="false">Menu ' + ICON_SCROLL + '</button><div class="mm-dropdown-menu" role="menu">' +
+    return '<div class="mm-dropdown mm-navdd"><button type="button" data-act="menu" aria-haspopup="true" aria-expanded="false">Menu</button><div class="mm-dropdown-menu" role="menu">' +
       MM.NAV.map(function (n) {
         if (n[0] !== "operation-george.html") return navLink(n, cur);
         var on = GEORGE_SUB.some(function (g) { return g[0] === cur; });
@@ -396,7 +396,7 @@
         '<div class="mm-header-tools"><button class="mm-iconbtn" data-act="search" aria-label="Search">' + ICON_SEARCH + '</button>' +
         '<button class="mm-iconbtn mm-menu-toggle" data-act="navtoggle" aria-label="Menu" aria-expanded="false" aria-controls="mm-nav">' + ICON_MENU + "</button></div></div>" +
         (cur === "index.html" ? '<div class="mm-headtag"><span>Somewhere between “Mom!” and a breakdown.</span><span>Lower your expectations. Then scroll.</span></div>' : "") +
-        '<nav id="mm-nav" aria-label="Main navigation">' + navMenu(cur) + "</nav></header>";
+        '<nav id="mm-nav" aria-label="Main navigation">' + '<a class="mm-navhome" href="index.html"' + (cur === "index.html" ? ' aria-current="page"' : "") + ">Home</a>" + '<span class="mm-navdot" aria-hidden="true">•</span>' + navMenu(cur) + "</nav></header>";
     }
     var ft = document.getElementById("mm-footer");
     if (ft) {

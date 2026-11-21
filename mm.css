@@ -556,3 +556,8 @@ main[aria-label="Explore MediocreMom"] .artwork{outline:1px solid #e9e6e1}
   .mm-navsub .car{display:none}
   .mm-navsub-menu{display:block;position:static;box-shadow:none;border:0;border-left:2px solid var(--line);padding:0 0 0 16px;margin:0 0 6px 2px;min-width:0}
 }
+
+.mm-navdot{font-size:12px;color:var(--ink-2);margin:0 -4px}
+@media(max-width:990px){.mm-navdot{display:none}}
+main[aria-label="Explore MediocreMom"]{max-width:1640px}
+@media(max-width:1700px){main[aria-label="Explore MediocreMom"]{margin:28px 16px 0}}
