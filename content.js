@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-11-20T23:27:53 */
+/* MediocreMom public content, published 2026-11-20T23:29:03 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -28,11 +28,11 @@ window.MM_SEED = {
   "pages": {
     "music": {
       "title": "Mood Swings & Mixtapes",
-      "intro": "My favorite songs, arranged by mood rather than good sense. \nSome songs speak to me. \n\nOthers help me avoid speaking to you."
+      "intro": "Because every emotional malfunction deserves a soundtrack."
     },
     "writings": {
       "title": "Literary Misconduct",
-      "intro": "Stories, poems, and a generous disregard for keeping shit private."
+      "intro": "Things I probably should've kept to myself. Oh well."
     },
     "journal": {
       "title": "The Daily Debrief",
