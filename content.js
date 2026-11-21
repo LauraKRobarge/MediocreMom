@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-11-20T22:01:59 */
+/* MediocreMom public content, published 2026-11-20T23:30:03 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -27,16 +27,16 @@ window.MM_SEED = {
   },
   "pages": {
     "music": {
-      "title": "Sound Judgement",
-      "intro": "My favorite songs, arranged by mood rather than good sense. \nSome songs speak to me. \n\nOthers help me avoid speaking to you."
+      "title": "Mood Swings & Mixtapes",
+      "intro": "Because every emotional malfunction deserves a soundtrack."
     },
     "writings": {
-      "title": "Casual Oversharing",
-      "intro": "Stories, poems, and a generous disregard for keeping shit private."
+      "title": "Literary Misconduct",
+      "intro": "Things I probably should've kept to myself. Oh well."
     },
     "journal": {
       "title": "The Daily Debrief",
-      "intro": "Thoughts, reflections, and today's version of events."
+      "intro": "Today's events, as interpreted by an unreliable narrator."
     },
     "lists": {
       "title": "Listful Thinking",
@@ -47,17 +47,34 @@ window.MM_SEED = {
       "intro": "Reminders and quick notes for things my brain declined to keep."
     },
     "photos": {
-      "title": "Proof of Life",
-      "intro": "I came. I saw. I asked everyone to move slightly to the left."
+      "title": "Exhibit A",
+      "intro": "Photographic evidence of a life reasonably well lived."
     },
     "links": {
-      "title": "The Rabbit Hole",
-      "intro": "Websites, links, and media nobody needs, discovered while ignoring things that actually needed doing."
+      "title": "Down the Rabbit Hole",
+      "intro": "Things I found while avoiding things I should be doing."
     },
     "ventures": {
       "title": "My Rebel Grace",
-      "intro": "Designs, business ideas, and creative ventures with a little grace and a lot of nerve."
-    }
+      "intro": "Creative ambition, questionable restraint, absolutely no adult supervision, a little grace, and a lot of nerve."
+    },
+    "george": {
+      "title": "Operation George: All Hands on Deck",
+      "intro": "Navigating Alzheimer's, one stubborn father, and the unexpected reality of becoming the parent."
+    },
+    "gcontacts": {
+      "title": "Contacts",
+      "intro": "Friends, family and George's care team."
+    },
+    "gwishes": {
+      "title": "Well Wishes",
+      "intro": "Leave a message for George."
+    },
+    "gphotos": {
+      "title": "Photos",
+      "intro": "Pictures of George."
+    },
+    "_titles2": 1
   },
   "passHash": "198b7d7f68b9fa805a04f11dee609ac7606d2c147c22ccb0621c38b055075ab8",
   "trash": [],
@@ -6888,8 +6905,6 @@ window.MM_SEED = {
       "sharedAt": "2026-10-03T21:52:27"
     }
   ],
-  "lists": [],
-  "reminders": [],
   "links": [
     {
       "id": "h5hjb4n",
@@ -7110,5 +7125,9 @@ window.MM_SEED = {
       "showLink": false
     }
   ],
-  "ventures": []
+  "ventures": [],
+  "george": [],
+  "gcontacts": [],
+  "gwishes": [],
+  "gphotos": []
 };
