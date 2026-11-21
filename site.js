@@ -354,7 +354,7 @@
 
   /* ---------- header / editbar / footer ---------- */
   MM.NAV = [
-    ["index.html", "Home"], ["rabbit-hole.html", "Down the Rabbit Hole"], ["daily-debrief.html", "The Daily Debrief"], ["sound-judgement.html", "Mood Swings & Mixtapes"],
+    ["./", "Home"], ["rabbit-hole.html", "Down the Rabbit Hole"], ["daily-debrief.html", "The Daily Debrief"], ["sound-judgement.html", "Mood Swings & Mixtapes"],
     ["my-rebel-grace.html", "My Rebel Grace"], ["proof-of-life.html", "Exhibit A"], ["casual-oversharing.html", "Literary Misconduct"], ["operation-george.html", "Operation George"], ["about.html", "About"]
   ];
   var CREATE = [["writings", "Writing"], ["journal", "Journal entry"], ["playlists", "Playlist"], ["tracks", "On Repeat track"], ["photos", "Photo"], ["links", "Rabbit Hole link"], ["ventures", "Venture"], ["george", "George update"], ["gcontacts", "George contact"], ["gwishes", "Well wish"], ["gphotos", "George photo"]];
@@ -363,7 +363,7 @@
 
   var GEORGE_SUB = [["operation-george.html", "Updates"], ["george-contacts.html", "Contacts"], ["george-wishes.html", "Well Wishes"], ["george-photos.html", "Photos"]];
   var ICON_SCROLL = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></svg>';
-  function navLink(n, cur) { return '<a href="' + n[0] + '"' + (cur === n[0] ? ' aria-current="page"' : "") + ">" + esc(n[1]) + "</a>"; }
+  function navLink(n, cur) { return '<a href="' + n[0] + '"' + (cur === n[0] || (n[0] === "./" && cur === "index.html") ? ' aria-current="page"' : "") + ">" + esc(n[1]) + "</a>"; }
   function navMenu(cur) {
     return '<div class="mm-dropdown mm-navdd"><button type="button" data-act="menu" aria-haspopup="true" aria-expanded="false">Menu</button><div class="mm-dropdown-menu" role="menu">' +
       MM.NAV.map(function (n) {
@@ -392,17 +392,17 @@
     if (hd) {
       hd.innerHTML = bar + '<header><div class="mm-topbar"><div class="mm-wrap"><span class="tagline">Life’s a shitshow. I made it a website.</span><span style="flex:1"></span>' + MM.socialIcons() +
         (MM.signedIn() ? '<button data-act="signout">Sign out</button>' : '<button data-act="signin">Sign in</button>') + '</div></div>' +
-        '<div class="mm-brandrow"><a class="brand" href="index.html" aria-label="MediocreMom home"><img src="' + MM.logo() + '" alt="MediocreMom" class="mm-logo"></a>' +
+        '<div class="mm-brandrow"><a class="brand" href="./" aria-label="MediocreMom home"><img src="' + MM.logo() + '" alt="MediocreMom" class="mm-logo"></a>' +
         '<div class="mm-header-tools"><button class="mm-iconbtn" data-act="search" aria-label="Search">' + ICON_SEARCH + '</button>' +
         '<button class="mm-iconbtn mm-menu-toggle" data-act="navtoggle" aria-label="Menu" aria-expanded="false" aria-controls="mm-nav">' + ICON_MENU + "</button></div></div>" +
         (cur === "index.html" ? '<div class="mm-headtag"><span>Somewhere between “Mom!” and a breakdown.</span><span>Lower your expectations. Then scroll.</span></div>' : "") +
-        '<nav id="mm-nav" aria-label="Main navigation">' + '<a class="mm-navhome" href="index.html"' + (cur === "index.html" ? ' aria-current="page"' : "") + ">Home</a>" + '<span class="mm-navdot" aria-hidden="true">•</span>' + navMenu(cur) + "</nav></header>";
+        '<nav id="mm-nav" aria-label="Main navigation">' + '<a class="mm-navhome" href="./"' + (cur === "index.html" ? ' aria-current="page"' : "") + ">Home</a>" + '<span class="mm-navdot" aria-hidden="true">•</span>' + navMenu(cur) + "</nav></header>";
     }
     var ft = document.getElementById("mm-footer");
     if (ft) {
-      ft.innerHTML = '<footer class="mm-footer"><div class="mm-wrap"><div><a class="brand" href="index.html" aria-label="MediocreMom home"><img src="' + MM.logo() + '" alt="MediocreMom" class="mm-logo-foot"></a>' +
+      ft.innerHTML = '<footer class="mm-footer"><div class="mm-wrap"><div><a class="brand" href="./" aria-label="MediocreMom home"><img src="' + MM.logo() + '" alt="MediocreMom" class="mm-logo-foot"></a>' +
         '<p class="mm-footquip">Somewhere to put the mental bullshit.</p></div>' +
-        '<div><h6>Quick links</h6><ul aria-label="Footer navigation"><li><a href="index.html">Home</a></li>' + MM.NAV.map(function (n) { return '<li><a href="' + n[0] + '">' + esc(n[1]) + "</a></li>"; }).join("") + "</ul></div>" +
+        '<div><h6>Quick links</h6><ul aria-label="Footer navigation"><li><a href="./">Home</a></li>' + MM.NAV.map(function (n) { return '<li><a href="' + n[0] + '">' + esc(n[1]) + "</a></li>"; }).join("") + "</ul></div>" +
         '<div>' + (MM.socialIcons("labels") ? '<h6>Follow along</h6>' + MM.socialIcons("labels") + '<div style="height:28px"></div>' : "") + '<h6>Just for me</h6>' + (MM.signedIn() ? '<button class="signin" data-act="signout">Sign out</button>' : '<button class="signin" data-act="signin">Private sign-in</button>') + "</div>" +
         '<div class="bottom"><span>© ' + new Date().getFullYear() + ' MediocreMom</span></div></div></footer>';
     }
@@ -891,7 +891,7 @@
   };
   MM.pageHead = function (key, extra) {
     var p = db.pages[key] || {};
-    return '<section class="mm-pagehead"><div class="mm-wrap"><div class="mm-crumb"><a href="index.html">Home</a> / ' + esc(p.title) + '</div><h1>' + esc(p.title) + "</h1><p>" + esc(p.intro) + "</p>" +
+    return '<section class="mm-pagehead"><div class="mm-wrap"><div class="mm-crumb"><a href="./">Home</a> / ' + esc(p.title) + '</div><h1>' + esc(p.title) + "</h1><p>" + esc(p.intro) + "</p>" +
       '<div class="mm-row">' + (extra || "") + (MM.edit() ? '<button class="mm-btn ghost small" data-act="editpage" data-key="' + key + '">Edit introduction</button>' : "") + "</div>" + '<p class="mm-headquip">' + esc(MM.quip()) + "</p>" + (MM.edit() && ["music", "writings", "lists", "photos", "links", "ventures"].indexOf(key) > -1 ? '<p class="mm-sorthint">Editing tip: drag cards to rearrange them, or use the ↑ ↓ buttons. Click Edit to change or delete images and files.</p>' : "") + "</div></section>";
   };
   MM.shareBtn = function (url, label) { return '<button class="mm-btn ghost small" data-act="share" data-url="' + esc(url || location.href.split("#")[0]) + '">' + (label || "Copy share link") + "</button>"; };
