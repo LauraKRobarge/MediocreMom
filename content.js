@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-11-20T23:41:46 */
+/* MediocreMom public content, published 2026-11-20T23:48:15 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -2404,14 +2404,14 @@ window.MM_SEED = {
       "id": "jdpm481",
       "order": -58,
       "src": "mm-fmuusxm1rezw6we5.jpg",
-      "caption": "IMG 0005",
+      "caption": "",
       "album": "MANY FACES OF MADDIE",
       "date": "2026-10-05",
       "favorite": false,
       "inActivity": false,
       "status": "public",
       "created": "2026-10-05T01:21:03",
-      "updated": "2026-10-05T01:22:07",
+      "updated": "2026-11-20T23:48:12",
       "publishedAt": "2026-10-05T01:22:07",
       "sharedAt": "2026-10-05T01:22:07"
     },
@@ -2497,11 +2497,11 @@ window.MM_SEED = {
       "caption": "IMG 0177",
       "album": "MANY FACES OF MADDIE",
       "date": "2026-10-05",
-      "favorite": false,
+      "favorite": true,
       "inActivity": false,
       "status": "public",
       "created": "2026-10-05T01:21:03",
-      "updated": "2026-10-05T01:21:38",
+      "updated": "2026-11-20T23:46:02",
       "publishedAt": "2026-10-05T01:21:38",
       "sharedAt": "2026-10-05T01:21:38"
     },
@@ -4072,11 +4072,11 @@ window.MM_SEED = {
       "caption": "",
       "album": "BLUE BUTTON DOWN SERIES",
       "date": "2026-10-04",
-      "favorite": true,
+      "favorite": false,
       "inActivity": false,
       "status": "public",
       "created": "2026-10-04T01:18:59",
-      "updated": "2026-10-05T00:22:27",
+      "updated": "2026-11-20T23:47:32",
       "publishedAt": "2026-10-04T01:41:48",
       "sharedAt": "2026-10-04T01:41:48"
     },
