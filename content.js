@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-11-20T23:26:17 */
+/* MediocreMom public content, published 2026-11-20T23:27:53 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -56,7 +56,7 @@ window.MM_SEED = {
     },
     "ventures": {
       "title": "My Rebel Grace",
-      "intro": "Designs, business ideas, and creative ventures with a little grace and a lot of nerve."
+      "intro": "Creative ambition, questionable restraint, absolutely no adult supervision, a little grace, and a lot of nerve."
     },
     "george": {
       "title": "Operation George",
