@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-11-23T20:45:16 */
+/* MediocreMom public content, published 2026-11-23T20:46:18 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -859,14 +859,14 @@ window.MM_SEED = {
       "id": "2c6tj5c",
       "order": 5,
       "src": "mm-fmuut6gjr9f63is0.jpg",
-      "caption": "IMG 0219",
+      "caption": "",
       "album": "MY BUD JACKSON",
       "date": "2026-10-05",
       "favorite": false,
       "inActivity": false,
       "status": "public",
       "created": "2026-10-05T01:27:55",
-      "updated": "2026-11-23T20:45:12",
+      "updated": "2026-11-23T20:46:06",
       "publishedAt": "2026-10-05T01:30:19",
       "sharedAt": "2026-10-05T01:30:19"
     },
@@ -874,14 +874,14 @@ window.MM_SEED = {
       "id": "eindfle",
       "order": 4,
       "src": "mm-fmuut6fhfamikd6j.jpg",
-      "caption": "IMG 0292",
-      "album": "MY BUD JACKSON ",
+      "caption": "",
+      "album": "MY BUD JACKSON",
       "date": "2026-10-05",
       "favorite": false,
       "inActivity": false,
       "status": "public",
       "created": "2026-10-05T01:27:55",
-      "updated": "2026-10-05T01:30:19",
+      "updated": "2026-11-23T20:46:00",
       "publishedAt": "2026-10-05T01:30:19",
       "sharedAt": "2026-10-05T01:30:19"
     },
