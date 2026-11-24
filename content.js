@@ -1,4 +1,4 @@
-/* MediocreMom public content, published 2026-11-21T00:01:21 */
+/* MediocreMom public content, published 2026-11-23T20:45:16 */
 window.MM_SEED = {
   "about": {
     "name": "Laura",
@@ -860,13 +860,13 @@ window.MM_SEED = {
       "order": 5,
       "src": "mm-fmuut6gjr9f63is0.jpg",
       "caption": "IMG 0219",
-      "album": "MY BUD JACKSON ",
+      "album": "MY BUD JACKSON",
       "date": "2026-10-05",
       "favorite": false,
       "inActivity": false,
       "status": "public",
       "created": "2026-10-05T01:27:55",
-      "updated": "2026-10-05T01:30:19",
+      "updated": "2026-11-23T20:45:12",
       "publishedAt": "2026-10-05T01:30:19",
       "sharedAt": "2026-10-05T01:30:19"
     },
